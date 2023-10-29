@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Routes</title>
+    <style>
+        body {
+            background-color: rgb(248, 202, 143);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #5a2b2b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .add-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #5a2b2b;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            width: 80%;
+            align-items: center;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e2adad;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+
+        li:hover {
+            background-color: #ddd;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-button, .delete-button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #5a2b2b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1> 
+        Routes
+    </h1>
+    <ul>
+        {% for ticket in ticket_data %}
+            <li>
+                {{ ticket.bus_id }}
+                {{ ticket.route }}
+               
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

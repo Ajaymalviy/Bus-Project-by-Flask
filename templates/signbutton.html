@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: khaki;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+            
+        }
+
+        h1{
+            text-align: center;
+           
+           
+        }
+
+        /* Dropdown cont
+        /* Dropdown content (hidden by default) */
+        
+        .container {
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 10vh;
+            min-height: 64vh;
+            margin-bottom: 500px;
+            margin-left: 10%;
+        }
+
+        .login-form {
+            background-color: rgba(233, 177, 177, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align:center; /* Center text within the login form */
+            z-index: 9999;
+            margin-left: 10%;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        /* Style your buttons here */
+        .button {
+            padding: 15px 30px;
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <h1 style="justify-content: center; margin-left: 12%; margin-top: 1%;">Please Login Your ID</h1>
+
+    {% extends "index.html" %}
+    {% block content %}
+   
+    <div class="container">
+        <div class="login-form">
+            <h1>Login</h1>
+            <form id="loginForm" action="/login" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+
+                <div class="button-container">
+                    <button type="submit" class="button">Login</button>
+                    <div class="registration-button">
+                        <a href="{{url_for('register')}}" class="button">Register</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
