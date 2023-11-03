@@ -98,9 +98,7 @@
     </div>
   </header><!-- End Header -->
 
-  <div class="content" >
-    {% block content %} {% endblock %}
-  </div>
+
  
 
 
@@ -270,52 +268,51 @@
 
         <div class="row" data-aos="fade-up">
           <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
+            <ul id="portfolio-flters" style="width: 500px;">
               <li data-filter="*" class="filter-active">Bus-detail</li>
-              <li data-filter=".filter-app">Platform</li>
+              <li data-filter=".filter-app" >Platform</li>
               <li data-filter="#">Routes</li>
-              <li data-filter="#">Search-Bus</li>
+              <li data-filter="#" style="height: 27px;width: 90px;">Search</li>
             </ul>
+          </div>    
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='img/portfolio/port1.jpg') }}" class="img-fluid" alt="">  
+            </div>
+            <a href="{{url_for('bus_details')}}" id="bd">Bus-Detail</a>
           </div>
+        
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='img/portfolio/port3.jpg') }}" class="img-fluid" alt="">
+            </div> 
+            <a href="{{url_for('platform_details')}}" id="bd1">Platforms</a>   
+          </div>
+        
         </div>
-
-          <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="{{ url_for('static', filename='img/portfolio/port1.jpg') }}" class="img-fluid" alt="">  
-                          
-              </div>
-              <a href="{{url_for('bus_details')}}" id="bd">Bus-Detail </a>
+        
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+        
+          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='img/portfolio/route8.jpg') }}" class="img-fluid" alt="">                    
             </div>
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="{{ url_for('static', filename='img/portfolio/port3.jpg') }}" class="img-fluid" alt="">
-                </div> 
-                <a href="{{url_for('platform_details')}}" id="bd1">Platforms </a>   
-              </div>
+            <a href="{{url_for('ticket_routes')}}" id="bd2">Routes</a>
+          </div>
+        
+          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img src="{{ url_for('static', filename='img/portfolio/search9.png') }}" class="img-fluid" alt="">                    
             </div>
-
-         
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="{{ url_for('static', filename='img/portfolio/route8.jpg') }}" class="img-fluid" alt="">                    
-              </div>
-              <a href="{{url_for('ticket_routes')}}" id="bd2">Routes </a>
-            <div>
-
-
-              <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-                <div class="portfolio-wrap">
-                  <img src="{{ url_for('static', filename='img/portfolio/search9.png') }}" class="img-fluid" alt=" ">                    
-                </div>
-                <a href="{{url_for('index')}}" id="bd3" >Search </a>
-              </div>
-  
-            </div>
-
+            <a href="{{url_for('index')}}" id="bd3">Search</a>
+          </div>
+        
         </div>
+        
 
       </div>
     </section><!-- End Portfolio Section -->

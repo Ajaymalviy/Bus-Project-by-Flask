@@ -49,10 +49,11 @@
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Add Platform</h1>
-        <form action="/add_platform" method="post">
+    {% extends "header.html" %}
+    {% block content %}
+    <div class="container" style="margin-left: 30% ; margin-top: 90px; width: 800px; height: 400px;">
+        <h1 style="justify-content: center;">Add Platform</h1>
+        <form action="/add_platform" method="post" >
             <div class="form-group">
                 <label for="platform_number">Platform Number:</label>
                 <input type="text" id="platform_number" name="platform_number" required>
@@ -72,6 +73,6 @@
         </form>
     </div>
  
-    
+    {% endblock %}
 </body>
 </html>

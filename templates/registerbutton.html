@@ -82,8 +82,9 @@
     </style>
 </head>
 <body>
-
-<div class="registration-form">
+{% extends "header.html" %}
+{% block content %}
+<div class="registration-form" style="margin-top: 39%;">
     <h1>Registration</h1>
     <form id="registrationForm" action="/register" method="POST">
         <label for="newUsername">New Username:</label>
@@ -110,7 +111,7 @@
         <button type="submit" value="register">Register</button>
     </form>
 </div>
-
+{% endblock %}
 
 </body>
 </html>

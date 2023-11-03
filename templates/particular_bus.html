@@ -47,12 +47,13 @@
     </style>
 </head>
 <body>
-
+    {% extends "header.html" %}
+    {% block content %}
    
-    <h1 style="margin-left: 30%;">Welcome To The AICTSL_BUS</h1>
-    <p style="margin-left: 30%;">Please enter Bus-Id to see the details of the Bus</p>
-      <div class="find-form "> 
-        <form action="/success" class="container" method="POST">
+    <h1 style="margin-left: 34%;">Welcome To The AICTSL_BUS</h1>
+    <p style="margin-left: 41%;">Please enter Bus-Id to see the details of the Bus</p>
+      <div class="find-form " style="margin-left: 600px;"> 
+        <form action="/success" class="container" method="POST" >
             
             <label for="bus_id">Bus ID:</label>
             <input type="text" id="bus_id" name="bus_id" required placeholder="Enter Bus ID"><br><br>
@@ -60,6 +61,6 @@
             <button type="submit">Search</button> <!-- Change the button text to "Search" -->
         </form>
       </div> 
-      
+   {% endblock %}  
 </body>
 </html>

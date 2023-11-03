@@ -8,10 +8,11 @@
         /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
+            position:fixed;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 20x;
             margin-left: 25%;
             padding: 20px;
             background-color: #f2f2f2;
@@ -45,10 +46,12 @@
     </style>
 </head>
 <body>
+    {% extends "header.html" %}
+    {% block content %}
  
-    <div class="container">
+    <div class="container" style="margin-left: 390px; margin-top: 8%;">
         <h1>Update Bus Details</h1>
-        <form action="{{ url_for('update_bus', bus_id=bus.bus_id) }}" method="post">
+        <form action="{{ url_for('update_bus', bus_id=bus.bus_id) }}" method="post" style="width: 90%;">
            
             <div class="form-group">
                 <label for="route">Route:</label>
@@ -68,6 +71,6 @@
             </div>
         </form>
     </div>
- 
+    {% endblock %}
 </body>
 </html>

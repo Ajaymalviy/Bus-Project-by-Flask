@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="imyproject_by_flask/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+          <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <style>
+            #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 300px;
+            transition: all ease-in-out 0.5s;
+            z-index: 9988;
+            transition: all 0.5s;
+            padding: 0 15px;
+            background: #040b14;
+            overflow-y: auto;
+            }
+
+            #header .profile img {
+            margin: 15px auto;
+            display: block;
+            width: 120px;
+            border: 8px solid #2c2f3f;
+            }
+
+            #header .profile h1 {
+            font-size: 24px;
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            -moz-text-align-last: center;
+            text-align-last: center;
+            font-family: "Poppins", sans-serif;
+            }
+
+            #header .profile h1 a,
+            #header .profile h1 a:hover {
+            color: #fff;
+            text-decoration: none;
+            }
+
+            #header .profile .social-links a {
+            font-size: 18px;
+            display: inline-block;
+            background: #212431;
+            color: #fff;
+            line-height: 1;
+            padding: 8px 0;
+            margin-right: 4px;
+            border-radius: 50%;
+            text-align: center;
+            width: 36px;
+            height: 36px;
+            transition: 0.3s;
+            }
+
+            #header .profile .social-links a:hover {
+            background: #149ddd;
+            color: #fff;
+            text-decoration: none;
+            }
+
+            #main {
+            margin-left: 300px;
+            }
+
+            .container,
+            .container-fluid {
+            padding-left: 30px;
+            padding-right: 30px;
+            }
+
+            @media (max-width: 1199px) {
+            #header {
+                left: -300px;
+            }
+
+            #main {
+                margin-left: 0;
+            }
+
+            .container,
+            .container-fluid {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+            }
+            .nav-menu {
+            padding: 30px 0 0 0;
+            }
+
+            .nav-menu * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            }
+
+            .nav-menu>ul>li {
+            position: relative;
+            white-space: nowrap;
+            }
+
+            .nav-menu a,
+            .nav-menu a:focus {
+            display: flex;
+            align-items: center;
+            color: #a8a9b4;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            transition: 0.3s;
+            font-size: 15px;
+            }
+
+            .nav-menu a i,
+            .nav-menu a:focus i {
+            font-size: 24px;
+            padding-right: 8px;
+            color: #6f7180;
+            }
+
+            .nav-menu a:hover,
+            .nav-menu .active,
+            .nav-menu .active:focus,
+            .nav-menu li:hover>a {
+            text-decoration: none;
+            color: #fff;
+            }
+
+            .nav-menu a:hover i,
+            .nav-menu .active i,
+            .nav-menu .active:focus i,
+            .nav-menu li:hover>a i {
+            color: #149ddd;
+            }
+
+            /* Mobile Navigation */
+            .mobile-nav-toggle {
+            position: fixed;
+            right: 15px;
+            top: 15px;
+            z-index:9997;
+            border: 0;
+            font-size: 24px;
+            transition: all 0.4s;
+            outline: none !important;
+            background-color: #149ddd;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
+            border-radius: 50px;
+            cursor: pointer;
+            }
+
+            .mobile-nav-active {
+            overflow: hidden;
+            }
+
+            .mobile-nav-active #header {
+            left: 0;
+            }
+
+    </style>
+
+</head>
+<body>
+   
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="{{ url_for('static', filename='img/backpg.jpg') }}" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">Express-Bus</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>History</span></a></li>
+          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Dashboard</span></a></li>
+          <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
+          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header --> 
+  <div class="content" >
+    {% block content %} {% endblock %}
+  </div>
+</body>
+</html>

@@ -10,24 +10,26 @@ def convert_time_to_time_format(time_str):
     return time_obj.strftime('%H:%M')
 
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
+#this is our flask application instance for class Flask or we can say that is our object of class .
 
 
-
-app.secret_key = 'secrets.token_hex(16)'  # Replace with a secret key for sessions
+app.secret_key = 'secrets.token_hex(16)'  # Replace with a secret key for sessions as our need ,we can fix any secrete key
 # PER_PAGE = 10 
 db_config = {
     "host": "localhost",
     "user": "root",
     "password": "password",
     "database": "myproject",
-}
+}#here we connect our database for transfer data with UI or for performing operation on data 
 
 db = mysql.connector.connect(**db_config)
+#I pass db_config dict in connection
 
-# Create a cursor to execute SQL queries
+# Create a cursor to execute SQL queries , without it we face difficulty to execute our query
 cursor = db.cursor()
 
-# Create a table for user registration if it doesn't exist
+# Create a table for user registration if it doesn't exist,this was done after creating my database we can make
+#change our database form here also ,or create any attribute's as we need after creating database
 create_table_query = """
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS users (
 """
 cursor.execute(create_table_query)
 db.commit()
-
+#always remeber to commit ,after execute any query
 
 create_table_query_bus_pass="""
 CREATE TABLE bus_pass (
@@ -58,47 +60,47 @@ CREATE TABLE bus_pass (
 # db.commit()
 
 
+
+# i am creating root directory which is denoted by '/' slash this is our first page open when we run our file .
 @app.route('/')
 def home():
     return render_template('index.html')
+# on this root directry one fuction is wrote and this tell us to render/ change direction on given page which is index.html
+
+
 
 @app.route('/signin/')
 def signin():
     return render_template('signbutton.html')
 
+
+
 @app.route('/registerbutton')
 def registerbutton():
     return render_template('registerbutton.html')
 
-
+#----------------this is our main page of login which work under authentication.----------------------------
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
+    if request.method == 'POST':   #we fix the method is post ,means user gives inpute to any form or page
         username = request.form['username']
         password = request.form['password']
         cursor = db.cursor()
-
-        # Fetch user data based on the provided username
         cursor.execute("SELECT name, password FROM users WHERE name=%s", (username,))
         user_data = cursor.fetchone()
-        
         cursor.close()
-
         if user_data:
             stored_password = user_data[1]
             if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
-                # Passwords match, you can log in
-                # Add your login logic here
                 return render_template('index.html')
             else:
                 return "Incorrect password. Please try again."
         else:
             return "Username not found. Please register."
-
     return render_template('index.html')
 
-
+#-----------------this is registration page -------before that no can login ------------------------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -130,9 +132,7 @@ def register():
 
         # Commit the transaction after the INSERT query
         db.commit()
-
         return redirect(url_for('login'))
-
     return render_template('registerbutton.html')
 
 
