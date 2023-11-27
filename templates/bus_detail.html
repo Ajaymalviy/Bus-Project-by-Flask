@@ -103,17 +103,18 @@
             {% endfor %}
         </tbody>
     </table>        
+    
     <div class="pagination">
         {% if page > 1 %}
             <a href="{{ url_for('bus_details', page=page-1) }}" style="color: black; z-index: 999999;">Previous</a>
         {% else %}
-            <span style="color: gray;">Previous</span>
+            <span style="color: rgb(3, 2, 2);">Previous</span>
         {% endif %}
         
         {% if bus_data|length == per_page %}
             <a href="{{ url_for('bus_details', page=page+1) }}" style="color: black;">Next</a>
         {% else %}
-            <span style="color: gray;">Next</span>
+            <span style="color: rgb(0, 0, 0);">Next</span>
         {% endif %}
     </div>
     
@@ -124,6 +125,6 @@
                 event.preventDefault();
             }
         }
-        </script>
+    </script>
 </body>
 </html>

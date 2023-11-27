@@ -31,12 +31,12 @@
       top: 10px;
       right: 20px;
       display: flex;
-      color: rgb(19, 16, 16);
+      color: rgb(15, 13, 13);
     }
   
     .top-right-buttons a {
       margin-left: 10px;
-      background-color: rgb(105, 228, 228);
+      background-color: rgb(0, 0, 0);
       border-radius: 5px;
       padding: 5px 10px;
       text-decoration: none; /* Add this to remove underlines from links */
@@ -44,7 +44,8 @@
     }
   
     .top-right-buttons a:hover {
-      background-color: rgb(0, 0, 0);
+      background-color: rgb(19, 206, 223);
+      text-emphasis-color: black;
     }
 
 
@@ -77,11 +78,11 @@
         <img src="{{ url_for('static', filename='img/backpg.jpg') }}" alt="" class="img-fluid rounded-circle">
         <h1 class="text-light"><a href="index.html">Express-Bus</a></h1>
         <div class="social-links mt-3 text-center">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://about.twitter.com/en" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
           <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://www.google.com/chrome/" class="google-plus"><i class="bx bxl-skype"></i></a>
+          <a href="https://www.linkedin.com/feed/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
       </div>
 
@@ -117,11 +118,17 @@
   </section><!-- End Hero -->
   </div>
 
+
+
+
+
+
+
   <main id="main">
 
 
     
-  <div class="top-right-buttons">
+  <div class="top-right-buttons" >
     <a class="login-button" href="#" id="login_page" >Login</a>
     <a href="{{url_for('register')}}" id="register_page"class="button">SignUp</a>
   </div>
@@ -266,31 +273,20 @@
           <p> This Is Our Dashboard,Where You Can Directy Access The Detail Of Our Bus,Platforms ,Route .You Can Directly Search The Detail Of Any Bus With Its Id Number."</p>
         </div>
 
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters" style="width: 500px;">
-              <li data-filter="*" class="filter-active">Bus-detail</li>
-              <li data-filter=".filter-app" >Platform</li>
-              <li data-filter="#">Routes</li>
-              <li data-filter="#" style="height: 27px;width: 90px;">Search</li>
-            </ul>
-          </div>    
-        </div>
-
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
 
           <div class="col-lg-6 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{{ url_for('static', filename='img/portfolio/port1.jpg') }}" class="img-fluid" alt="">  
+            <div class="portfolio-wrap">  
+              <img src="{{ url_for('static', filename='img/portfolio/port1.jpg') }}" class="img-fluid" alt="" style="z-index: 1000;">
             </div>
-            <a href="{{url_for('bus_details')}}" id="bd">Bus-Detail</a>
+            <a href="{{url_for('bus_details')}}" style="color: black; background-color: bisque;">Bus-Detail </a>
           </div>
         
           <div class="col-lg-6 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
               <img src="{{ url_for('static', filename='img/portfolio/port3.jpg') }}" class="img-fluid" alt="">
             </div> 
-            <a href="{{url_for('platform_details')}}" id="bd1">Platforms</a>   
+            <a href="{{url_for('platform_details')}}" id="bd1" style="color: black; background-color: bisque;">Platforms</a>   
           </div>
         
         </div>
@@ -301,14 +297,15 @@
             <div class="portfolio-wrap">
               <img src="{{ url_for('static', filename='img/portfolio/route8.jpg') }}" class="img-fluid" alt="">                    
             </div>
-            <a href="{{url_for('ticket_routes')}}" id="bd2">Routes</a>
+            <a href="{{url_for('ticket_routes')}}" id="bd1" style="color: black; background-color: bisque;">Routes</a>
+
           </div>
         
           <div class="col-lg-6 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
               <img src="{{ url_for('static', filename='img/portfolio/search9.png') }}" class="img-fluid" alt="">                    
             </div>
-            <a href="{{url_for('index')}}" id="bd3">Search</a>
+            <a href="{{url_for('index')}}" id="bd3" style="color: black; background-color: bisque;">Search</a>
           </div>
         
         </div>
@@ -322,6 +319,7 @@
       <div class="container">
 
         <div class="section-title">
+          
           <h2>Services</h2>
                 <h3>Bus-Pass</h3>
                 <h4>Please Fill The Form For Verification</h4>
@@ -329,20 +327,20 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="name">  Your Name</label>
-                      <input type="text" name="name" class="form-control" id="name" required>
+                      <input type="text" name="name" class="form-control" id="name"  maxlength="18" required pattern="^[^\d.]+$" required>
                     </div>
                     <div class="form-group col-md-6">
                       <label for="name">Your Email</label>
-                      <input type="email" class="form-control" name="email" id="email" required>
+                      <input type="email" class="form-control" name="email" id="email" maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="name">Aadhar-Number</label>
-                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" required>
+                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12">
                   </div>
                   <div class="form-group">
                     <label for="name">Address</label>
-                    <textarea class="form-control" name="address" id="Address" rows="2" required></textarea>
+                    <textarea class="form-control" name="address" id="Address" rows="2"  maxlength="30"></textarea>
                   </div>
                   <div class="my-3">
               
@@ -412,7 +410,7 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <p>If you have any query regarding our buses then you can Directy contact us via call ,mail or message .</p>
+          <p>If you have any query regarding our buses then you can directy contact us via Call ,Mail or Message .</p>
         </div>
 
         <div class="row" data-aos="fade-in">
@@ -434,7 +432,7 @@
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 55s</p>
+                <p>+1 5589 55488 55</p>
               </div>
 
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
@@ -447,20 +445,20 @@
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name"> Name</label>
-                  <input type="text" name="name" class="form-control" id="name" required > 
+                  <input type="text" name="name" class="form-control" id="name" maxlength="15" required pattern="^[^\d.]+$" > 
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name"> Email</label>
-                  <input type="email" class="form-control" name="email" id="email" required>
+                  <input type="email" class="form-control" name="email" id="email"maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
+                <input type="text" class="form-control" name="subject" id="subject" maxlength="18" minlength="2"required pattern="^[^\d.]+$" required>
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" required></textarea>
+                <textarea class="form-control" name="message" rows="10" maxlength="80" minlength="10" required></textarea>
               </div>
               <div class="my-3">
                 

@@ -21,19 +21,26 @@
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
     <style>
-            #header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 300px;
-            transition: all ease-in-out 0.5s;
-            z-index: 9988;
-            transition: all 0.5s;
-            padding: 0 15px;
-            background: #040b14;
-            overflow-y: auto;
-            }
+        #header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        transition: all ease-in-out 0.5s;
+        z-index: 10;
+        padding: 0 15px;
+        background: #040b14;
+        overflow-y: auto;
+}
+
+#main {
+    margin-left: 300px;
+    z-index: 1; /* Adjust as needed */
+}
+
+/* ... other styles ... */
+
 
             #header .profile img {
             margin: 15px auto;
@@ -183,6 +190,7 @@
             }
 
     </style>
+    
 
 </head>
 <body>
@@ -205,18 +213,20 @@
 
       <nav id="navbar" class="nav-menu navbar">
         <ul>
-          <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>History</span></a></li>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Dashboard</span></a></li>
-          <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
-          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+          <li><a href="{{ url_for('home') }}" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+          <li><a href="{{ url_for('home') }}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="{{ url_for('home') }}" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>History</span></a></li>
+          <li><a href="{{ url_for('home') }}" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Dashboard</span></a></li>
+          <li><a href="{{ url_for('home') }}"class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
+          <li><a href="{{ url_for('home') }}"class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header --> 
   <div class="content" >
-    {% block content %} {% endblock %}
+    {% block content %} 
+    {% endblock %}
   </div>
+  
 </body>
 </html>

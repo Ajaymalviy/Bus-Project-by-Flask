@@ -1,8 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from functools import wraps
+from flask import Flask, render_template, request, redirect, url_for, session, flash 
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin,logout_user,current_user
+
 # from flask_paginate import Pagination, get_page_args
 from datetime import datetime
 import mysql.connector
 import bcrypt
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+
+
 
 def convert_time_to_time_format(time_str):
     # Assuming time_str is in 'HH:MM AM/PM' format
@@ -59,7 +65,24 @@ CREATE TABLE bus_pass (
 # cursor.execute(create_table_query_bus_pass)
 # db.commit()
 
+# the login_required function
+def login_required(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        if session.get('username'):
+            # User is authenticated, execute the original view function
+            return view(*args, **kwargs)
+        else:
+            # User is not authenticated, redirect to the login page
+            flash("You are not logged in..! Login to perform action")
+            return redirect(url_for('signin'))
 
+    return wrapped_view
+
+
+
+
+#-----------------------------this is our pages for auth----------------------require----------------
 
 # i am creating root directory which is denoted by '/' slash this is our first page open when we run our file .
 @app.route('/')
@@ -69,9 +92,9 @@ def home():
 
 
 
-@app.route('/signin/')
+@app.route('/signin')
 def signin():
-    return render_template('signbutton.html')
+    return render_template('login_page.html')
 
 
 
@@ -83,24 +106,32 @@ def registerbutton():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':   #we fix the method is post ,means user gives inpute to any form or page
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         cursor = db.cursor()
+
+        # Fetch user data based on the provided username
         cursor.execute("SELECT name, password FROM users WHERE name=%s", (username,))
         user_data = cursor.fetchone()
+        
         cursor.close()
+
         if user_data:
             stored_password = user_data[1]
             if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+                # Passwords match, you can log in
+                # Add your login logic here
+                session['username' ] = username 
                 return render_template('index.html')
             else:
                 return "Incorrect password. Please try again."
         else:
             return "Username not found. Please register."
+
     return render_template('index.html')
 
-#-----------------this is registration page -------before that no can login ------------------------------
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -118,7 +149,7 @@ def register():
         if user_data:
             stored_password = user_data[1].encode('utf-8')
             if bcrypt.checkpw(password.encode('utf-8'), stored_password):
-                return render_template('signbutton.html')
+                return "Username and password already exist. You can log in now."
 
         # Commit any pending changes from previous queries
         db.commit()
@@ -132,8 +163,38 @@ def register():
 
         # Commit the transaction after the INSERT query
         db.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('signin'))
+
     return render_template('registerbutton.html')
+
+#----------------------------------login session -------------------------
+
+# Assuming 'app' is your Flask application instance
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'  # Specify the login view for redirecting unauthenticated users
+
+@login_manager.user_loader
+def load_user(user_id):
+    # Retrieve the user object from the database
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+    user = cursor.fetchone()
+    cursor.close()
+    return User(user) if user else None
+
+# Your User class should inherit from UserMixin
+class User(UserMixin):
+    def __init__(self, user_data):
+        self.id = user_data['id']
+        self.username = user_data['name']
+        self.user_type = user_data['user_type']
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 
 
 #-------------------------------bus_detail___________________________________________________________
@@ -158,8 +219,10 @@ def bus_details():
 
 
 
-#-----------------------------for adding bus-------------------------------------------------------------------   
+#----------------------------------for adding bus-------------------------------------------------------------------   
+
 @app.route('/add_bus',methods=['GET','POST'])
+@login_required
 def add_bus_form():
     if request.method == 'POST':
         # bus_id = request.form['bus_id']
@@ -183,6 +246,7 @@ def add_bus_form():
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
  
 @app.route('/update_bus/<int:bus_id>', methods=['GET', 'POST'])
+@login_required
 def update_bus(bus_id):
     cursor = db.cursor(dictionary=True)
     if request.method == 'POST':
@@ -203,6 +267,7 @@ def update_bus(bus_id):
   
 #---------------------------------------for deleting bus----------------------------------------------------------------------------------
 @app.route('/delete_bus/<int:bus_id>', methods=['GET','POST'])
+@login_required
 def delete_bus(bus_id):
     try:
         # Delete the bus record from the database
@@ -233,10 +298,11 @@ def platform_details():
     cursor.close()
     return render_template('platform.html', platform_data=platform_data)
 
-#for adding platform------------------------
+#--------------------------------------------------for adding platform------------------------
 
 
 @app.route('/add_platform', methods=['GET', 'POST'])
+@login_required
 def add_platform():
     if request.method == 'POST':
          # platform_id = request.form['platform _id']
@@ -253,8 +319,8 @@ def add_platform():
     return render_template('add_platform_form.html')   
 
 #--------------------for editing this platform----------------------------------------
-
 @app.route('/update_paltform/<int:platform_id>', methods=['GET', 'POST'])
+@login_required
 def update_platform(platform_id):
     cursor = db.cursor(dictionary=True)
     if request.method == 'POST':
@@ -273,6 +339,7 @@ def update_platform(platform_id):
 
 
 @app.route('/delete_platform/<int:platform_id>', methods=['GET','POST'])
+@login_required
 def delete_platform(platform_id):
     try:
         # Delete the bus record from the database
@@ -347,33 +414,33 @@ def getting_data():
 
 #--------------------for bus-pass from services------------------------------------------
 
+from flask import session, request
+
 
 @app.route('/services', methods=['GET', 'POST'])
+@login_required
 def services():
     if request.method == 'POST':
-        # Get data from the form
+        # Process the form data and insert it into the database
         name = request.form['name']
         email = request.form['email']
-        aadhar = request.form['aadhar-number'] 
-        address = request.form['address']  
+        aadhar = request.form['aadhar-number']
+        address = request.form['address']
         user_type = request.form['userType']
-        try:
-            cursor = db.cursor()
-            insert_query = "INSERT INTO bus_pass (name, email, aadhar, address, user_type) VALUES (%s, %s, %s, %s, %s)"
-            cursor.execute(insert_query, (name, email, aadhar, address, user_type))
-            db.commit()
-            cursor.close()
-            return render_template('success1.html')  # Return the success.html template
-        except mysql.connector.Error as e:
-            return f"An error occurred while inserting data: {str(e)}"
-        finally:
-            if cursor:
-                cursor.close()
-    return render_template('index.html')
 
+        cursor = db.cursor()
+        insert_query = "INSERT INTO bus_pass (name, email, aadhar, address, user_type) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(insert_query, (name, email, aadhar, address, user_type))
+        db.commit()
+        cursor.close()
+
+        return render_template('success1.html')  # Return the success.html template
+
+    return render_template('index.html')  # Render the form for data submission
 
 #----------------------THIS IS FOR CONTACT DETAIL-----------------------
 @app.route('/contact', methods=['GET', 'POST'])
+@login_required
 def contact():
     if request.method == 'POST':
         # Get data from the form using correct keys
@@ -393,4 +460,6 @@ def contact():
         finally:
             if cursor:
                 cursor.close()
-    return render_template('index.html')
+    return render_template('success1.html')
+
+#app.run(host='0.0.0.0')

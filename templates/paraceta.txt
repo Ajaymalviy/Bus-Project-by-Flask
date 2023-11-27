@@ -1,0 +1,470 @@
+ dict={
+  "status": 1,
+  "data": {
+    "brand": null,
+    "brandSlug": null,
+    "products": [
+      {
+        "entityType": 12,
+        "entityText": "",
+        "productId": 840612,
+        "productType": 0,
+        "name": "Paracetamol 650",
+        "variantCount": 0,
+        "slug": "Paracetamol%20650",
+        "subtitleText": null,
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/search_results?q=Paracetamol%20650",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 12,
+        "entityText": "",
+        "productId": 840679,
+        "productType": 0,
+        "name": "Paracetamol 500",
+        "variantCount": 0,
+        "slug": "Paracetamol%20500",
+        "subtitleText": null,
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/search_results?q=Paracetamol%20500",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 12,
+        "entityText": "",
+        "productId": 80511,
+        "productType": 0,
+        "name": "Paracetanal",
+        "variantCount": 0,
+        "slug": "Paracetanal",
+        "subtitleText": null,
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/search_results?q=Paracetanal",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 12,
+        "entityText": "",
+        "productId": 973665,
+        "productType": 0,
+        "name": "Paracetamol 500mg Tablet",
+        "variantCount": 0,
+        "slug": "Paracetamol%20500mg%20Tablet",
+        "subtitleText": null,
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/search_results?q=Paracetamol%20500mg%20Tablet",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 12,
+        "entityText": "",
+        "productId": 973661,
+        "productType": 0,
+        "name": "Paracetamol 650mg Tablet",
+        "variantCount": 0,
+        "slug": "Paracetamol%20650mg%20Tablet",
+        "subtitleText": null,
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/search_results?q=Paracetamol%20650mg%20Tablet",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 2,
+        "entityText": "",
+        "productId": 3631551,
+        "productType": 1,
+        "name": "Teplota 100mg Bottle Of 15ml Syrup",
+        "variantCount": 0,
+        "slug": "teplota-100mg-bottle-of-15ml-syrup-3631551",
+        "subtitleText": "15ml Syrup in Bottle",
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/medicine_details?medicine_id=3631551",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "14854650",
+        "adId": "30366",
+        "adVendorId": "internal",
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 2,
+        "entityText": "",
+        "productId": 169787,
+        "productType": 1,
+        "name": "P 650mg Strip Of 10 Tablets",
+        "variantCount": 0,
+        "slug": "p-650mg-tab-10-s-169787",
+        "subtitleText": "10 Tablet(s) in Strip",
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/medicine_details?medicine_id=169787",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "14849637",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 2,
+        "entityText": "",
+        "productId": 44140,
+        "productType": 1,
+        "name": "Dolo 650mg Strip Of 15 Tablets",
+        "variantCount": 0,
+        "slug": "dolo-650mg-strip-of-15-tablets-44140",
+        "subtitleText": "15 Tablet(s) in Strip",
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/medicine_details?medicine_id=44140",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "14631678",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 2,
+        "entityText": "",
+        "productId": 3349,
+        "productType": 1,
+        "name": "P 500mg Suspension 60ml",
+        "variantCount": 0,
+        "slug": "p-500mg-susp-3349",
+        "subtitleText": "60ml Suspension in Bottle",
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/medicine_details?medicine_id=3349",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "14690501",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      },
+      {
+        "entityType": 2,
+        "entityText": "",
+        "productId": 3326,
+        "productType": 1,
+        "name": "P 250mg Suspension 60ml",
+        "variantCount": 0,
+        "slug": "p-250mg-susp-3326",
+        "subtitleText": "60ml Suspension in Bottle",
+        "productTierAttributes": {
+          "type": 0,
+          "text": ""
+        },
+        "productAvailabilityFlags": {
+          "isAvailable": false,
+          "showVariantsInBottomSheet": false,
+          "notifyMe": false
+        },
+        "productSubstitutionAttributes": null,
+        "similarProductsAttributes": null,
+        "maxQuantity": 0,
+        "minQuantity": 0,
+        "deeplink": "push.pharmeasy.clevertap://deeplink/medicine_details?medicine_id=3326",
+        "pricePerUnit": null,
+        "pricePerUnitNew": "",
+        "image": null,
+        "damImages": null,
+        "isSimilarAvailable": false,
+        "isGradedDiscountApplicable": false,
+        "labelDetails": {
+          "code": 0,
+          "name": ""
+        },
+        "ratingDetails": {
+          "value": 0,
+          "count": 0
+        },
+        "isSponsored": false,
+        "showSponsoredTag": false,
+        "listingId": "14624949",
+        "adId": null,
+        "adVendorId": null,
+        "plusDiscount": {}
+      }
+    ],
+    "suggestedNames": null,
+    "customMedicineRequest": {
+      "title": "Request for paracet",
+      "subtitle": "Our pharmacist may call you to confirm details for your requested medicine",
+      "imageUrl": "https://d3ow2108bmqeui.cloudfront.net/search_results_custom_medicine.png"
+    },
+    "uploadRxRequest": {
+      "title": "Order via Your Prescription",
+      "subtitle": "Our pharmacist will call you to confirm medicines from your prescription",
+      "imageUrl": "https://d3ow2108bmqeui.cloudfront.net/search_results_upload_rx.png"
+    },
+    "orderOnCallRequest": {
+      "title": "Speak To Our Expert Now",
+      "subtitle": "Call us and our pharmacists will help you place an order",
+      "imageUrl": "https://d3ow2108bmqeui.cloudfront.net/search_results_order_on_call.png"
+    },
+    "redirectTo": "PHARMA_SRP"
+  },
+  "query": {
+    "intent_id": "1699159806739",
+    "q": "paracet"
+  }
+}

@@ -6,8 +6,7 @@
     <title>Registration Page</title>
     <style>
         body {
-            background-color: rgb(180, 201, 194);
-           
+            background-color: rgb(21, 56, 168);
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -21,7 +20,7 @@
         }
 
         .registration-form {
-            background-color: bisque;
+            background-color: rgb(87, 187, 154);
             padding: 40px;
             border-radius: 10px;
             width: 50%;
@@ -55,6 +54,7 @@
         }
 
         input[type="text"][name="mobile_number"] {
+            background-color: azure;
             width: 60%;
             padding: 5px;
             height: 40%;
@@ -72,8 +72,8 @@
         }
 
         button[type="submit"] {
-            background-color: #007BFF;
-            color: white;
+            background-color: #2ebbee;
+            color: rgb(0, 0, 0);
             padding: 10px 20px;
             border: 1px solid black;
             border-radius: 4px;
@@ -84,23 +84,23 @@
 <body>
 {% extends "header.html" %}
 {% block content %}
-<div class="registration-form" style="margin-top: 39%;">
+<div class="registration-form" style="margin-top: 4%; height: 550px; width: 500px;">
     <h1>Registration</h1>
-    <form id="registrationForm" action="/register" method="POST">
+    <form id="registrationForm" action="/register" method="POST" style="height: 500; padding: 20px; margin-top: 10px;" >
         <label for="newUsername">New Username:</label>
-        <input type="text" id="newUsername" name="username" required pattern="^[^\d.]+$" placeholder="Enter your username"><br>
+        <input type="text" id="newUsername" name="username"  maxlength="18" required pattern="^[^\d.]+$" placeholder="Enter your username"><br>
 
         <label for="newPassword">New Password :</label>
-        <input type="password" id="newPassword" name="password"  placeholder="Enter your password"><br>
+        <input type="password" id="newPassword" name="password" maxlength="8" required placeholder="Enter your password"><br>
 
         <label for="mobileNumber">Mobile Number :</label>
-        <input type="text" id="mobileNumber" name="mobile_number" required pattern="^[789]\d{9}$" placeholder="Enter your mobile number"><br>
+        <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" requiredrequired pattern="^[6789]\d{9}$" placeholder="Enter your mobile number"><br>
 
         <label for="city">City :</label>
-        <input type="text" id="city" name="city" required pattern="^[A-Za-z]+$" placeholder="Enter your city"><br>
+        <input type="text" id="city" name="city" maxlength="18" required pattern="^[A-Za-z]+$" placeholder="Enter your city"><br>
 
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email"><br>
+        <input type="email" id="email" name="email" maxlength="30" requiredrequired pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email"><br>
 
         <label for="userType">User Type:</label>
         <select id="userType" name="user_type" required>
@@ -108,7 +108,7 @@
             <option value="other">Other</option>
         </select><br>
 
-        <button type="submit" value="register">Register</button>
+        <button type="submit" value="register" style="margin-top: 15px;">Register</button>
     </form>
 </div>
 {% endblock %}

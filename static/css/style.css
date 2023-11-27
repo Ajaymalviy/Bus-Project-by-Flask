@@ -248,12 +248,12 @@ h6 {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9977;
+  
 }
 
 #hero .hero-container {
   position: relative;
-  z-index: 9990;
+
   min-width: 300px;
   margin-left: 5%;
   margin-bottom: 2%;
@@ -287,9 +287,7 @@ h6 {
 }
 
 @media (min-width: 1024px) {
-  #hero {
-    background-attachment: fixed;
-  }
+
 }
 
 @media (max-width: 768px) {
