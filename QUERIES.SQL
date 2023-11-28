@@ -14,6 +14,46 @@ CREATE TABLE Queries (
     PRIMARY KEY (id)
 );
 
+-- Create the 'conductor' table
+CREATE TABLE conductor (
+    conductor_id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    contact_number VARCHAR(70),
+    email VARCHAR(100),
+    hire_date DATE,
+    salary DECIMAL(10, 2),
+    PRIMARY KEY (conductor_id)
+);
+
+
+-- Create the 'driver' table
+CREATE TABLE driver (
+    driver_id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    contact_number VARCHAR(70),
+    email VARCHAR(100),
+    hire_date DATE,
+    salary DECIMAL(10, 2),
+    license_number VARCHAR(20),
+    license_expiry_date DATE,
+    PRIMARY KEY (driver_id)
+);
+
+-- Create the 'users' table
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    mobile_number VARCHAR(20) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    user_type VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
 -- Create the 'bus_detail' table
 CREATE TABLE bus_detail (
     bus_id INT NOT NULL AUTO_INCREMENT,
@@ -41,31 +81,6 @@ CREATE TABLE bus_pass (
     PRIMARY KEY (id)
 );
 
--- Create the 'conductor' table
-CREATE TABLE conductor (
-    conductor_id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    contact_number VARCHAR(70),
-    email VARCHAR(100),
-    hire_date DATE,
-    salary DECIMAL(10, 2),
-    PRIMARY KEY (conductor_id)
-);
-
--- Create the 'driver' table
-CREATE TABLE driver (
-    driver_id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    contact_number VARCHAR(70),
-    email VARCHAR(100),
-    hire_date DATE,
-    salary DECIMAL(10, 2),
-    license_number VARCHAR(20),
-    license_expiry_date DATE,
-    PRIMARY KEY (driver_id)
-);
 
 -- Create the 'platform' table
 CREATE TABLE platform (
@@ -95,15 +110,5 @@ CREATE TABLE ticket (
     FOREIGN KEY (platform_id) REFERENCES platform(platform_id)
 );
 
--- Create the 'users' table
-CREATE TABLE users (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    mobile_number VARCHAR(20) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    user_type VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
-);
+
 
