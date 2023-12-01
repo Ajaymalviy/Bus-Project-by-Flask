@@ -9,4 +9,4 @@ mysql-connector==2.2.9
 mysql-connector-python==8.2.0
 protobuf==4.21.12
 Werkzeug==3.0.1
-
+Flask-Login==0.6.3
