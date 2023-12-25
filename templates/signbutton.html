@@ -19,6 +19,7 @@
 
         h1{
             text-align: center;
+            
         }
    .container {
             display:flex;
@@ -69,16 +70,16 @@
      
     {% extends "header.html" %}
     {% block content %}
-    <h1 style="justify-content: center; margin-left: 12%; margin-top: 1%;">Please Login Your ID</h1>
+    <h1 style="justify-content: center; margin-left: 12%; margin-top: 14%;">Please Login Your ID</h1>
     <div class="container">
         <div class="login-form">
             <h1>Login</h1>
             <form id="loginForm" action="/login" method="POST">
                 <label for="username">Username :</label>
-                <input type="text" id="username" name="username" maxlength="18" required><br><br>
+                <input type="text" id="username" name="username" minlength="3" maxlength="25" required><br><br>
                 
                 <label for="password">Password :</label>
-                <input type="password" id="password" name="password" maxlength="8" required><br><br>
+                <input type="password" id="password" name="password" minlength="3" maxlength="8" required><br><br>
     
                 <div class="button-container">
                     <button type="submit" class="button">Login</button>

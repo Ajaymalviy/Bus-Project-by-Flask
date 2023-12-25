@@ -13,6 +13,9 @@
             position:static;
             margin-right: 3%;
         }
+        a.hover{
+            color: black;
+        }
 
         h1 {
             background-color: #5a2b2b;
@@ -65,12 +68,48 @@
         .action-buttons button + button {
             margin-left: 10px;
         }
-    </style>
+
+        .pagination a:hover {
+            background-color: #31d1bc;
+            color: rgb(16, 228, 210);
+        }
+
+        .pagination span:hover {
+            background-color: #3f1c1c;
+            color: rgb(92, 34, 34);
+        }
+
+            /* Style for the pagination */
+    .pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination a {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color:rgb(27, 27, 27);
+        color: white;
+        border-radius: 3px;
+        text-decoration: none;
+    }
+
+    .pagination a:hover {
+        background-color: rgb(27, 27, 27);
+    }
+
+    .pagination .disabled {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+    }
+        </style>
 </head>
 <body>
     {% extends "header.html" %}
     {% block content %}
-    <h1 style="color: white;">Platform Details <a class= "add-bus-button"href="{{ url_for('add_platform') }}" style="margin-left: 20%; background-color: #701a1a; color: rgb(247, 243, 243);" >ADD</a></h1>
+    <h1 style="color: white;">Platform Details <a href="{{url_for('homee')}}"  style="margin-left: 1%; border-radius: 2px; background-color: #701a1a; color: rgb(247, 243, 243);">Home</a> <a class= "add-bus-button"href="{{ url_for('add_platform') }}" style="margin-left: 13%; background-color: #701a1a;border-radius: 2px; color: rgb(247, 243, 243);" >ADD</a></h1>
     <table>
         <thead>
             <tr>
@@ -101,6 +140,19 @@
             }
         }
         </script>
+
+    <div class="pagination">
+        <span>Page {{ page }} of {{ total_pages }}</span>
+        
+        {% if page > 1 %}
+            <a href="{{ url_for('platform_details', page=page-1) }}" id="prev" style="margin-left: 20%;">Previous</a>
+        {% endif %}
+        
+        {% if page < total_pages %}
+            <a href="{{ url_for('platform_details', page=page+1) }}" style="margin-left: 58%;">Next</a>
+        {% endif %}
+    </div>
+    
     {% endblock  %}    
 </body>
 </html>

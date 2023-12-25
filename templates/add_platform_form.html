@@ -56,11 +56,11 @@
         <form action="/add_platform" method="post" >
             <div class="form-group">
                 <label for="platform_number">Platform Number:</label>
-                <input type="text" id="platform_number" name="platform_number" required>
+                <input type="text" id="platform_number" name="platform_number"  require pattern="\d+" maxlength ="4" minlength="1" required>
             </div>
             <div class="form-group">
                 <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required>
+                <input type="text" id="location" name="location" maxlength="25" minlength="2" require pattern="[A-Za-z ]+" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Add">

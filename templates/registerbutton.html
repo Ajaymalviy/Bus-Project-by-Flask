@@ -6,13 +6,13 @@
     <title>Registration Page</title>
     <style>
         body {
-            background-color: rgb(21, 56, 168);
+            background-color: #dacfb3; /* Changed the background color */
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin-left: 5%;
+            margin: 0;
             overflow: hidden; /* Prevent scrolling */
-           
         }
 
         h1 {
@@ -20,10 +20,10 @@
         }
 
         .registration-form {
-            background-color: rgb(87, 187, 154);
-            padding: 40px;
-            border-radius: 10px;
-            width: 50%;
+            background-color: rgb(38, 114, 104);
+            padding: 90px;
+            border-radius: 90px;
+            width: 40%;
             height: 70%;
             margin-left: 40%;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
@@ -31,7 +31,7 @@
 
         label {
             display: block;
-            margin-bottom: 0px;
+            margin-bottom: 10px;
             font-size: medium;
         }
 
@@ -39,28 +39,15 @@
         input[type="password"],
         input[type="email"],
         select {
-            width: 60%;
-            padding: 8px;
-            margin-bottom: 13px;
+            width: 100%; /* Set width to 100% for full width */
+            padding: 10px;
+            margin-bottom: 10px;
             border: 1px solid black;
             border-radius: 3px;
-        }
-
-        input[type="text"]:required,
-        input[type="password"]:required,
-        input[type="email"]:required,
-        select:required {
-            border-color: rgb(10, 3, 3);
         }
 
         input[type="text"][name="mobile_number"] {
             background-color: azure;
-            width: 60%;
-            padding: 5px;
-            height: 40%;
-            margin-bottom: 5px;
-            border: 1px solid black;
-            border-radius: 3px;
         }
 
         input[type="text"][name="mobile_number"]:required {
@@ -82,36 +69,35 @@
     </style>
 </head>
 <body>
-{% extends "header.html" %}
-{% block content %}
-<div class="registration-form" style="margin-top: 4%; height: 550px; width: 500px;">
-    <h1>Registration</h1>
-    <form id="registrationForm" action="/register" method="POST" style="height: 500; padding: 20px; margin-top: 10px;" >
-        <label for="newUsername">New Username:</label>
-        <input type="text" id="newUsername" name="username"  maxlength="18" required pattern="^[^\d.]+$" placeholder="Enter your username"><br>
+    {% extends "header.html" %}
+    {% block content %}
+    <div class="registration-form">
+        <h1>Registration</h1>
+        <form id="registrationForm" action="/register" method="POST">
+            <label for="newUsername">New Username:</label>
+            <input type="text" id="newUsername" name="username" minlength="3" maxlength="25" required pattern="^[^\d.]+$" placeholder="Enter your username">
 
-        <label for="newPassword">New Password :</label>
-        <input type="password" id="newPassword" name="password" maxlength="8" required placeholder="Enter your password"><br>
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="password"  minlength="3" maxlength="8" required placeholder="Enter your password">
 
-        <label for="mobileNumber">Mobile Number :</label>
-        <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" requiredrequired pattern="^[6789]\d{9}$" placeholder="Enter your mobile number"><br>
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" required pattern="^[6789]\d{9}$" placeholder="Enter your mobile number">
 
-        <label for="city">City :</label>
-        <input type="text" id="city" name="city" maxlength="18" required pattern="^[A-Za-z]+$" placeholder="Enter your city"><br>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" maxlength="18" minlength="3" pattern="^[A-Za-z]+$" placeholder="Enter your city">
 
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" maxlength="30" requiredrequired pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email"><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" maxlength="30" required pattern="^[a-zA-Z0_%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email">
 
-        <label for="userType">User Type:</label>
-        <select id="userType" name="user_type" required>
-            <option value="student">Student</option>
-            <option value="other">Other</option>
-        </select><br>
+            <label for="userType">User Type:</label>
+            <select id="userType" name="user_type" required>
+                <option value="student">Student</option>
+                <option value="other">Other</option>
+            </select>
 
-        <button type="submit" value="register" style="margin-top: 15px;">Register</button>
-    </form>
-</div>
-{% endblock %}
-
+            <button type="submit" value="register" style="margin-top: 15px;">Register</button>
+        </form>
+    </div>
+    {% endblock %}
 </body>
 </html>

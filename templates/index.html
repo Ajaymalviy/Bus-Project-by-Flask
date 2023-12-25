@@ -47,6 +47,30 @@
       background-color: rgb(19, 206, 223);
       text-emphasis-color: black;
     }
+     
+
+        /* CSS code */
+    ul.flashes {
+        list-style-type: none;
+        padding: 10px;
+    }
+
+    ul.flashes li {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    ul.flashes li.success {
+        background-color: #dff0d8; /* Green background for success messages */
+        color: #3c763d;
+    }
+
+    ul.flashes li.danger {
+        background-color: #f2dede; /* Red background for error messages */
+        color: #a94442;
+    }
+  
 
 
   </style>
@@ -81,7 +105,7 @@
           <a href="https://about.twitter.com/en" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
           <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="https://www.google.com/chrome/" class="google-plus"><i class="bx bxl-skype"></i></a>
+         
           <a href="https://www.linkedin.com/feed/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
       </div>
@@ -91,7 +115,6 @@
           <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
           <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
           <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>History</span></a></li>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Dashboard</span></a></li>
           <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
           <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
         </ul>
@@ -100,38 +123,27 @@
   </header><!-- End Header -->
 
 
- 
-
-
-
-
-
   <!-- ======= Hero Section ======= -->
   <div>
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center"> 
-    <div class="hero-container" data-aos="fade-in">
+    <div class="hero-container" data-aos="fade-in" >
       <h1>  Welcome to Express-BUS</h1>
       <div style = "padding-left: 60px;">
-      <p>We Can Help You To <span class="typed" data-typed-items="Travel, Transport-Goods"></span></p>
+      <p>We Can Help You To <span class="typed" data-typed-items="Travel,Travel"></span></p>
       </div>
     </div>
   </section><!-- End Hero -->
   </div>
 
 
-
-
-
-
-
   <main id="main">
-
-
-    
+   
+ 
   <div class="top-right-buttons" >
     <a class="login-button" href="#" id="login_page" >Login</a>
     <a href="{{url_for('register')}}" id="register_page"class="button">SignUp</a>
   </div>
+
 
 
     <!-- ======= About Section ======= -->
@@ -140,7 +152,7 @@
 
         <div class="section-title">
           <h2>About</h2>
-          <p>Express-Bus ,Manage the whole buses at our city. It was compliting  from last 5-years at our whole areas of covering and provide the facitlities to our citizens .Everyone enjoy to there suffer with our buses and his journey a memorable</p>
+          <p>Express-Bus,Manage the whole buses at our city. It was developing, from last 5-years at our whole areas of covering and provide the facitlities to our citizens.Everyone enjoy to their journey with our buses and make it a  memorable.</p>
         </div>
 
         <div class="row">
@@ -148,34 +160,33 @@
             <img src="{{ url_for('static', filename='img/backpic.jpg') }}" class="img-fluid" alt="">
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>information About  &amp; Us.</h3>
+            <h3>information About Us.</h3>
             <p class="fst-italic">
-             following
+             Following
             </p>
             <div class="row">
               <div class="col-lg-6">
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>Opening:</strong> <span>1 May 2015</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.AICTSL-BUS.com</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+71 856 7890</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>indore</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.express-bus.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+71 85643 07890</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Indore</span></li>
                 </ul>
               </div>
               <div class="col-lg-6">
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>From:</strong> <span>5 Years</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Work:</strong> <span>Travllin And Transport</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>Expressbus@gmail.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Work:</strong> <span>Travelling
+                    And Transport</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>expressbus@gmail.com</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
                 </ul>
               </div>
             </div>
-            <p>Express-BUS, Over the years, has strived to deliver easy booking solutions to its customers. Our continued efforts have resulted in Express-BUS becoming one of the leading and top-rated bus booking platforms in India for various Bus services. We have a strong presence with a ticket inventory from over 1000 bus partners and 100 route options on our app and website.
+            <p>Express-BUS, over the years, has strived to deliver easy booking solutions to its customers. Our continued efforts have resulted in Express-BUS becoming one of the leading and top-rated bus booking platforms in India for various bus services. We have a strong presence with a ticket inventory from over 1000 bus partners and 100 route options on our app and website.
 
-              Founded in the year 2005, Express-BUS is a pioneer in providing end-to-end software and other value-added solutions such as  fleet management solutions, vehicle tracking systems, passenger information systems, backed by a 24x7 customer support center.
-              
-              
-            </p>
+              Founded in the year 2005, Express-BUS is a pioneer in providing end-to-end software and other value-added solutions such as fleet management solutions, vehicle tracking systems, passenger information systems, backed by a 24x7 customer support center. 
+             </p>
           </div>
         </div>
 
@@ -188,8 +199,7 @@
 
         <div class="section-title">
           <h2>Facts</h2>
-          <p>When considering the selection of buses for public transportation , here are several key parameters and factors that play a crucial role in making an informed decision. These factors encompass various aspects, such as capacity and fuel. Let's delve into some of  the essential parameters to evaluate when it comes to buses:".</p>
-        </div>
+          <p>When considering the selection of buses for public transportation, there are several key parameters and factors that play a crucial role in making an informed decision. These factors encompass various aspects, such as capacity and fuel. Let's delve into some of the essential parameters to evaluate when it comes to buses.        </div>
 
         <div class="row no-gutters">
 
@@ -238,82 +248,32 @@
 
         <div class="section-title">
           <h2>History</h2>
-          <p>At the old edge when we thought to manage all bus system into our city,which is very hard work for to do that mantain all the bus of city at fix time,after having only 10buses at first of the year now regulary increased our buses and now goes to approx more than 150 in our under.</p>
-        </div>
+          <p>At the outset, when we considered managing the entire bus system in our city, it seemed like a daunting task to maintain all the buses at fixed times. After starting with only 10 buses at the beginning of the year, we have consistently increased our fleet, and now it comprises more than 150 buses.         </div>
 
         <div class="row">
           <div class="col-lg-6" data-aos="fade-up">
             <h3 class="resume-title"></h3>
             <div class="resume-item pb-0">
               <h4>Planing</h4>
-              <p><em>Around before 2014 we have 2buses which is used for local facilities under in 50km .And just after in the same year buys ten bus by planing of:</em></p>
-              <ul>
-                <li>Rajmendra Singh,(head of member assembly)</li>
-                <li>Manshing rajore ,(chief of school depart.)</li>
-                <li>Rajwardhan singh sharma,(ex IIM-director)</li>
-              </ul>
+              <p><em>Around 2014, we had two buses that were used for local facilities within a 50km radius. Soon after, in the same year, we acquired ten more buses as part of our planning. 
+                <ul>
+                  <li>Rajendra Singh, (Head of Member Assembly)</li>
+                  <li>Manshing Rajore, (Chief of School Department)</li>
+                  <li>Rajwardhan Singh Sharma, (Ex IIM Director)</li>
+                </ul>
             </div>
 
             <h3 class="resume-title">Success</h3>
             <div class="resume-item">
               <h4>Finally We Get In</h4>
-              <h5>2015 </h5>
+              <h5>2015</h5>
               <p><em>We Decide to open big managment system of buses into our city.</em></p>
-              <p>And Indore help us vice -versa and now we have more than 150 buses .ThankYou Indore For Supporting Us</p>
+              <p>And Indore helped us vice versa, and now we have more than 150 buses. Thank you, Indore, for supporting us.</p>
             </div>
            
     </section><!-- End Resume Section -->
 
-    <!-- ======= dashboard ======= -->
-    <section id="portfolio" class="portfolio section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Dashboard</h2>
-          <p> This Is Our Dashboard,Where You Can Directy Access The Detail Of Our Bus,Platforms ,Route .You Can Directly Search The Detail Of Any Bus With Its Id Number."</p>
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">  
-              <img src="{{ url_for('static', filename='img/portfolio/port1.jpg') }}" class="img-fluid" alt="" style="z-index: 1000;">
-            </div>
-            <a href="{{url_for('bus_details')}}" style="color: black; background-color: bisque;">Bus-Detail </a>
-          </div>
-        
-          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{{ url_for('static', filename='img/portfolio/port3.jpg') }}" class="img-fluid" alt="">
-            </div> 
-            <a href="{{url_for('platform_details')}}" id="bd1" style="color: black; background-color: bisque;">Platforms</a>   
-          </div>
-        
-        </div>
-        
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-        
-          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="{{ url_for('static', filename='img/portfolio/route8.jpg') }}" class="img-fluid" alt="">                    
-            </div>
-            <a href="{{url_for('ticket_routes')}}" id="bd1" style="color: black; background-color: bisque;">Routes</a>
-
-          </div>
-        
-          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="{{ url_for('static', filename='img/portfolio/search9.png') }}" class="img-fluid" alt="">                    
-            </div>
-            <a href="{{url_for('index')}}" id="bd3" style="color: black; background-color: bisque;">Search</a>
-          </div>
-        
-        </div>
-        
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
+    
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container">
@@ -321,39 +281,32 @@
         <div class="section-title">
           
           <h2>Services</h2>
-                <h3>Bus-Pass</h3>
-                <h4>Please Fill The Form For Verification</h4>
-                <form action="/services" method="post" role="form" >
-                  <div class="row">
-                    <div class="form-group col-md-6">
-                      <label for="name">  Your Name</label>
-                      <input type="text" name="name" class="form-control" id="name"  maxlength="18" required pattern="^[^\d.]+$" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="name">Your Email</label>
-                      <input type="email" class="form-control" name="email" id="email" maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="name">Aadhar-Number</label>
-                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12">
-                  </div>
-                  <div class="form-group">
-                    <label for="name">Address</label>
-                    <textarea class="form-control" name="address" id="Address" rows="2"  maxlength="30"></textarea>
-                  </div>
-                  <div class="my-3">
-              
-                    <label for="userType">User Type:</label>
-                    <select id="userType" name="userType" required>
-                        <option value="student">Student</option>
-                        <option value="other">Other</option>
-                    </select>
-                  </div>
-                  <div class="text-center"><button type="submit">submit</button></div>
-                </form>
-        </div>
+          
+        <div class="section-title">
+          
+          <h4>Experience The Convenience Of </h4></div>
 
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item pb-0">
+              <h3 style="color: rgb(39, 38, 38);">Mobile Bus Pass</h3>
+              <h4 style="color: rgb(51, 49, 49);"><em>    Buy your mobile bus pass on the Express-bus App, and you will never have to visit the pass counter or wait in the queue ever again.. </em></h4>
+                <ul>
+                  <h5>
+                  <li>So,open your phone</li>
+                  <li>Download Express-bus App</li>
+                  <li>And make your bus-pass</li>
+                 </h5>
+                </ul>
+            </div>
+
+            <h3 class="resume-title">Because--</h3>
+            <div class="resume-item">
+              <h4>What's more, travelling with a mobile bus pass is safer than paying cash in the bus.</h4>
+              <h5>Just show your pass on your mobile and scan the QR code to travel.
+              </h5>
+            </div>
       </div>
     </section><!-- End Services Section -->
 
@@ -363,7 +316,8 @@
 
         <div class="section-title">
           <h2>Benefits</h2>
-          <p>We Have Different offers For All For Monthly Pass</p>
+          <p>We have two offers available for this month, applicable to all,for monthly bus passes."
+          </p>
         </div>
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -373,7 +327,7 @@
               <div class="testimonial-item" data-aos="fade-up">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                    We have plan where 40% off for student
+                   Our plan for this month is 40% off for student.
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="{{ url_for('static', filename='img/testimonials/student.png') }}" class="testimonial-img" alt="">
@@ -388,7 +342,7 @@
               <div class="testimonial-item" data-aos="fade-up" data-aos-delay="300">
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  We have a plan where 30% off for Handicap
+                  Our plan for this month is 30% off for Handicap.
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                 </p>
                 <img src="{{ url_for('static', filename='img/testimonials/handicap.png') }}" class="testimonial-img" alt="">
@@ -398,9 +352,8 @@
             </div><!-- End testimonial item -->
 
           </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
+          <div class="swiper-pagination">
+          
       </div>
     </section><!-- End Testimonials Section -->
 
@@ -410,7 +363,7 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <p>If you have any query regarding our buses then you can directy contact us via Call ,Mail or Message .</p>
+          <p>If you have any queries regarding our buses, you can directly contact us via call, email, or message.</p>
         </div>
 
         <div class="row" data-aos="fade-in">
@@ -420,23 +373,22 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>A108 Adam Street, Indore, NY 535022</p>
+                <p>A108 Sapna Sangeeta ,Indore,NY 535022</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>Expressbus@example.com</p>
+                <p>expressbus@example.com</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 55</p>
+                <p>+71 85643 07890</p>
               </div>
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
-            </div>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 300px; height: 290px;" ></iframe>  </div>
 
           </div>
 
@@ -445,7 +397,7 @@
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name"> Name</label>
-                  <input type="text" name="name" class="form-control" id="name" maxlength="15" required pattern="^[^\d.]+$" > 
+                  <input type="text" name="name" class="form-control" id="name"  minlength="2" maxlength="15" required pattern="^[^\d.]+$" > 
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name"> Email</label>
@@ -454,12 +406,13 @@
               </div>
               <div class="form-group">
                 <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" maxlength="18" minlength="2"required pattern="^[^\d.]+$" required>
+                <input type="text" class="form-control" name="subject" id="subject" maxlength="25" minlength="3"required pattern="^[^\d.]+$" required>
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" maxlength="80" minlength="10" required></textarea>
-              </div>
+                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[^\d]*$"></textarea>
+            </div>
+            
               <div class="my-3">
                 
                 <div class="error-message"></div>
@@ -479,14 +432,14 @@
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Ajay Malviya</span></strong>
+        &copy; Creatby <strong><span>Ajay Malviya</span></strong>
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed using <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
   </footer><!-- End  Footer -->
@@ -549,5 +502,17 @@
 
 <!-- -----------------------this for hide  registration page with sidebar---------------------------- -->
   
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
 </body>
 </html>

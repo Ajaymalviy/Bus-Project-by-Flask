@@ -39,9 +39,31 @@
         tr:hover {
             background-color: #ddd;
         }
+        a {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+            padding: 10px 20px; /* Adjust padding as needed */
+            border: 1px solid #ccc; /* Add a border for a button-like appearance */
+            border-radius: 4px; /* Optional: Add rounded corners */
+            background-color: #f0f0f0; /* Button background color */
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add a smooth transition effect */
+            margin-bottom: 41%;
+          
+            }
+
+            /* Change the background color on hover for a more interactive feel */
+            a:hover {
+            background-color: #e0e0e0;
+            }
     </style>
 </head>
 <body>
+
+    <a href="{{url_for('homee')}}">Home</a>
     
         <table>
             <tr>

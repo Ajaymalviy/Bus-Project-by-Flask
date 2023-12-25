@@ -1,23 +1,17 @@
 from functools import wraps
 from flask import Flask, render_template, request, redirect, url_for, session, flash 
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user, UserMixin,logout_user,current_user
-
+from flask_login import login_required, logout_user
 # from flask_paginate import Pagination, get_page_args
-from datetime import datetime
 import mysql.connector
 import bcrypt
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_login import LoginManager
 
-
-
-def convert_time_to_time_format(time_str):
-    # Assuming time_str is in 'HH:MM AM/PM' format
-    time_obj = datetime.strptime(time_str, '%I:%M %p')
-    return time_obj.strftime('%H:%M')
 
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
 #this is our flask application instance for class Flask or we can say that is our object of class .
 
+# login_manager = LoginManager(app)
+# login_manager.login_view = 'login'  # Specify the login view for redirecting
 
 app.secret_key = 'secrets.token_hex(16)'  # Replace with a secret key for sessions as our need ,we can fix any secrete key
 # PER_PAGE = 10 
@@ -62,8 +56,7 @@ CREATE TABLE bus_pass (
     
 );
 # """
-# cursor.execute(create_table_query_bus_pass)
-# db.commit()
+#--------------------------------------authorization on tables------------------------------------
 
 # the login_required function
 def login_required(view):
@@ -81,15 +74,48 @@ def login_required(view):
 
 
 
+#----------------------------------------------------------------
 
-#-----------------------------this is our pages for auth----------------------require----------------
+@app.route('/logout')
+def logout():
+    # Clear the session to log the user out
+    session.pop('username', None)
+    # flash('You have been logged out.', 'info')
+    return render_template('index.html')
+
+#---------------------------------------------------------------------
+
+# cursor.execute(create_table_query_bus_pass)
+# db.commit()
+ 
+# Assume you have a function to retrieve a user from your database
+# def get_user_by_username(username):
+#     cursor = db.cursor(dictionary=True)
+#     cursor.execute("SELECT id, is_active FROM users WHERE name = %s", (username,))
+#     user_data = cursor.fetchone()
+#     cursor.close()
+
+#     if user_data:
+#         user = User(user_id=user_data['id'])
+#         user.is_active = user_data['is_active']
+#         return user
+#     return None
+
+# #-----------------------------this is our pages for auth----------------------require----------------
+
+# from flask_login import UserMixin
+
+# class User(UserMixin):
+#     def __init__(self, user_id):
+#         self.id = user_id
 
 # i am creating root directory which is denoted by '/' slash this is our first page open when we run our file .
 @app.route('/')
 def home():
+    if 'username' in session:
+        return render_template('index1.html')
     return render_template('index.html')
 # on this root directry one fuction is wrote and this tell us to render/ change direction on given page which is index.html
-
 
 
 @app.route('/signin')
@@ -106,6 +132,7 @@ def registerbutton():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -114,24 +141,25 @@ def login():
         # Fetch user data based on the provided username
         cursor.execute("SELECT name, password FROM users WHERE name=%s", (username,))
         user_data = cursor.fetchone()
-        
+        cursor.fetchall()
         cursor.close()
 
         if user_data:
             stored_password = user_data[1]
             if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
                 # Passwords match, you can log in
-                # Add your login logic here
-                session['username' ] = username 
-                return render_template('index.html')
+                # Add  login logic here
+                session['username'] = username 
+                flash('You are now logged in!', 'success')
+                return render_template('index1.html')
             else:
                 return "Incorrect password. Please try again."
         else:
             return "Username not found. Please register."
 
-    return render_template('index.html')
+    return redirect('signin')
 
-
+#-----------------for logout-----------------------------------------------------------------------------------
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -167,55 +195,53 @@ def register():
 
     return render_template('registerbutton.html')
 
-#----------------------------------login session -------------------------
 
-# Assuming 'app' is your Flask application instance
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'  # Specify the login view for redirecting unauthenticated users
+# ------------------------------------------- Login Required for Authentification -------------------------
 
-@login_manager.user_loader
-def load_user(user_id):
-    # Retrieve the user object from the database
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
-    user = cursor.fetchone()
-    cursor.close()
-    return User(user) if user else None
 
-# Your User class should inherit from UserMixin
-class User(UserMixin):
-    def __init__(self, user_data):
-        self.id = user_data['id']
-        self.username = user_data['name']
-        self.user_type = user_data['user_type']
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
 
 
 
 #-------------------------------bus_detail___________________________________________________________
 @app.route('/bus_details', methods=['GET', 'POST'])
 def bus_details():
-    # Get the page number from the query string, default to 1 if not provided
+    # Get the current page from the query parameters, default to 1
     page = int(request.args.get('page', 1))
 
-    # Set the number of records to display per page
-    per_page = 10  # You can adjust this number as needed
+    # Set the number of items per page
+    per_page = 10 # You can adjust this based on your preference
 
-    # Calculate the OFFSET based on the page number
+    # Calculate the OFFSET based on the current page
     offset = (page - 1) * per_page
 
     # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
-    cursor.execute(f"SELECT * FROM bus_detail LIMIT %s OFFSET %s", (per_page, offset))
+    cursor.execute(f"SELECT * FROM bus_detail LIMIT {per_page} OFFSET {offset}")
     bus_data = cursor.fetchall()
+    
+
+    # Count the total number of items
+    cursor.execute("SELECT COUNT(*) FROM bus_detail")
+    total_items = cursor.fetchone()['COUNT(*)']
+
+    # Calculate the total number of pages
+    total_pages = (total_items + per_page - 1) // per_page
+
     cursor.close()
 
-    return render_template('bus_detail.html', bus_data=bus_data, page=page)
+    # print(bus_data)
+    # print(page)
+    # print(per_page)
+    # print(total_pages)
+
+    # Modify the bus_data to be in title case
+    for bus in bus_data:
+        for key, value in bus.items():
+            if isinstance(value, str):
+                bus[key] = value.title()
+
+    return render_template('bus_detail.html', bus_data=bus_data, page=page, per_page=per_page, total_pages=total_pages)
 
 
 
@@ -266,6 +292,7 @@ def update_bus(bus_id):
 
   
 #---------------------------------------for deleting bus----------------------------------------------------------------------------------
+
 @app.route('/delete_bus/<int:bus_id>', methods=['GET','POST'])
 @login_required
 def delete_bus(bus_id):
@@ -277,26 +304,51 @@ def delete_bus(bus_id):
         db.commit()
         cursor.close()
         
-        flash("Bus deleted successfully.", "success")
-        return redirect(url_for('bus_details'))
+        # flash("platform deleted successfully.", "success")
+        # return redirect(url_for('platform_details'))
+        return render_template('success.html')
     except Exception as e:
         db.rollback()
         flash(f"An error occurred while deleting the bus.:{e}", "error")
         return redirect(url_for('bus_details'))
     
+    
    
 #----------------------------------platform detail manipulation----------------------------------------------
 
-# Create a new route for platform details
-@app.route('/platform_details',methods=['GET','POST'])
+
+@app.route('/platform_details', methods=['GET', 'POST'])
 def platform_details():
-    # Query for my database to fetch platform details
+    # Get the current page from the query parameters, default to 1
+    page = int(request.args.get('page', 1))
+
+    # Set the number of items per page
+    per_page = 8  # You can adjust this based on your preference
+
+    # Calculate the OFFSET based on the current page
+    offset = (page - 1) * per_page
+
+    # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
-    query = "SELECT * FROM platform LIMIT 70"  
+    query = f"SELECT * FROM platform LIMIT {per_page} OFFSET {offset}"
     cursor.execute(query)
     platform_data = cursor.fetchall()
+
+    # Count the total number of items
+    cursor.execute("SELECT COUNT(*) FROM platform")
+    total_items = cursor.fetchone()['COUNT(*)']
+
+    # Calculate the total number of pages
+    total_pages = (total_items + per_page - 1) // per_page
+
     cursor.close()
-    return render_template('platform.html', platform_data=platform_data)
+    for platform in platform_data:
+        for key, value in platform.items():
+            if isinstance(value, str):
+                platform[key] = value.title()
+
+
+    return render_template('platform.html', platform_data=platform_data, page=page, per_page=per_page, total_pages=total_pages)
 
 #--------------------------------------------------for adding platform------------------------
 
@@ -351,6 +403,7 @@ def delete_platform(platform_id):
         
         # flash("platform deleted successfully.", "success")
         # return redirect(url_for('platform_details'))
+        # print("work")
         return render_template('success.html')
     except Exception as e:
         db.rollback()
@@ -358,33 +411,48 @@ def delete_platform(platform_id):
         return redirect(url_for('platform_details'))
     
     
-#-------------------------------route manipulation---------------------------
-    
 #-------------------------------route manipulation--------------------------------------------------------------
 
 # Create a new route for ticket routes
-@app.route('/ticket_routes',methods=['GET','POST'])
+
+@app.route('/ticket_routes', methods=['GET', 'POST'])
 def ticket_routes():
-    # Query your database to fetch ticket routes
+    # Get the current page from the query parameters, default to 1
+    page = int(request.args.get('page', 1))
+
+    # Set the number of items per page
+    per_page = 10  # You can adjust this based on your preference
+
+    # Calculate the OFFSET based on the current page
+    offset = (page - 1) * per_page
+
+    # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
-    query = "SELECT route FROM bus_detail LIMIT 30"  # Adjust the query as needed
+    query = f"SELECT route FROM bus_detail LIMIT {per_page} OFFSET {offset}"
     cursor.execute(query)
     ticket_data = cursor.fetchall()
+
+    # Count the total number of items
+    cursor.execute("SELECT COUNT(*) FROM bus_detail")
+    total_items = cursor.fetchone()['COUNT(*)']
+
+    # Calculate the total number of pages
+    total_pages = (total_items + per_page - 1) // per_page
+
     cursor.close()
 
-    return render_template('ticket.html', ticket_data=ticket_data)
+    return render_template('ticket.html', ticket_data=ticket_data, page=page, per_page=per_page, total_pages=total_pages)
 
-
-#-------------for adding route-----------
-
-
-
+@app.route('/home')
+def homee():
+    return render_template ('index1.html')
 
 
 
 #-----------------------------this is for open bus detail of particular bus------------------------------------
 
 @app.route("/show") #our first directry which is open
+@login_required
 def index():
     return render_template("particular_bus.html")#it will though us to the html page which is open at first
 
@@ -414,9 +482,6 @@ def getting_data():
 
 #--------------------for bus-pass from services------------------------------------------
 
-from flask import session, request
-
-
 @app.route('/services', methods=['GET', 'POST'])
 @login_required
 def services():
@@ -436,7 +501,7 @@ def services():
 
         return render_template('success1.html')  # Return the success.html template
 
-    return render_template('index.html')  # Render the form for data submission
+    return render_template('index1.html')  # Render the form for data submission
 
 #----------------------THIS IS FOR CONTACT DETAIL-----------------------
 @app.route('/contact', methods=['GET', 'POST'])
@@ -454,7 +519,7 @@ def contact():
             cursor.execute(insert_query, (name, email, subject, message))
             db.commit()
             cursor.close()
-            return render_template('success.html')  # Return the success.html template
+            return render_template('success1.html')  # Return the success.html template
         except mysql.connector.Error as e:
             return f"An error occurred while inserting data: {str(e)}"
         finally:
@@ -462,4 +527,5 @@ def contact():
                 cursor.close()
     return render_template('success1.html')
 
-#app.run(host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)

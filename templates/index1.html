@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Express-Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="imyproject_by_flask/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+  <style>
+    .top-right-buttons {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      color: rgb(15, 13, 13);
+    }
+  
+    .top-right-buttons a {
+      margin-left: 10px;
+      background-color: rgb(0, 0, 0);
+      border-radius: 5px;
+      padding: 5px 10px;
+      text-decoration: none; /* Add this to remove underlines from links */
+      transition: background-color 0.3s; /* Add a transition for smooth hover effect */
+    }
+  
+    .top-right-buttons a:hover {
+      background-color: rgb(19, 206, 223);
+      text-emphasis-color: black;
+    }
+     
+
+        /* CSS code */
+    ul.flashes {
+        list-style-type: none;
+        padding: 10px;
+    }
+
+    ul.flashes li {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+
+    ul.flashes li.success {
+        background-color: #dff0d8; /* Green background for success messages */
+        color: #3c763d;
+    }
+
+    ul.flashes li.danger {
+        background-color: #f2dede; /* Red background for error messages */
+        color: #a94442;
+    }
+   
+
+
+  </style>
+  
+  
+</head>
+
+<body>
+
+  <div class="work-section">
+    <div id="content-container" class="work-content">
+  </div>
+  
+
+  
+  <div class="work-section">
+    <div id="content-mask" class="work-content">
+  </div>
+  
+</div> 
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="{{ url_for('static', filename='img/proffff.jpg') }}" alt="" class="img-fluid rounded-circle">
+        <h1 class="text-light"><a href="index.html">Express-Bus</a></h1>
+        <div class="social-links mt-3 text-center">
+          <a href="https://about.twitter.com/en" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
+         
+          <a href="https://www.linkedin.com/feed/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="#hero1" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>History</span></a></li>
+          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Dashboard</span></a></li>
+          <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
+          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+
+  <!-- ======= hero1 Section ======= -->
+  <div style="width: 100%; height: 100vh; background: url('../img/lastpic1.jpg') top center; background-size: cover;">
+    <section id="hero1" class="d-flex flex-column justify-content-center align-items-center"> 
+      <div class="hero1-container" data-aos="fade-in" >  <h1>  Welcome to Express-BUS</h1>
+      <div style = "padding-left: 60px;">
+      <p>You can see Dashboard for <span class="typed" data-typed-items=" Bus-Details, Bus-Stop's, Routes"></span></p>
+      </div>
+    </div>
+  </section><!-- End hero1 -->
+  </div>
+
+
+  <main id="main">
+   
+ 
+  <div class="top-right-buttons" >
+    <a class="login-button" href="{{url_for('logout')}}" id="login_page" >Logout</a>
+    <a href="#">session on</a>
+    
+  </div>
+
+
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>About</h2>
+          <p>Express-Bus,Manage the whole buses at our city. It was developing, from last 5-years at our whole areas of covering and provide the facitlities to our citizens.Everyone enjoy to their journey with our buses and make it a  memorable.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4" data-aos="fade-right">
+            <img src="{{ url_for('static', filename='img/backpic.jpg') }}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+            <h3>information About Us.</h3>
+            <p class="fst-italic">
+             Following
+            </p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Opening:</strong> <span>1 May 2015</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.express-bus.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+71 85643 07890</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Indore</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>From:</strong> <span>5 Years</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Work:</strong> <span>Travelling
+                    And Transport</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>expressbus@gmail.com</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                </ul>
+              </div>
+            </div>
+            <p>Express-BUS, over the years, has strived to deliver easy booking solutions to its customers. Our continued efforts have resulted in Express-BUS becoming one of the leading and top-rated bus booking platforms in India for various bus services. We have a strong presence with a ticket inventory from over 1000 bus partners and 100 route options on our app and website.
+
+              Founded in the year 2005, Express-BUS is a pioneer in providing end-to-end software and other value-added solutions such as fleet management solutions, vehicle tracking systems, passenger information systems, backed by a 24x7 customer support center. 
+             </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Facts Section ======= -->
+    <section id="facts" class="facts">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Facts</h2>
+          <p>When considering the selection of buses for public transportation, there are several key parameters and factors that play a crucial role in making an informed decision. These factors encompass various aspects, such as capacity and fuel. Let's delve into some of the essential parameters to evaluate when it comes to buses.        </div>
+
+        <div class="row no-gutters">
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up">
+            <div class="count-box">
+              <i class="bi bi smile emoji"></i>
+              <span data-purecounter-start="0" data-purecounter-end="60" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Seat</strong> Of Capacity</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="count-box">
+              <i class="bi bi-journal-richtext"></i>
+              <span data-purecounter-start="0" data-purecounter-end="80" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Percent </strong> Use CNG & Natural-Gas</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="count-box">
+              <i class=""></i>
+              <span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Hours </strong> Provide services</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="count-box">
+              <i class="bi bi-people"></i>
+              <span data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="1" class="purecounter"></span>
+              <p><strong>Members</strong> In Our Team</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Facts Section -->
+
+   
+
+    <!-- ======= Resume Section ======= -->
+    <section id="resume" class="resume">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>History</h2>
+          <p>At the outset, when we considered managing the entire bus system in our city, it seemed like a daunting task to maintain all the buses at fixed times. After starting with only 10 buses at the beginning of the year, we have consistently increased our fleet, and now it comprises more than 150 buses.         </div>
+
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up">
+            <h3 class="resume-title"></h3>
+            <div class="resume-item pb-0">
+              <h4>Planing</h4>
+              <p><em>Around 2014, we had two buses that were used for local facilities within a 50km radius. Soon after, in the same year, we acquired ten more buses as part of our planning. 
+                <ul>
+                  <li>Rajendra Singh, (Head of Member Assembly)</li>
+                  <li>Manshing Rajore, (Chief of School Department)</li>
+                  <li>Rajwardhan Singh Sharma, (Ex IIM Director)</li>
+                </ul>
+            </div>
+
+            <h3 class="resume-title">Success</h3>
+            <div class="resume-item">
+              <h4>Finally We Get In</h4>
+              <h5>2015</h5>
+              <p><em>We Decide to open big managment system of buses into our city.</em></p>
+              <p>And Indore helped us vice versa, and now we have more than 150 buses. Thank you, Indore, for supporting us.</p>
+            </div>
+           
+    </section><!-- End Resume Section -->
+
+    <!-- ======= dashboard ======= -->
+    <section id="portfolio" class="portfolio section-bg">
+      <div class="container">
+    
+        <div class="section-title">
+          <h2>Dashboard</h2>
+          <p>This is our dashboard, where you can directly access the details of our buses, platforms, and routes. You can search for the details of any bus using its ID number.</p>
+        </div>
+    
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+    
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <a href="{{url_for('bus_details')}}" style="color: black; background-color: bisque; margin-top: 2%;">
+              <div class="portfolio-wrap">
+                <img src="{{ url_for('static', filename='img/portfolio/port1.jpg') }}" class="img-fluid" alt="" style="max-width: 100%; height: auto;">
+              </div>
+              <h3>Bus Details</h3> <!-- Heading for the content carried by the image -->
+            </a>
+          </div>
+    
+          <div class="col-lg-6 col-md-6 portfolio-item filter-app">
+            <a href="{{url_for('platform_details')}}" id="bd1" style="color: black; background-color: bisque;">
+              <div class="portfolio-wrap">
+                <img src="{{ url_for('static', filename='img/portfolio/port3.jpg') }}" class="img-fluid" alt="" style="max-width: 100%; height: auto;">
+              </div>
+              <h3>Platforms</h3> <!-- Heading for the content carried by the image -->
+            </a>
+          </div>
+    
+        </div>
+    
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+    
+          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
+            <a href="{{url_for('ticket_routes')}}" id="bd1" style="color: black; background-color: bisque;">
+              <div class="portfolio-wrap">
+                <img src="{{ url_for('static', filename='img/portfolio/route8.jpg') }}" class="img-fluid" alt="" style="max-width: 100%; height: auto;">
+              </div>
+              <h3>Routes</h3> <!-- Heading for the content carried by the image -->
+            </a>
+          </div>
+    
+          <div class="col-lg-6 col-md-6 portfolio-item filter-card">
+            <a href="{{url_for('index')}}" id="bd3" style="color: black; background-color: bisque;">
+              <div class="portfolio-wrap">
+                <img src="{{ url_for('static', filename='img/portfolio/search.jpg') }}" class="img-fluid" alt="" style="max-width: 100%; height: auto;">
+              </div>
+              <h3>Search</h3> <!-- Heading for the content carried by the image -->
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          
+          <h2>Services</h2>
+                <h3>Bus-Pass</h3>
+                <h4>Please Fill The Form For Verification</h4>
+                <form action="/services" method="post" role="form" >
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="name">  Your Name</label>
+                      <input type="text" name="name" class="form-control" id="name" minlength="3"  maxlength="18" required pattern="^[^\d.]+$" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="name">Your Email</label>
+                      <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Aadhar-Number</label>
+                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12" pattern="\d+" title="Aadhar-Number must contain only numeric digits" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <textarea class="form-control" name="address" id="Address" rows="2" maxlength="30"  pattern="[a-zA-Z].*\d.*|[0-9].*[a-zA-Z].*" title="Address must contain only letters and digits, no special characters" required></textarea>
+                </div>
+                
+                  <div class="my-3">
+              
+                    <label for="userType">User Type:</label>
+                    <select id="userType" name="userType" required>
+                        <option value="student">Student</option>
+                        <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="text-center"><button type="submit">submit</button></div>
+                </form>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials section-bg">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Benefits</h2>
+          <p>We have two offers available for this month, applicable to all,for monthly bus passes."
+          </p>
+        </div>
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item" data-aos="fade-up">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                   Our plan for this month is 40% off for student.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img src="{{ url_for('static', filename='img/testimonials/student.png') }}" class="testimonial-img" alt="">
+                <h3>Bus-Pass</h3>
+                <h4>
+                  Offer</h4>
+              </div>
+            </div><!-- End testimonial item -->
+
+
+            <div class="swiper-slide">
+              <div class="testimonial-item" data-aos="fade-up" data-aos-delay="300">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Our plan for this month is 30% off for Handicap.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img src="{{ url_for('static', filename='img/testimonials/handicap.png') }}" class="testimonial-img" alt="">
+                <h3>Bus-Pass</h3>
+                <h4>Offer</h4>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>If you have any queries regarding our buses, you can directly contact us via call, email, or message.</p>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+
+          <div class="col-lg-5 d-flex align-items-stretch">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>A108 Sapna Sangeeta ,Indore,NY 535022</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>expressbus@example.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+71 85643 07890</p>
+              </div>
+
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 300px; height: 290px;" ></iframe>
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch " style="display: flex; align-items: right; margin-left: 120px; width: 500px; border: 1px dashed black; padding: 10px ">
+            <form action="contact" method="post" role="form" >
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name"> Name</label>
+                  <input type="text" name="name" class="form-control" id="name"  minlength="2" maxlength="20" required pattern="^[^\d.]+$" > 
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name"> Email</label>
+                  <input type="email" class="form-control" name="email" id="email"maxlength="25" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" maxlength="25" minlength="3"required pattern="^[^\d.]+$" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[^\d]*$"></textarea>
+            </div>
+            
+              <div class="my-3">
+                
+                <div class="error-message"></div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Creatby <strong><span>Ajay Malviya</span></strong>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed using  <a href="https://bootstrapmade.com/"> BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/typed.js/typed.umd.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/waypoints/noframework.waypoints.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- -----------------------this for hide  login page with sidebar---------------------------- -->
+  <script>
+    document.getElementById('login_page').addEventListener('click' , function login() {
+      
+      loadContent("{{url_for('signin')}}");
+    })
+
+    function loadContent(page) {
+      const contentContainer = document.getElementById('content-container')
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET" , page,true);
+      xhr.onreadystatechange = function () {
+        
+        if(xhr.readyState == 4 && xhr.status ===200){
+          contentContainer.innerHTML = xhr.responseText;
+        }
+      }
+      xhr.send();
+    }
+
+    document.getElementById('register_page').addEventListener('click' , function register() {
+      
+      loadContent("{{url_for('registerbutton')}}");
+    })
+    function loadContent(page) {
+      const contentContainer = document.getElementById('content-mask')
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET" , page,true);
+      xhr.onreadystatechange = function () {
+        
+        if(xhr.readyState == 4 && xhr.status ===200){
+          contentContainer.innerHTML = xhr.responseText;
+        }
+      }
+      xhr.send();
+    }
+
+  </script>
+
+<!-- -----------------------this for hide  registration page with sidebar---------------------------- -->
+  
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+</body>
+</html>

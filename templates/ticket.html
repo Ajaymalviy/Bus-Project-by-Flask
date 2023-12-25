@@ -17,7 +17,7 @@
             background-color: #5a2b2b;
             color: white;
             padding: 20px;
-            text-align: center;
+            
             position: relative;
         }
 
@@ -70,13 +70,73 @@
             border-radius: 5px;
             cursor: pointer;
         }
-    </style>
+
+
+        .pagination a:hover {
+            background-color: #31d1bc;
+            color: rgb(16, 228, 210);
+        }
+
+        .pagination span:hover {
+            background-color: #3f1c1c;
+            color: rgb(92, 34, 34);
+        }
+
+                /* Style for the pagination */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color:rgb(27, 27, 27);
+            color: white;
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        .pagination a:hover {
+            background-color: rgb(27, 27, 27);
+        }
+
+        .pagination .disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+                /* Reset some default styles for the anchor tag */
+        a {
+        text-decoration: none;
+        color: inherit;
+        display: inline-block;
+        padding: 7px 15px; /* Adjust padding as needed */
+        border: 1px solid #242424; /* Add a border for a button-like appearance */
+        border-radius: 4px; /* Optional: Add rounded corners */
+        background-color: #db5252; /* Button background color */
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Add a smooth transition effect */
+        position: relative;
+        }
+
+        /* Change the background color on hover for a more interactive feel */
+        a:hover {
+        background-color: #f06767;
+        }
+            </style>
 </head>
 <body>
    
     <h1 > 
-        Routes
+        <a href="{{url_for('homee')}}" style=" margin-right: 40%;">Home</a> 
+        Routes  
     </h1>
+   
     <ul>
         {% for ticket in ticket_data %}
             <li>
@@ -86,6 +146,17 @@
             </li>
         {% endfor %}
     </ul>
-   
+    <div class="pagination">
+        <span>Page {{ page }} of {{ total_pages }}</span>
+        
+        {% if page > 1 %}
+            <a href="{{ url_for('ticket_routes', page=page-1) }}" id="prev" style="margin-left: 16%;">Previous</a>
+        {% endif %}
+        
+        {% if page < total_pages %}
+            <a href="{{ url_for('ticket_routes', page=page+1) }}" style="margin-left: 48%;">Next</a>
+        {% endif %}
+    </div>
+    
 </body>
 </html>
