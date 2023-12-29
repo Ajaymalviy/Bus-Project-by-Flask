@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Details</title>
+    <style>
+        h1 {
+            color: rgb(214, 207, 207);
+            padding: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 69%;
+            margin-left: 27%;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #333333;
+            color: rgb(231, 239, 240);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: bisque;
+        }
+
+        tbody tr:hover {
+            background-color: #b7cfc7;
+        }
+
+        button {
+            padding: 3%;
+            margin: 4%;
+            background-color: rgb(167, 109, 52);
+            border-radius: 5px;
+        }
+
+        .add-bus-button {
+            float: right;
+            margin-right: 20px;
+            padding: 2px 7px;
+            background-color: #bdd8d4;
+            color: white;
+            text-decoration: none;
+            border-radius: 1px;
+        }
+
+        .pagination a:hover {
+            background-color: #31d1bc;
+            color: rgb(16, 228, 210);
+        }
+
+        .pagination span:hover {
+            background-color: #3f1c1c;
+            color: rgb(92, 34, 34);
+        }
+
+        /* Style for the pagination */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color:rgb(27, 27, 27);
+    color: white;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background-color: rgb(27, 27, 27);
+}
+
+.pagination .disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+        /* Change the background color on hover for a more interactive feel */
+        a:hover {
+        background-color: #f14040;
+        color: #31d1bc;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f2f2f2;">
+    {% extends "header.html" %}
+    {% block content %}
+    <h1  style="background-color:#5a2b2b; margin-left: 22%; border-radius: 5px; color: white;" >Bus Details <a href="{{url_for('homee')}}" style="padding: 5px 12px; 
+        border: 1px solid #242424; 
+        border-radius: 3px; 
+        background-color: #db5252; 
+        font-weight: bold;
+        text-align: center;
+        color: wheat;
+        margin-left: 5%;
+        cursor: pointer;">Home</a> <a
+        class="add-bus-button" href="{{url_for('add_bus_form')}}"
+        style="background-color: rgb(109,31,23,1); margin-right: 14%;">Add user</a></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>mobil_number</th>
+                <th>city</th>
+                <th>email</th>
+                <th>user_type</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_data %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.mobil_number }}</td>
+                <td>{{user.city }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.user_type }}</td>
+                <td>
+               </td>
+            </tr>
+</body>
+</html>            

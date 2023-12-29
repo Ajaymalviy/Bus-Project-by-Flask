@@ -6,26 +6,25 @@
     <title>Registration Page</title>
     <style>
         body {
-            background-color: #dacfb3; /* Changed the background color */
+            background-color: #dacfb3;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevent scrolling */
+            font-family: 'Arial', sans-serif;
         }
 
         h1 {
             text-align: center;
+            color: #2ebbee;
         }
 
         .registration-form {
-            background-color: rgb(38, 114, 104);
-            padding: 90px;
-            border-radius: 90px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
             width: 40%;
-            height: 70%;
-            margin-left: 40%;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
         }
 
@@ -33,61 +32,66 @@
             display: block;
             margin-bottom: 10px;
             font-size: medium;
+            color: #333;
         }
 
         input[type="text"],
         input[type="password"],
         input[type="email"],
         select {
-            width: 100%; /* Set width to 100% for full width */
+            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid black;
-            border-radius: 3px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
         input[type="text"][name="mobile_number"] {
-            background-color: azure;
+            background-color: #f0f8ff;
         }
 
         input[type="text"][name="mobile_number"]:required {
-            border-color: rgb(24, 13, 13);
+            border-color: #ff0000;
         }
 
         input[type="text"][name="mobile_number"]:valid {
-            border-color: green;
+            border-color: #008000;
         }
 
         button[type="submit"] {
             background-color: #2ebbee;
-            color: rgb(0, 0, 0);
+            color: #fff;
             padding: 10px 20px;
-            border: 1px solid black;
+            border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1c7d6a;
         }
     </style>
 </head>
 <body>
-    {% extends "header.html" %}
-    {% block content %}
     <div class="registration-form">
         <h1>Registration</h1>
         <form id="registrationForm" action="/register" method="POST">
             <label for="newUsername">New Username:</label>
-            <input type="text" id="newUsername" name="username" minlength="3" maxlength="25" required pattern="^[^\d.]+$" placeholder="Enter your username">
+            <input type="text" id="newUsername" name="username" minlength="3" maxlength="25" required pattern="^[^\s]+$" title="Remove spaces" placeholder="Enter your username">
 
             <label for="newPassword">New Password:</label>
-            <input type="password" id="newPassword" name="password"  minlength="3" maxlength="8" required placeholder="Enter your password">
+            <input type="password" id="newPassword" name="password" minlength="4" maxlength="8" title="Must contain at least 4 characters" required placeholder="Enter your password">
 
             <label for="mobileNumber">Mobile Number:</label>
-            <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" required pattern="^[6789]\d{9}$" placeholder="Enter your mobile number">
+            <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" title="Start with 5, 6, 7, 8, or 9" required pattern="^[56789]\d{9}$" placeholder="Enter your mobile number">
 
             <label for="city">City:</label>
-            <input type="text" id="city" name="city" maxlength="18" minlength="3" pattern="^[A-Za-z]+$" placeholder="Enter your city">
+            <input type="text" id="city" name="city" maxlength="20" minlength="3" title="Fill at least three words" pattern="^[A-Za-z]+$" placeholder="Enter your city">
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" maxlength="30" required pattern="^[a-zA-Z0_%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email">
+            <input type="email" id="email" name="email" minlength="4" maxlength="30" title="Minimum length 4 and must contain @" required pattern="^[a-zA-Z0_%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email">
 
             <label for="userType">User Type:</label>
             <select id="userType" name="user_type" required>
@@ -98,6 +102,5 @@
             <button type="submit" value="register" style="margin-top: 15px;">Register</button>
         </form>
     </div>
-    {% endblock %}
 </body>
 </html>

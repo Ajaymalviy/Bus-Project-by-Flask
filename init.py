@@ -5,12 +5,12 @@ from flask_login import login_required, logout_user
 import mysql.connector
 import bcrypt
 from flask_login import LoginManager
-
+from datetime import datetime ,timedelta
 
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
 #this is our flask application instance for class Flask or we can say that is our object of class .
 
-# login_manager = LoginManager(app)
+# login_manager = LoginManager(app )
 # login_manager.login_view = 'login'  # Specify the login view for redirecting
 
 app.secret_key = 'secrets.token_hex(16)'  # Replace with a secret key for sessions as our need ,we can fix any secrete key
@@ -81,7 +81,7 @@ def logout():
     # Clear the session to log the user out
     session.pop('username', None)
     # flash('You have been logged out.', 'info')
-    return render_template('index.html')
+    return render_template('new_index.html')
 
 #---------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ def logout():
 def home():
     if 'username' in session:
         return render_template('index1.html')
-    return render_template('index.html')
+    return render_template('new_index.html')
 # on this root directry one fuction is wrote and this tell us to render/ change direction on given page which is index.html
 
 
@@ -127,6 +127,19 @@ def signin():
 @app.route('/registerbutton')
 def registerbutton():
     return render_template('registerbutton.html')
+
+
+@app.route('/username')
+def username():
+    if username in session:
+        return render_template('user.html')
+
+
+# @app.route('/userinfo')
+# def userinfo():
+#     return render_template ('user_info.html')
+
+
 
 #----------------this is our main page of login which work under authentication.----------------------------
 
@@ -196,11 +209,25 @@ def register():
     return render_template('registerbutton.html')
 
 
-# ------------------------------------------- Login Required for Authentification -------------------------
+# ------------------------------------------- User detail -------------------------
+@app.route('/user', methods=['GET', 'POST'])
+def user():
+    # Execute the SELECT query with LIMIT and OFFSET clauses
+    cursor = db.cursor(dictionary=True)
+    cursor.execute(f"SELECT * FROM users where username ={username}")
+    user_data = cursor.fetchall()
+    
 
+    # Count the total number of items
+    cursor.execute("SELECT COUNT(*) FROM users")
+    total_items = cursor.fetchone()['COUNT(*)']
+    cursor.close()
 
-
-
+    # print(bus_data)
+    # print(page)
+    # print(per_page)
+    # print(total_pages)
+    return render_template('bus_detail.html', user_data=user_data)
 
 
 #-------------------------------bus_detail___________________________________________________________
@@ -237,6 +264,13 @@ def bus_details():
 
     # Modify the bus_data to be in title case
     for bus in bus_data:
+        if bus['departure_time']:
+            departure_datetime = datetime(1, 1, 1) + bus['departure_time']
+            bus['departure_time'] = departure_datetime.strftime('%H:%M')  # Format as HH:MM
+        if bus['arrival_time']:
+            arrival_datetime = datetime(1, 1, 1) + bus['arrival_time']
+            bus['arrival_time'] = arrival_datetime.strftime('%H:%M')  # Format as HH:MM
+
         for key, value in bus.items():
             if isinstance(value, str):
                 bus[key] = value.title()
@@ -266,7 +300,7 @@ def add_bus_form():
         db.commit()
         # flash('bus-detail added successfully', 'success')
         # return redirect(url_for('bus_details'))
-        return render_template('success.html')
+        return render_template('bus_details')
     return render_template('add_bus_form.html')    
 
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
@@ -284,7 +318,7 @@ def update_bus(bus_id):
         db.commit()
         # flash('Bus details updated successfully', 'success')
         # return redirect(url_for('bus_details'))
-        return render_template('success.html')
+        return redirect(url_for('bus_details'))
     query1 = 'SELECT * FROM bus_detail WHERE bus_id = %s'
     cursor.execute(query1, (bus_id,))
     bus = cursor.fetchone()
@@ -292,6 +326,10 @@ def update_bus(bus_id):
 
   
 #---------------------------------------for deleting bus----------------------------------------------------------------------------------
+@app.route('/success')
+def success_page():
+    return render_template('success.html')
+
 
 @app.route('/delete_bus/<int:bus_id>', methods=['GET','POST'])
 @login_required
@@ -306,7 +344,7 @@ def delete_bus(bus_id):
         
         # flash("platform deleted successfully.", "success")
         # return redirect(url_for('platform_details'))
-        return render_template('success.html')
+        return redirect(url_for('bus_details'))
     except Exception as e:
         db.rollback()
         flash(f"An error occurred while deleting the bus.:{e}", "error")
@@ -323,7 +361,7 @@ def platform_details():
     page = int(request.args.get('page', 1))
 
     # Set the number of items per page
-    per_page = 8  # You can adjust this based on your preference
+    per_page = 10  # You can adjust this based on your preference
 
     # Calculate the OFFSET based on the current page
     offset = (page - 1) * per_page
@@ -348,7 +386,7 @@ def platform_details():
                 platform[key] = value.title()
 
 
-    return render_template('platform.html', platform_data=platform_data, page=page, per_page=per_page, total_pages=total_pages)
+    return render_template('platform.html', platform_data=platform_data,page=page, per_page=per_page, total_pages=total_pages)
 
 #--------------------------------------------------for adding platform------------------------
 
@@ -359,7 +397,7 @@ def add_platform():
     if request.method == 'POST':
          # platform_id = request.form['platform _id']
         platform_number = request.form['platform_number']
-        location = request.form['location']
+        location = request.form['platform_name']
         cursor = db.cursor(dictionary=True)
         # Assuming platform_id is an auto-increment primary key, you don't need to specify it in the INSERT statement
         query = 'INSERT INTO platform(platform_number, location) VALUES (%s, %s)'
@@ -367,7 +405,7 @@ def add_platform():
         db.commit()
         flash('Platform detail added successfully', 'success')
         # return redirect(url_for('platform_details'))
-        return render_template('success.html')
+        return redirect(url_for('platform_details'))
     return render_template('add_platform_form.html')   
 
 #--------------------for editing this platform----------------------------------------
@@ -381,7 +419,7 @@ def update_platform(platform_id):
         cursor.execute(query, (platform_name, platform_id))
         db.commit()
         # flash('platform name updated successfully', 'success')
-        return render_template('success.html')
+        return redirect(url_for('platform_details'))
         # return redirect(url_for('platform_details'))
 
     query1 = 'SELECT * FROM platform WHERE platform_id = %s'
@@ -401,14 +439,14 @@ def delete_platform(platform_id):
         db.commit()
         cursor.close()
         
-        # flash("platform deleted successfully.", "success")
-        # return redirect(url_for('platform_details'))
+        # msg = flash("platform deleted successfully.", "success")
+        # # return redirect(url_for('platform_details'))
         # print("work")
-        return render_template('success.html')
+        return redirect(url_for('platform_details'))
     except Exception as e:
         db.rollback()
-        flash(f"An error occurred while deleting the bus.:{e}", "error")
-        return redirect(url_for('platform_details'))
+        msg = flash(f"An error occurred while deleting the bus.:{e}", "error")
+        return render_template('platform.html') 
     
     
 #-------------------------------route manipulation--------------------------------------------------------------
@@ -440,14 +478,50 @@ def ticket_routes():
     total_pages = (total_items + per_page - 1) // per_page
 
     cursor.close()
+    for ticket in ticket_data:
+        for key,value in ticket.items():
+            if isinstance(value,str):
+                ticket[key]=value.title()
+
 
     return render_template('ticket.html', ticket_data=ticket_data, page=page, per_page=per_page, total_pages=total_pages)
+
+
 
 @app.route('/home')
 def homee():
     return render_template ('index1.html')
 
 
+@app.route('/route_details', methods=['POST'])
+def route_details():
+    if request.method == 'POST':
+        selected_route = request.form['selected_route']
+
+        # Fetch details for the selected route from the database
+        cursor = db.cursor(dictionary=True)
+        cursor.execute(f'SELECT  bus_id,bus_number,bus_model,seating_capacity, departure_time, arrival_time FROM bus_detail WHERE route= "{selected_route}";')
+        route_details = cursor.fetchall()
+
+        # Close the cursor after fetching results
+        cursor.close()
+        for bus in route_details:
+            if bus['departure_time']:
+                departure_datetime = datetime(1, 1, 1) + bus['departure_time']
+                bus['departure_time'] = departure_datetime.strftime('%H:%M')  # Format as HH:MM
+            if bus['arrival_time']:
+                arrival_datetime = datetime(1, 1, 1) + bus['arrival_time']
+                bus['arrival_time'] = arrival_datetime.strftime('%H:%M')  # Format as HH:MM
+
+        for key, value in bus.items():
+            if isinstance(value, str):
+                bus[key] = value.title()
+
+        # Pass the route details to the template and render it
+        return render_template('route_details.html', route_details=route_details)
+
+    # Handle the case where the route_details page is directly accessed without a POST request
+    return render_template('error_page.html', error_message='Invalid Access')
 
 #-----------------------------this is for open bus detail of particular bus------------------------------------
 
@@ -456,17 +530,17 @@ def homee():
 def index():
     return render_template("particular_bus.html")#it will though us to the html page which is open at first
 
-@app.route("/success", methods=['GET', 'POST'])
+@app.route("/buses", methods=['GET', 'POST'])
 def getting_data():
     result = []
 
     if request.method == 'POST':
-        bus_id = request.form['bus_id']
+        route = request.form['route']
         try:
             connection = mysql.connector.connect(**db_config)
             cursor = connection.cursor()
 
-            cursor.execute(f'SELECT bus_model,seating_capacity, route, departure_time, arrival_time FROM bus_detail WHERE bus_id = "{bus_id}";')
+            cursor.execute(f'SELECT  bus_id,bus_number,seating_capacity, departure_time, arrival_time FROM bus_detail WHERE route= "{route}";')
             result = cursor.fetchall()
 
         except mysql.connector.Error as e:
@@ -476,9 +550,10 @@ def getting_data():
         finally:
             cursor.close()
             connection.close()
-            
 
-    return render_template('particular_form.html', result=result)
+
+        
+    return render_template('search_route.html', result=result)
 
 #--------------------for bus-pass from services------------------------------------------
 
@@ -497,8 +572,7 @@ def services():
         insert_query = "INSERT INTO bus_pass (name, email, aadhar, address, user_type) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(insert_query, (name, email, aadhar, address, user_type))
         db.commit()
-        cursor.close()
-
+        cursor.close() 
         return render_template('success1.html')  # Return the success.html template
 
     return render_template('index1.html')  # Render the form for data submission
@@ -519,13 +593,13 @@ def contact():
             cursor.execute(insert_query, (name, email, subject, message))
             db.commit()
             cursor.close()
-            return render_template('success1.html')  # Return the success.html template
+            return redirect(url_for('contact'))  # Return the success.html template
         except mysql.connector.Error as e:
             return f"An error occurred while inserting data: {str(e)}"
         finally:
             if cursor:
                 cursor.close()
-    return render_template('success1.html')
+    return render_template('index1.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

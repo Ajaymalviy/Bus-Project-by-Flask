@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,60 +8,137 @@
     <style>
         body {
             background-color: rgb(228, 216, 207);
-            text-align: center; /* Center align text within the body */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
 
         h1 {
-            margin-top: 20px; /* Add margin to the top of the h1 for spacing */
+            margin-top: 20px;
+            color: #333; /* Change the color of the heading text */
         }
 
         p {
-            margin-bottom: 20px; /* Add margin to the bottom of the p for spacing */
+            margin-bottom: 20px;
+            color: #555; /* Change the color of the paragraph text */
         }
 
-        /* Style the button */
-        button {
-            background-color: #007BFF; /* Change the button background color */
-            color: white; /* Change the button text color */
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* Style the button on hover */
-        button:hover {
-            background-color: #0056b3;
-        }
         .find-form {
+            position: relative;
             background-color: rgba(17, 12, 12, 0.7);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align:center; /* Center text within the login form */
-            width: 20%;
-            height: 10%;
-            justify-content: center;
-            margin-left: 500px;
+            text-align: center;
+            width: 300px; /* Adjusted width for better readability */
+            max-width: 80%; /* Set a maximum width to ensure it's responsive */
         }
 
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: white; /* Change the label text color */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #666; /* Change the border color */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 99;
+            width: 100%;
+        }
+
+        .autocomplete-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
-<body>
-    {% extends "header.html" %}
-    {% block content %}
-   
-    <h1 style="margin-left: 34%;margin-top: 3%;">Welcome To The AICTSL_BUS</h1>
-    <p style="margin-left: 41%; margin-top: 4;">Please enter Bus-Id to see the details of the Bus</p>
-      <div class="find-form " style="margin-left: 600px; margin-top: 5%;"> 
-        <form action="/success" class="container" method="POST"  style="margin-top: 0px;">
-            
-            <label for="bus_id">Bus ID:</label>
-            <input type="text" id="bus_id" name="bus_id" required placeholder="Enter Bus ID"><br><br>
 
-            <button type="submit">Search</button> <!-- Change the button text to "Search" -->
+<body>
+    <h1>Welcome To The EXPRESS_BUS</h1>
+    <p>Please choose route for see the details of the Bus</p>
+    <div class="find-form">
+        <form action="/buses" method="POST">
+            <label for="route">Route:</label>
+            <input type="text" id="route" name="route" required placeholder="Choose Route" autocomplete="off">
+            <div class="autocomplete-items" id="autocomplete-items"></div>
+            <button type="submit">Search</button>
         </form>
-      </div> 
-   {% endblock %}  
+    </div>
+
+    <script>
+        const routeInput = document.getElementById('route');
+        const autocompleteContainer = document.getElementById('autocomplete-items');
+
+        const routes = [
+            'Seattle to San Diego along the Pacific Coast and California Coast Ranges',
+            'Chicago to Denver via the Great Plains and Rocky Mountains',
+            'forage town to inox flip tom',
+            'New York City to Miami through the Appalachian Mountains and Florida Keys',
+            'rajwada to collectorate to ganesh nagar',
+            'Los Angeles to San Francisco via Central Valley and Pacific Coast Highway',
+            'manratn twoe here teo lop for',
+            'Chicago to Denver via the Great Plains and Rocky Mountains',
+            'rajmohhalla to sarafa to itpark',
+            'mujhe nhi pata',
+            'erewrewrwrw',
+            'tower to tantiya bhiil',
+            'rajwada to sarafa to itpark'
+        ];
+
+        routeInput.addEventListener('input', function () {
+            const inputText = this.value.toLowerCase();
+            autocompleteContainer.innerHTML = '';
+
+            const matchedRoutes = routes.filter(route => route.toLowerCase().includes(inputText));
+
+            matchedRoutes.forEach(route => {
+                const item = document.createElement('div');
+                item.classList.add('autocomplete-item');
+                item.innerText = route;
+                item.addEventListener('click', function () {
+                    routeInput.value = route;
+                    autocompleteContainer.innerHTML = '';
+                });
+                autocompleteContainer.appendChild(item);
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.matches('.autocomplete-item') && !e.target.matches('#route')) {
+                autocompleteContainer.innerHTML = '';
+            }
+        });
+    </script>
 </body>
+
 </html>

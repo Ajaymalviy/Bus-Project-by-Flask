@@ -116,7 +116,7 @@
         padding: 7px 15px; /* Adjust padding as needed */
         border: 1px solid #242424; /* Add a border for a button-like appearance */
         border-radius: 4px; /* Optional: Add rounded corners */
-        background-color: #db5252; /* Button background color */
+        background-color: #f18e8e; /* Button background color */
         font-weight: bold;
         text-align: center;
         cursor: pointer;
@@ -137,12 +137,13 @@
         Routes  
     </h1>
    
-    <ul>
+    <ul style="align-items: center;">
         {% for ticket in ticket_data %}
-            <li>
-                {{ ticket.bus_id }}
-                {{ ticket.route }}
-               
+            <li class="clickable">
+                <form action="{{ url_for('route_details') }}" method="post">
+                    <input type="hidden" name="selected_route" value="{{ ticket.route }}">
+                    <button type="submit">{{ ticket.route }}</button>
+                </form>
             </li>
         {% endfor %}
     </ul>

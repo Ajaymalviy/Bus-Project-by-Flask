@@ -101,9 +101,7 @@
 
 <body style="background-color: #f2f2f2;">
    
-    <h1  style="background-color:#5a2b2b; border-radius: 5px; color: white; margin-left: 2px; position: relative;" >Bus Details  <a
-            class="add-bus-button" href="{{url_for('add_bus_form')}}"
-            style="background-color: rgb(109,31,23,1); margin-right: 7%;"  >Add Bus</a> <a href="{{url_for('homee')}}" style="margin-left: 600px; background-color: rgb(109,31,23,1);padding: 2px 7px;
+    <h1  style="background-color:#434958; border-radius: 5px; color: white; margin-left: 2px; position: relative;" >Bus Details  <a href="{{url_for('homee')}}" style="margin-left: 600px; background-color: rgb(109,31,23,1);padding: 2px 7px;
            
             color: white;
             text-decoration: none;
@@ -114,57 +112,26 @@
                 <th>Bus ID</th>
                 <th>Bus Number</th>  
                 <th>Seating Capacity</th>
-                <th>Route</th>
                 <th>Departure Time</th>
                 <th>Arrival Time</th>
-                <th>Action</th>
+              
             </tr>
-        </thead>
+        </thead>   
         <tbody>
-            {% for bus in bus_data %}
+            {% for bus in route_details %}
             <tr>
+                
                 <td>{{ bus.bus_id }}</td>
                 <td>{{ bus.bus_number }}</td>
                 <td>{{ bus.seating_capacity }}</td>
-                <td>{{ bus.route }}</td>
                 <td>{{ bus.departure_time }}</td>
                 <td>{{ bus.arrival_time }}</td>
-                <td>
-                    <a href="{{ url_for('delete_bus', bus_id=bus.bus_id) }}" onclick="confirmDelete(event)"
-                        style="background-color:rgba(195,199,138,1); color: rgb(0, 0, 0); border-radius: 1px;">Delete </a>
-                    <a href="{{ url_for('update_bus', bus_id=bus.bus_id) }}"
-                        style="background-color:rgba(195,199,138,1); color: rgb(0, 0, 0); border-radius: 1px;">Edit</a>
-                </td>
+              
             </tr>
-            {% endfor %}
+           {%endfor%}
         </tbody>
         
-    </table>
-
-    <div class="pagination">
-        <span >Page {{ page }} of {{ total_pages }}</span>
-        
-        {% if page > 1 %}
-            <a href="{{ url_for('bus_details', page=page-1) }}" id="prev" style="margin-left: 3%;">Previous</a>
-        {% endif %}
-        
-        {% if page < total_pages %}
-            <a href="{{ url_for('bus_details', page=page+1) }}" style="margin-left: 59%;">Next</a>
-        {% endif %}
-    </div>
-    
-    
-
-    <script>
-        function confirmDelete(event) {
-            if (!confirm("Are you sure you want to delete this bus?")) {
-                event.preventDefault();
-            }
-        }
-    </script>
-
- 
-   
+    </table>  
 
 </body>
 

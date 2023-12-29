@@ -6,7 +6,7 @@
     <title>Platform Details</title>
     <style>
         body {
-            background-color: rgb(248, 207, 157);
+            background-color: rgb(255, 252, 247);
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -26,7 +26,7 @@
 
         table {
             width: 80%;
-            margin-left: 23%;
+            margin-left:10%;
             border-collapse: collapse;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -42,7 +42,7 @@
         }
 
         tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #e4b3b3;
         }
 
         tbody tr:hover {
@@ -107,14 +107,19 @@
         </style>
 </head>
 <body>
-    {% extends "header.html" %}
-    {% block content %}
-    <h1 style="color: white;">Platform Details <a href="{{url_for('homee')}}"  style="margin-left: 1%; border-radius: 2px; background-color: #701a1a; color: rgb(247, 243, 243);">Home</a> <a class= "add-bus-button"href="{{ url_for('add_platform') }}" style="margin-left: 13%; background-color: #701a1a;border-radius: 2px; color: rgb(247, 243, 243);" >ADD</a></h1>
+   
+    <h1 style="color: white;">Platform Details <a href="{{url_for('homee')}}"  style=" border-radius: 2px; background-color: #701a1a; color: rgb(247, 243, 243); margin-left: 28%;">Home</a> <a class= "add-bus-button"href="{{ url_for('add_platform') }}" style="margin-left: 25%; background-color: #701a1a;border-radius: 2px; color: rgb(247, 243, 243);" >ADD</a></h1>
     <table>
+        {% if msg %}
+
+        <p>
+            {{msg}}
+        </p>
+        {%endif%}
         <thead>
             <tr>
-                <th>Platform ID</th>
-                <th>Platform Number</th>
+                <th>Bus-Stop  ID</th>
+                <th>Bus-Stop Number</th>
                 <th>Location</th>
                 <th>Action</th> <!-- New column for action buttons -->
             </tr>
@@ -135,24 +140,24 @@
     </table>
     <script>
         function confirmDelete(event) {
-            if (!confirm("Are you sure you want to delete this bus?")) {
+            if (!confirm("Are you sure you want to delete this stop ?")) {
                 event.preventDefault();
             }
         }
-        </script>
+    </script>
 
     <div class="pagination">
-        <span>Page {{ page }} of {{ total_pages }}</span>
+        <span >Page {{ page }} of {{ total_pages }}</span>
         
         {% if page > 1 %}
-            <a href="{{ url_for('platform_details', page=page-1) }}" id="prev" style="margin-left: 20%;">Previous</a>
+            <a href="{{ url_for('platform_details', page=page-1) }}" id="prev"  style="margin-right: 10%;">Previous</a>
         {% endif %}
         
         {% if page < total_pages %}
-            <a href="{{ url_for('platform_details', page=page+1) }}" style="margin-left: 58%;">Next</a>
+            <a href="{{ url_for('platform_details', page=page+1) }}" style="margin-left: 50%;">Next</a>
         {% endif %}
     </div>
     
-    {% endblock  %}    
+    
 </body>
 </html>

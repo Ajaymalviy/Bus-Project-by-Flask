@@ -129,7 +129,7 @@
     <div class="hero-container" data-aos="fade-in" >
       <h1>  Welcome to Express-BUS</h1>
       <div style = "padding-left: 60px;">
-      <p>We Can Help You To <span class="typed" data-typed-items="Travel,Travel"></span></p>
+      <p style="color: rgb(255, 144, 65); border-radius: 2px solid black;">We Can Help You To <span class="typed" data-typed-items="Travel,Travel" style="color: rgb(226, 225, 225);"></span></p>
       </div>
     </div>
   </section><!-- End Hero -->
@@ -152,12 +152,12 @@
 
         <div class="section-title">
           <h2>About</h2>
-          <p>Express-Bus,Manage the whole buses at our city. It was developing, from last 5-years at our whole areas of covering and provide the facitlities to our citizens.Everyone enjoy to their journey with our buses and make it a  memorable.</p>
+          <p>Express-Bus manages all the buses in our city, and it has been under development for the past five years, covering all areas to provide facilities to our citizens. Everyone enjoys their journey with our buses, making it a memorable experience.</p>
         </div>
 
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
-            <img src="{{ url_for('static', filename='img/backpic.jpg') }}" class="img-fluid" alt="">
+            <img src="{{ url_for('static', filename='img/backpic.jpg') }}" style="border-radius: 5p;" class="img-fluid" alt="">
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
             <h3>information About Us.</h3>
@@ -267,7 +267,7 @@
             <div class="resume-item">
               <h4>Finally We Get In</h4>
               <h5>2015</h5>
-              <p><em>We Decide to open big managment system of buses into our city.</em></p>
+              <p><em>We Decide to open a managment system of buses into our city.</em></p>
               <p>And Indore helped us vice versa, and now we have more than 150 buses. Thank you, Indore, for supporting us.</p>
             </div>
            
@@ -275,6 +275,7 @@
 
     
     <!-- ======= Services Section ======= -->
+
     <section id="services" class="services">
       <div class="container">
 
@@ -301,13 +302,47 @@
                 </ul>
             </div>
 
-            <h3 class="resume-title">Because--</h3>
-            <div class="resume-item">
-              <h4>What's more, travelling with a mobile bus pass is safer than paying cash in the bus.</h4>
-              <h5>Just show your pass on your mobile and scan the QR code to travel.
-              </h5>
-            </div>
       </div>
+    </section><!-- End Services Section -->
+    
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+                <h4>Please Fill The Form For Verification</h4>
+                <form action="/services" method="post" role="form" >
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="name">  Your Name</label>
+                      <input type="text" name="name" class="form-control" id="name" minlength="3"  maxlength="22" required pattern="^[^\d.]+$" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="name">Your Email</label>
+                      <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="name">Aadhar-Number</label>
+                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12" pattern="\d+" title="Aadhar-Number must contain only numeric digits" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <textarea class="form-control" name="address" id="Address" rows="2" maxlength="30"  pattern="[a-zA-Z].*\d.*|[0-9].*[a-zA-Z].*" title="Address must contain only letters and digits, no special characters" required></textarea>
+                </div>
+                
+                  <div class="my-3">
+              
+                    <label for="userType">User Type:</label>
+                    <select id="userType" name="userType" required>
+                        <option value="student">Student</option>
+                        <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="text-center"><button type="submit">submit</button></div>
+                </form>
+        </div>
     </section><!-- End Services Section -->
 
     <!-- ======= Testimonials Section ======= -->
@@ -385,7 +420,7 @@
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+71 85643 07890</p>
+                <p>+91 9098293312</p>
               </div>
 
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 300px; height: 290px;" ></iframe>  </div>
@@ -432,7 +467,7 @@
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Creatby <strong><span>Ajay Malviya</span></strong>
+        &copy; Created by <strong><span>Ajay Malviya</span></strong>
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
