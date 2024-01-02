@@ -141,7 +141,7 @@
         
       </div>
 
-      <nav id="navbar" class="nav-menu navbar">
+      <nav id="navbar" class="nav-menu navbar" style="margin-top: 20px;">
         <ul>
           <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-file-blank" style="font-size: x-large;"></i> <span style="font-size: large;">Dashboard</span></a></li>
           <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span style="font-size: large;" >Services</span></a></li>
@@ -150,6 +150,12 @@
           <li><a href="{{url_for('logout')}}" class="nav-link scrollto"><i class="bx bx-user"></i> <span style="font-size: large;" >Logout</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
+      <div class="copyright" style="color: rgb(255, 255, 255); height: 19px; margin-top: 45px; margin-right: 140px;font-size:small;">
+        &copy; Created by <strong><span>Ajay </span></strong>
+      </div>
+      <div class="credits" style="color: rgb(255, 255, 255); height: 19px; margin-top: 4px; margin-right: 4px; font-size: small;">
+        Designed using <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
     </div>
   </header><!-- End Header -->
 
@@ -332,7 +338,7 @@
   <script>
     document.getElementById('login_page').addEventListener('click' , function login() {
       
-      loadContent("{{url_for('signin')}}");
+      loadContent("{{url_for('login')}}");
     })
 
     function loadContent(page) {

@@ -68,7 +68,7 @@ def login_required(view):
         else:
             # User is not authenticated, redirect to the login page
             flash("You are not logged in..! Login to perform action")
-            return redirect(url_for('signin'))
+            return redirect(url_for('login'))
 
     return wrapped_view
 
@@ -118,9 +118,9 @@ def home():
 # on this root directry one fuction is wrote and this tell us to render/ change direction on given page which is index.html
 
 
-@app.route('/signin')
-def signin():
-    return render_template('login_page.html')
+# @app.route('/signin')
+# def signin():
+#     return render_template('login_page.html')
 
 
 
@@ -164,13 +164,13 @@ def login():
                 # Add  login logic here
                 session['username'] = username 
                 flash('You are now logged in!', 'success')
-                return render_template('index1.html')
+                return redirect('home')
             else:
                 return "Incorrect password. Please try again."
         else:
             return "Username not found. Please register."
 
-    return redirect('signin')
+    return render_template('login_page.html')
 
 #-----------------for logout-----------------------------------------------------------------------------------
 @app.route('/register', methods=['GET', 'POST'])
@@ -204,30 +204,30 @@ def register():
 
         # Commit the transaction after the INSERT query
         db.commit()
-        return redirect(url_for('signin'))
+        return render_template('login_page.html')
 
     return render_template('registerbutton.html')
 
 
-# ------------------------------------------- User detail -------------------------
-@app.route('/user', methods=['GET', 'POST'])
-def user():
-    # Execute the SELECT query with LIMIT and OFFSET clauses
-    cursor = db.cursor(dictionary=True)
-    cursor.execute(f"SELECT * FROM users where username ={username}")
-    user_data = cursor.fetchall()
+# # ------------------------------------------- User detail -------------------------
+# @app.route('/user', methods=['GET', 'POST'])
+# def user():
+#     # Execute the SELECT query with LIMIT and OFFSET clauses
+#     cursor = db.cursor(dictionary=True)
+#     cursor.execute(f"SELECT * FROM users where username ={username}")
+#     user_data = cursor.fetchall()
     
 
-    # Count the total number of items
-    cursor.execute("SELECT COUNT(*) FROM users")
-    total_items = cursor.fetchone()['COUNT(*)']
-    cursor.close()
+#     # Count the total number of items
+#     cursor.execute("SELECT COUNT(*) FROM users")
+#     total_items = cursor.fetchone()['COUNT(*)']
+#     cursor.close()
 
-    # print(bus_data)
-    # print(page)
-    # print(per_page)
-    # print(total_pages)
-    return render_template('bus_detail.html', user_data=user_data)
+#     # print(bus_data)
+#     # print(page)
+#     # print(per_page)
+#     # print(total_pages)
+#     return render_template('bus_detail.html', user_data=user_data)
 
 
 #-------------------------------bus_detail___________________________________________________________
@@ -300,7 +300,7 @@ def add_bus_form():
         db.commit()
         # flash('bus-detail added successfully', 'success')
         # return redirect(url_for('bus_details'))
-        return render_template('bus_details')
+        return redirect(url_for('bus_details'))
     return render_template('add_bus_form.html')    
 
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
@@ -525,7 +525,7 @@ def route_details():
 
 #-----------------------------this is for open bus detail of particular bus------------------------------------
 
-@app.route("/show") #our first directry which is open
+@app.route("/search") #our first directry which is open
 @login_required
 def index():
     return render_template("particular_bus.html")#it will though us to the html page which is open at first
@@ -600,6 +600,25 @@ def contact():
             if cursor:
                 cursor.close()
     return render_template('index1.html')
+
+@app.route('/contacts', methods=['GET', 'POST'])
+def contact_form():
+    if request.method == 'POST':
+        email = request.form['email']
+        message = request.form['message']
+        cursor = db.cursor()
+        insert_query = "INSERT INTO contact(email, message) VALUES ( %s, %s)"
+        cursor.execute(insert_query, ( email, message))
+        db.commit()
+        cursor.close() 
+        return redirect(url_for('thank_you'))
+
+    return render_template('new_index.html')
+
+@app.route('/thank_you')
+def thank_you():
+    return 'Thank you for submitting the form!'
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

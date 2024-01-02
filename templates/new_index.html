@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Express-Index</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
+{% extends 'navbar.html'%}
+{% block content %}
   <!-- Favicons -->
-  <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="imyproject_by_flask/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{ url_for('static', filename='gae/favicon.png') }}" rel="imyproject_by_flask/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -133,22 +124,6 @@
 </head>
 
 <body>
-    
-
-        <div class="navbar" style="background-color: #faf8f8;">
-            <a href="#" class="logo">   
-            <img src="static/img/portfolio/logo1.png" alt="Bus Logo" style="width: 100px; height: 150px;">
-            </a>
-            <h2 style="border-radius: 5px solid white; text-decoration:double;font-style:normal ;">Express-BUS</h2>
-            <a href="#about" class="bus-info" style="font-size: large; " >About</a>
-            <a href="#resume" class="bus-info" style="font-size: large; " >History</a>
-            <a href="#contact" class="bus-info" style="margin-right: 200px;font-size: large;">Contact Us</a>
-        
-            <div class="top-right-buttons" >
-                <a class="login-button" href="{{url_for('signin')}}" id="login_page" style="color: white; border-radius: 4px; height: 40px;width: 70px; padding: 4px; margin-top: 13px; " >Login</a>
-                <a href="{{url_for('register')}}" id="register_page"class="button" style="color: white; border-radius: 4px ; height: 40px;width: 70px; padding: 4px;margin-top: 13px;" >Sign Up</a>
-            </div>
-
   
   <div class="work-section">
     <div id="content-mask" class="work-content">
@@ -173,7 +148,7 @@
 
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about" style="margin-left: 110px;">
+    <section id="about" class="about" style="margin-left: 150px;">
         <div class="section-title">
           <h2>About</h2>
           <p>Express-Bus manages all the buses in our city, and it has been under development for the past eight years, covering all areas to provide facilities to our citizens. Everyone enjoys their journey with our buses, making it a memorable experience.</p>
@@ -218,7 +193,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Facts Section ======= -->
-    <section id="facts" class="facts" style="margin-left: 90px;">
+    <section id="facts" class="facts" style="margin-left: 70px;">
       <div class="container">
 
         <div class="section-title">
@@ -267,7 +242,7 @@
    
 
     <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume" style="margin-left: 90px ;">
+    <section id="resume" class="resume" style="margin-left: 70px ;">
       <div class="container">
 
         <div class="section-title">
@@ -344,116 +319,99 @@
           
       </div>
     </section><!-- End Testimonials Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Contact</h2>
-            <p>If you have any queries regarding our buses, you can directly contact us via call, email, or message.</p>
-          </div>
-  
-          <div class="row" data-aos="fade-in">
-  
-            <div class="col-lg-5 d-flex align-items-stretch">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>In Map:</h4>
-                  <p>A108 Sapna Sangeeta ,Indore,IN 452002</p>
-                </div>
-    
-               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 300px; height: 290px;" ></iframe>  </div>
-  
-            </div>
-  
-            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-              <form action="contact" method="post" role="form" >
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="name"> Name</label>
-                    <input type="text" name="name" class="form-control" id="name"  minlength="2" maxlength="15" required pattern="^[^\d.]+$" > 
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="name"> Email</label>
-                    <input type="email" class="form-control" name="email" id="email"maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="name">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject" maxlength="25" minlength="3"required pattern="^[^\d.]+$" required>
-                </div>
-                <div class="form-group">
-                  <label for="name">Message</label>
-                  <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[^\d]*$"></textarea>
-              </div>
-              
-                <div class="my-3">
-                  
-                  <div class="error-message"></div>
-                </div>
-                <div class="text-center"><button type="submit">Send Message</button></div>
-              </form>
-            </div>
-  
-          </div>
-  
-        </div>
-      </section><!-- End Contact Section -->
   
     </main><!-- End #main -->
   
    
   <!-- ======= Footer ======= -->
-    <footer id="footer" style="background-color: #eecdcd; width: 1350px ; height: 460px; position: relative;">
-        <section id="contact" class="contact" style="height: 360px;">
-            <div class="container" style="background-color: #eccdcd; ">
-              <div class="row" data-aos="fade-in" style="margin-bottom: 250px;">      
-                <div class="col-lg-5 d-flex align-items-left" style="height: 300px; width: 300px;">
-                    <div class="info-container" style="height: 400px;">
-                        <div class="info" style="background-color: #eccdcd;">
-                            <div class="address">
-                                <i class="bi bi-geo-alt"></i>
-                                <h4>Location:</h4>
-                                <p>A108 Sapna Sangeeta, Indore, IN 452002</p>
-                            </div>
-                            <div class="email">
-                                <i class="bi bi-envelope"></i>
-                                <h4>Email:</h4>
-                                <p>expressbus@example.com</p>
-                            </div>              
-                            <div class="phone">
-                                <i class="bi bi-phone"></i>
-                                <h4>Call:</h4>
-                                <p>+91 9098293312</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container2" style="margin-left: 100px;height: 420px; width: 400px;">
-                      <div class="d-flex flex-column" style="margin-right: 400px; font-size: 28px;">
-                          <div class="profile">
-                              <div class="social-links mt-3 text-center" style="width: 20px; height: 60px;">
-                              <a href="https://about.twitter.com/en" class="twitter"><i class="bx bxl-twitter"></i></a>
-                              <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
-                              <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
-                              <a href="https://www.linkedin.com/feed/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                             </div>
-                          </div>              
-                      </div>
-                    </div>   
-                    <div class="container" >
-                      <div class="copyright" style="color: black;">
-                        &copy; Created by <strong><span >Ajay Malviya</span></strong>
-                      </div>
-                      <div class="credits" style="color: black;">Designed using BootstrapMade
-                      </div>
-                    </div>
-                
-                </div> 
-              </div> 
+    <footer id="footer" style="display: flex; flex-direction: row; background-color: #eecdcd; width: 1350px; height: 460px; position: relative;">  
+      <div class="col-lg-5 d-flex align-items-stretch" style="width: 340px;">
+        <div class="info">  
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 350px; height: 310px; margin-top: 20px;"></iframe>
+          <div class="copyright" style="color: black; height: 19px; margin-top: 45px; margin-right: 140px;font-size: medium;">
+            &copy; Created by <strong><span>Ajay Malviya</span></strong>
+          </div>
+          <div class="credits" style="color: black; height: 19px; margin-top: 4px; margin-right: 4px; font-size: medium;">
+            Designed using <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 60px;  height: 380px;">
+        <form action="/contacts/" method="post" role="form" style="height: 320px; justify-content: center; align-items: center;">
+          <div class="row"> 
+            <div class="form-group col-md-6">
+              <label for="name" style="color: black;"> Email</label>
+              <input type="email" class="form-control" name="email" id="email" maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required style="width: 260px;">
             </div>
+          </div>
+          <div class="form-group">
+            <label for="name"style="color: black;">Message</label>
+            <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[^\d]*$"></textarea>
+          </div>
+          <div class="my-3">
+            <div class="error-message"></div>
+          </div>
+          <div class="text-center"><button type="submit">Send Message</button></div>
+        </form>
+      </div>
+
+
+      <div style="margin-left: 80px; color: black; margin-top: 18px; height: 220px;">
+        <div>
+          <a href="#hero" class="bus-info" style="font-size: large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>
+        </div>
+        <div style="margin-top: 25px;">
+          <a href="#about" class="bus-info" style="font-size: large; color: black; text-decoration: underline; margin-top: 40px;">About</a>
+        </div>
+        <div style=" margin-top: 25px;">
+          <a href="#resume" class="bus-info" style="font-size: large; color: black; text-decoration: underline;">History</a>   
+        </div>
+        <div style=" margin-top: 25px;">
+          <a href="#contact" class="bus-info" style="margin-right: 200px; font-size: large; color: black; text-decoration: underline;">Contact Us</a>    
+        </div>
+      </div>
+
+
+      <div class="profile" style="margin-right: 100px; margin-top:10px; width: 240px;">
+        <img src="{{ url_for('static', filename='img/lastpic1.jpg') }}" alt="" class="img-fluid rounded-square" style="height: 100px; width: 110px; border-radius: 5px;">
+         <div class="social-links mt-3 text-center" style="height: 80px; font-size: x-large;">
+          <a href="https://about.twitter.com/en" class="twitter"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.facebook.com/" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
+         
+          <a href="https://www.linkedin.com/feed/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="row" data-aos="fade-in" style="margin-top: 5px;">  
+        <div class="col-lg-5 d-flex align-items-stretch" style=" margin-top: 5px; margin-left: 10px; background-color:  #eecdcd; z-index: 11;">
+        <div class="info" style="color: black; margin-left: 30px;">
+          <div class="address">
+            <i class="bi bi-geo-alt"></i>
+            <h4>Location:</h4>
+            <p>A108 Sapna Sangeeta ,Indore,NY 535022</p>
+          </div>
+
+          <div class="email">
+            <i class="bi bi-envelope"></i>
+            <h4>Email:</h4>
+            <p>expressbus@example.com</p>
+          </div>
+
+          <div class="phone">
+            <i class="bi bi-phone"></i>
+            <h4>Call:</h4>
+            <p>+91 9098293312</p>
+          </div>
+
+       
     </footer><!-- End  Footer -->
+    <div>
+      <marquee behavior="fade-left" direction="right" style="background-color: black; color: white;">Thankyou for visiting my website </marquee>
+      <p style="background-color: black;"></p>
+    </div>
+    
         
     
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -477,7 +435,7 @@
   <script>
     document.getElementById('login_page').addEventListener('click' , function login() {
       
-      loadContent("{{url_for('signin')}}");
+      loadContent("{{url_for('login')}}");
     })
 
     function loadContent(page) {
@@ -513,6 +471,4 @@
   </script>
 
 <!-- -----------------------this for hide  registration page with sidebar---------------------------- -->
-  
-</body>
-</html>
+{%endblock%}
