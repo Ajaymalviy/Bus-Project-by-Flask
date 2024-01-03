@@ -601,19 +601,20 @@ def contact():
                 cursor.close()
     return render_template('index1.html')
 
-@app.route('/contacts', methods=['GET', 'POST'])
-def contact_form():
+@app.route('/query', methods=['GET', 'POST'])
+def query():
     if request.method == 'POST':
         email = request.form['email']
         message = request.form['message']
         cursor = db.cursor()
+        print("i m in query wala function")
         insert_query = "INSERT INTO contact(email, message) VALUES ( %s, %s)"
         cursor.execute(insert_query, ( email, message))
         db.commit()
         cursor.close() 
         return redirect(url_for('thank_you'))
 
-    return render_template('new_index.html')
+    return redirect(url_for('home'))
 
 @app.route('/thank_you')
 def thank_you():

@@ -48,6 +48,53 @@ class DoublyLinkedList:
         print(llstr)
 
 
+    def getlength(self) :
+        if self.head is None:
+            print('linkedlist is empty')
+        count=0
+        itr=self.head
+        while itr:
+            count +=1
+            itr=itr.next
+        return count    
+   
+
+
+    def insert_at_index(self,index,data):
+        if index<0 or index>self.getlength():
+            raise Exception('error of invalid exception')
+        if index==0:
+            self.insert_at_beginning()
+            return
+        count=0
+        itr=self.head
+        while itr:
+            if count==index-1:
+                node=Node(data,itr.next,itr)
+                if node.next:
+                    node.next.prev=node
+                itr.next=node
+                break
+            itr=itr.next
+            count=count+1   
+
+
+    def remove_at(self,index):
+        if index<0 or index > self.getlength():
+            raise Exception('error  of invalid index occure')
+        if index==0:
+            self.head=self.head.next
+        count=0
+        itr=self.head
+        while itr:
+            if count==index-1:
+                itr.next=itr.next.next
+                break
+            itr=itr.next
+            count +=1
+            
+
+
 # Example usage
 dll = DoublyLinkedList()
 
@@ -60,7 +107,7 @@ dll.insert_at_end(111)
 dll.insert_at_end(321)
 dll.insert_at_end(1000)
 dll.insert_at_end(2023)
-
-
+dll.insert_at_index(2,2)
+dll.insert_at_index(3,3)
 dll.print_forward()
 dll.print_backward()
