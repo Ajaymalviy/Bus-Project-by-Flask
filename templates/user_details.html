@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User Details</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Mobile Number</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>User Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in buser_details %}
+            <tr>
+                <td>{{ user.userid }}</td>
+                <td>{{ user. username }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.city}}</td>
+                <td>{{ user.mobile_number }}</td>
+                <td>{{ user.city }}</td>
+                <td>{{ user.email}}</td>
+                <td>{{ user.user_type}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
