@@ -200,29 +200,30 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <img src="{{ url_for('static', filename='/img/user.jpg') }}" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html">Express-Bus</a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="https://www.instagram.com/" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-        </div>
+        <a href="#">
+            <img src="{{ url_for('static', filename='img/user.jpg') }}" alt="" class="img-fluid rounded-circle">
+        </a>
+        <h1 class="text-light"><span>{{ session['username'] }}</span></h1>
       </div>
-
-      <nav id="navbar" class="nav-menu navbar">
+    
+      <nav id="navbar" class="nav-menu navbar" style="margin-top: 20px;">
         <ul>
-          <li><a href="#user" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>{{ session['username'] }}</span></a></li>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Dashboard</span></a></li>
-          <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
-          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+          <li><a href="{{url_for('home')}}" class="nav-link scrollto"><i class="bx bx-file-blank" style="font-size: x-large;"></i> <span style="font-size: large;">Dashboard</span></a></li>
+          <li><a href="{{url_for('services')}}" class="nav-link scrollto"><i class="bx bx-server"></i> <span style="font-size: large;" >Services</span></a></li>
+          <li><a href="{{url_for('contact')}}" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span style="font-size: large;" >Contact</span></a></li>
 
-          <li><a href="{{url_for('logout')}}" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Logout</span></a></li>
+          <li><a href="{{url_for('logout')}}" class="nav-link scrollto"><i class="bx bx-user"></i> <span style="font-size: large;" >Logout</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
+      <div class="copyright" style="color: rgb(255, 255, 255); height: 19px; margin-top: 45px; margin-right: 140px;font-size:small;">
+        &copy; Created by <strong><span>Ajay </span></strong>
+      </div>
+      <div class="credits" style="color: rgb(255, 255, 255); height: 19px; margin-top: 4px; margin-right: 4px; font-size: small;">
+        Designed using <a href="#">BootstrapMade</a>
+      </div>
     </div>
-  </header><!-- End Header --> 
+  </header>
+  <!-- End Header --> 
   <div class="content" >
     {% block content %} 
     {% endblock %}

@@ -131,41 +131,42 @@
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="d-flex flex-column">
+    <!-- ======= Header ======= -->
+    <header id="header">
+      <div class="d-flex flex-column">
 
-      <div class="profile">
-        <img src="{{ url_for('static', filename='img/user.jpg') }}" alt=""  class="img-fluid rounded-circle" a>
-        <h1 class="text-light"  ><span >{{ session['username'] }}</span>
-        
+        <div class="profile">
+          <a href="#">
+              <img src="{{ url_for('static', filename='img/user.jpg') }}" alt="" class="img-fluid rounded-circle">
+          </a>
+          <h1 class="text-light"><span>{{ session['username'] }}</span></h1>
+        </div>
+      
+        <nav id="navbar" class="nav-menu navbar" style="margin-top: 20px;">
+          <ul>
+            <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-file-blank" style="font-size: x-large;"></i> <span style="font-size: large;">Dashboard</span></a></li>
+            <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span style="font-size: large;" >Services</span></a></li>
+            <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span style="font-size: large;" >Contact</span></a></li>
+
+            <li><a href="{{url_for('logout')}}" class="nav-link scrollto"><i class="bx bx-user"></i> <span style="font-size: large;" >Logout</span></a></li>
+          </ul>
+        </nav><!-- .nav-menu -->
+        <div class="copyright" style="color: rgb(255, 255, 255); height: 19px; margin-top: 45px; margin-right: 140px;font-size:small;">
+          &copy; Created by <strong><span>Ajay </span></strong>
+        </div>
+        <div class="credits" style="color: rgb(255, 255, 255); height: 19px; margin-top: 4px; margin-right: 4px; font-size: small;">
+          Designed using BootstrapMade
+        </div>
       </div>
-
-      <nav id="navbar" class="nav-menu navbar" style="margin-top: 20px;">
-        <ul>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-file-blank" style="font-size: x-large;"></i> <span style="font-size: large;">Dashboard</span></a></li>
-          <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span style="font-size: large;" >Services</span></a></li>
-          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span style="font-size: large;" >Contact</span></a></li>
-
-          <li><a href="{{url_for('logout')}}" class="nav-link scrollto"><i class="bx bx-user"></i> <span style="font-size: large;" >Logout</span></a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
-      <div class="copyright" style="color: rgb(255, 255, 255); height: 19px; margin-top: 45px; margin-right: 140px;font-size:small;">
-        &copy; Created by <strong><span>Ajay </span></strong>
-      </div>
-      <div class="credits" style="color: rgb(255, 255, 255); height: 19px; margin-top: 4px; margin-right: 4px; font-size: small;">
-        Designed using <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </header><!-- End Header -->
+    </header><!-- End Header -->
 
 
-  
+    
 
   <main id="main">
         <section>
             <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                    class="bi bi-arrow-up-short"></i></a>
+                    class="bi bi-arrow-up-short" ></i></a>
     
             <div id="portfolio" style="margin-top: 0px;">
                

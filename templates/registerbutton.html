@@ -17,7 +17,7 @@
 
         h1 {
             text-align: center;
-            color: #2ebbee;
+            color: #6dd6d1;
         }
 
         .registration-form {
@@ -52,7 +52,7 @@
         }
 
         input[type="text"][name="mobile_number"]:required {
-            border-color: #ff0000;
+            border-color: #5f5c5c;
         }
 
         input[type="text"][name="mobile_number"]:valid {
@@ -61,7 +61,7 @@
 
         button[type="submit"] {
             background-color: #2ebbee;
-            color: #fff;
+            color: #161414;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
@@ -79,13 +79,16 @@
         <h1>Registration</h1>
         <form id="registrationForm" action="/register" method="POST">
             <label for="newUsername">New Username:</label>
-            <input type="text" id="newUsername" name="username" minlength="3" maxlength="25" required pattern="^[^\s]+$" title="Remove spaces" placeholder="Enter your username">
+            <input type="text" id="newUsername" name="username" minlength="3" maxlength="18" required pattern="^[^\s]+$" title="Remove spaces" placeholder="Enter your username">
 
             <label for="newPassword">New Password:</label>
             <input type="password" id="newPassword" name="password" minlength="4" maxlength="8" title="Must contain at least 4 characters" required placeholder="Enter your password">
 
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirm_password" minlength="4" maxlength="8" title="Must match the entered password" required placeholder="Confirm your password" oninput="validatePassword()">
+
             <label for="mobileNumber">Mobile Number:</label>
-            <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" title="Start with 5, 6, 7, 8, or 9" required pattern="^[56789]\d{9}$" placeholder="Enter your mobile number">
+            <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" title="Start with  6, 7, 8, or 9" required pattern="^[6789]\d{9}$" placeholder="Enter your mobile number">
 
             <label for="city">City:</label>
             <input type="text" id="city" name="city" maxlength="20" minlength="3" title="Fill at least three words" pattern="^[A-Za-z]+$" placeholder="Enter your city">
@@ -102,5 +105,17 @@
             <button type="submit" value="register" style="margin-top: 15px;">Register</button>
         </form>
     </div>
+    <script>
+         function validatePassword() {
+            var newPassword = document.getElementById("newPassword");
+            var confirmPassword = document.getElementById("confirmPassword");
+
+            if (newPassword.value != confirmPassword.value) {
+                confirmPassword.setCustomValidity("Passwords do not match");
+            } else {
+                confirmPassword.setCustomValidity("");
+            }
+        }
+    </script>
 </body>
 </html>

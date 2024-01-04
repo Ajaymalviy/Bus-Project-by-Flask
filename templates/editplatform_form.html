@@ -54,7 +54,7 @@
         <form action="{{ url_for('update_platform', platform_id=platform_data.platform_id) }}" method="post">
             <div class="form-group">
                 <label for="platform-Name">Bus-Stop Location:</label>
-                <input type="text" id="location" name="platform_name" maxlength="30" minlength="3" pattern="[A-Za-z][A-Za-z0-9\- ]*" required title="Please enter a value in the format:">
+                <input type="text" id="location" name="platform_name" maxlength="30" minlength="3" pattern="[A-Za-z][A-Za-z0-9\- ]*" required title="Please enter a value in the format:" placeholder="Bus-Stop Location may have  latter ,digits or -">
             </div>
             
             

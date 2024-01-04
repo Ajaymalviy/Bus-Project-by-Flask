@@ -56,22 +56,17 @@
         <form action="/add_platform" method="post" >
             <div class="form-group">
                 <label for="platform_number">Bus-Stop Number:</label>
-                <input type="text" id="platform_number" name="platform_number"  require pattern="\d+" maxlength ="4" minlength="1" required>
+                <input type="text" id="platform_number" name="platform_number"  require pattern="\d+" maxlength ="4" minlength="1" required placeholder="Bus-Stop Number must have only digits">
             </div>
             <div class="form-group">
                 <label for="platform-Name">Bus-Stop Location:</label>
-                <input type="text" id="platform_name" name="platform_name" maxlength="30" minlength="3" pattern="[A-Za-z][A-Za-z0-9\- ]*" required title="Please enter a value in the format:">
+                <input type="text" id="platform_name" name="platform_name" maxlength="30" minlength="3" pattern="[A-Za-z][A-Za-z0-9\- ]*" required title="Please enter a value in the format:" placeholder="Bus-Stop Location may have latter,digit or -">
             </div>
-            
-            
+
             <div class="form-group">
                 <input type="submit" value="Add">
             </div>
-            {% for msg in get_flashed_messages() %}
-            <div>
-                {{ msg }}
-            </div>
-        {% endfor %}
+         
         </form>
     </div>
  

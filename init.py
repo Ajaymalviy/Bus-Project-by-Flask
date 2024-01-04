@@ -208,26 +208,31 @@ def register():
 
     return render_template('registerbutton.html')
 
+@app.route('/user', methods=['GET', 'POST'])
+def user():
+    if 'username' in session:
+        name = session['username']
 
-# # ------------------------------------------- User detail -------------------------
-# @app.route('/user', methods=['GET', 'POST'])
-# def user():
-#     # Execute the SELECT query with LIMIT and OFFSET clauses
-#     cursor = db.cursor(dictionary=True)
-#     cursor.execute(f"SELECT * FROM users where username ={username}")
-#     user_data = cursor.fetchall()
+        try:
+            # Use context manager for database connection
+            with mysql.connector.connect(**db_config) as db, db.cursor(dictionary=True) as cursor:
+                cursor.execute("SELECT * FROM users WHERE name = %s", (name,))
+                user_details = cursor.fetchone()
+
+                if user_details:
+                    # Pass user details to the HTML template
+                    return render_template('user_details.html', user=user_details)
+                else:
+                    return "User not found"
+        except mysql.connector.Error as err:
+            # Handle database errors (log or provide user feedback)
+            print(f"Error: {err}")
+            return "Database error"
+    else:
+        return redirect(url_for('login'))  # Redirect to login page if not logged in
+
+
     
-
-#     # Count the total number of items
-#     cursor.execute("SELECT COUNT(*) FROM users")
-#     total_items = cursor.fetchone()['COUNT(*)']
-#     cursor.close()
-
-#     # print(bus_data)
-#     # print(page)
-#     # print(per_page)
-#     # print(total_pages)
-#     return render_template('bus_detail.html', user_data=user_data)
 
 
 #-------------------------------bus_detail___________________________________________________________
@@ -295,12 +300,15 @@ def add_bus_form():
         departure_time = request.form['departure_time']
         arrival_time = request.form['arrival_time']
         cursor=db.cursor(dictionary=True)
-        query = 'INSERT INTO bus_detail ( bus_number, bus_model, seating_capacity, route, departure_time, arrival_time) VALUES ( %s, %s, %s, %s, %s, %s)'
-        cursor.execute(query,(bus_number,bus_model,seating_capacity,route,departure_time,arrival_time)) 
-        db.commit()
-        # flash('bus-detail added successfully', 'success')
-        # return redirect(url_for('bus_details'))
-        return redirect(url_for('bus_details'))
+        if arrival_time < departure_time:
+            flash('Arrival time must be before Departure time', 'error')
+        else:
+            query = 'INSERT INTO bus_detail ( bus_number, bus_model, seating_capacity, route, departure_time, arrival_time) VALUES ( %s, %s, %s, %s, %s, %s)'
+            cursor.execute(query,(bus_number,bus_model,seating_capacity,route,departure_time,arrival_time)) 
+            db.commit()
+            # flash('bus-detail added successfully', 'success')
+            # return redirect(url_for('bus_details'))
+            return redirect(url_for('bus_details'))
     return render_template('add_bus_form.html')    
 
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
@@ -313,12 +321,15 @@ def update_bus(bus_id):
         route = request.form['route']
         departure_time = request.form['departure_time']
         arrival_time = request.form['arrival_time']
-        query = 'UPDATE bus_detail SET route=%s, departure_time=%s, arrival_time=%s WHERE bus_id = %s'
-        cursor.execute(query, (route, departure_time, arrival_time, bus_id))
-        db.commit()
-        # flash('Bus details updated successfully', 'success')
-        # return redirect(url_for('bus_details'))
-        return redirect(url_for('bus_details'))
+        if arrival_time < departure_time:
+            flash('Arrival time must be before Departure time', 'error')
+        else:
+            query = 'UPDATE bus_detail SET route=%s, departure_time=%s, arrival_time=%s WHERE bus_id = %s'
+            cursor.execute(query, (route, departure_time, arrival_time, bus_id))
+            db.commit()
+            # flash('Bus details updated successfully', 'success')
+            # return redirect(url_for('bus_details'))
+            return redirect(url_for('bus_details'))
     query1 = 'SELECT * FROM bus_detail WHERE bus_id = %s'
     cursor.execute(query1, (bus_id,))
     bus = cursor.fetchone()
