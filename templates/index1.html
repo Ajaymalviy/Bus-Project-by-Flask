@@ -266,7 +266,7 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>A108 Sapna Sangeeta ,Indore,NY 535022</p>
+                <p>A108 Sapna Sangeeta ,Indore,IN 452022</p>
               </div>
 
               <div class="email">
@@ -303,7 +303,7 @@
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[^\d]*$"></textarea>
+                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[A-Za-z0-9_-]*$"></textarea>
             </div>
             
               <div class="my-3">
@@ -373,6 +373,15 @@
     }
 
   </script>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash-message" style="margin-left: 40%;">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
 
 
 
