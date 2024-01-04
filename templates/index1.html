@@ -219,21 +219,21 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="name">  Your Name</label>
-                      <input type="text" name="name" class="form-control" id="name" minlength="3"  maxlength="22" required pattern="^[^\d.]+$" required>
+                      <input type="text" name="name" class="form-control" id="name" minlength="3"  maxlength="22" required pattern="^[^\d.]+$" required placeholder="Enter Your Name">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="name">Your Email</label>
-                      <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required>
+                      <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required placeholder="Email must contain @.com">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="name">Aadhar-Number</label>
-                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12" pattern="\d+" title="Aadhar-Number must contain only numeric digits" required>
+                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12" pattern="\d+" title="Aadhar-Number must contain only numeric digits" required placeholder=" must have 12 digits">
                 </div>
                 
                 <div class="form-group">
                     <label for="name">Address</label>
-                    <textarea class="form-control" name="address" id="Address" rows="2" maxlength="30"  pattern="[a-zA-Z].*\d.*|[0-9].*[a-zA-Z].*" title="Address must contain only letters and digits, no special characters" required></textarea>
+                    <textarea class="form-control" name="address" id="Address" rows="2" maxlength="30"  pattern="[A-Za-z0-9\- ]*" title="Address must contain only letters and digits, no special characters" required placeholder="Enter Your Address"></textarea>
                 </div>
                 
                   <div class="my-3">
@@ -290,20 +290,20 @@
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name"> Name</label>
-                  <input type="text" name="name" class="form-control" id="name"  minlength="2" maxlength="15" required pattern="^[^\d.]+$" > 
+                  <input type="text" name="name" class="form-control" id="name"  minlength="2" maxlength="15" required pattern="^[^\d.]+$"  placeholder="Enter Your Name"> 
                 </div>
                 <div class="form-group col-md-6">
                   <label for="name"> Email</label>
-                  <input type="email" class="form-control" name="email" id="email"maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                  <input type="email" class="form-control" name="email" id="email"maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required placeholder="Must Contain @.com">
                 </div>
               </div>
               <div class="form-group">
                 <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" maxlength="25" minlength="3"required pattern="^[^\d.]+$" required>
+                <input type="text" class="form-control" name="subject" id="subject" maxlength="25" minlength="3"required pattern="^[^\d.]+$" required placeholder="Only contain latters not digit or character">
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[A-Za-z0-9_-]*$"></textarea>
+                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" title="must contain only latter or digit not character" required pattern="^[A-Za-z0-9_-]*$"  placeholder="Contain only latter and digits not character"></textarea required >
             </div>
             
               <div class="my-3">
