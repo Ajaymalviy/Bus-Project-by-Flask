@@ -92,7 +92,7 @@
         <h1>Login</h1>
         <form id="loginForm" action="/login" method="POST">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" maxlength="18" title="Please remove space" required pattern="^[^\s]+$"><br><br>
+            <input type="text" id="username" name="username" minlength="4" nmaxlength="18" title="Please remove space" required pattern="^[^\s]+$"><br><br>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" maxlength="8" required><br><br>

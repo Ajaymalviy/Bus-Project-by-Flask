@@ -6,7 +6,7 @@ import mysql.connector
 import bcrypt
 from flask_login import LoginManager
 from datetime import datetime ,timedelta
-
+import time
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
 #this is our flask application instance for class Flask or we can say that is our object of class .
 
@@ -619,18 +619,20 @@ def query():
         email = request.form['email']
         message = request.form['message']
         cursor = db.cursor()
-        print("i m in query wala function")
-        insert_query = "INSERT INTO contact(email, message) VALUES ( %s, %s)"
-        cursor.execute(insert_query, ( email, message))
+
+        # Email doesn't exist, proceed with insertion
+        insert_query = "INSERT INTO contact(email, message) VALUES (%s, %s)"
+        cursor.execute(insert_query, (email, message))
+
+        # Commit the changes and close the cursor
         db.commit()
-        cursor.close() 
+        cursor.close()
         return redirect(url_for('thank_you'))
 
     return redirect(url_for('home'))
-
 @app.route('/thank_you')
 def thank_you():
-    return 'Thank you for submitting the form!'
+    return 'Thank you for leaving the message we will try our best to go through your comment'
 
 
 if __name__ == "__main__":

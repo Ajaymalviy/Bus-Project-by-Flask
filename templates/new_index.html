@@ -342,18 +342,28 @@
           <div class="row"> 
             <div class="form-group col-md-6">
               <label for="name" style="color: black;"> Email</label>
-              <input type="email" class="form-control" name="email" id="email" maxlength="30" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required style="width: 260px;">
+              <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @.com" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required style="width: 260px;" placeholder="Enter Your gmail Id">
             </div>
           </div>
           <div class="form-group">
-            <label for="name"style="color: black;">Message</label>
-            <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" required pattern="^[^\d]*$"></textarea>
-          </div>
+            <label for="name" style="color: black;">Message</label>
+            <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" title="May contain letters and digits but not a single special character. The first character must be a letter." required pattern="^[a-zA-Z][a-zA-Z0-9]*$" placeholder="Enter Message"></textarea>
+        </div>
+        
           <div class="my-3">
             <div class="error-message"></div>
           </div>
           <div class="text-center"><button type="submit">Send Message</button></div>
         </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message" style="margin-left: 40%;">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
       </div>
 
 
@@ -377,7 +387,7 @@
 
 
       <div class="profile" style="margin-right: 100px; margin-top:10px; width: 30px;">
-        <img src="{{ url_for('static', filename='img/lastpic1.jpg') }}" alt="" class="img-fluid rounded-square" style="height: 100px; width: 300px; border-radius: 5px; margin-left: 42px;">
+        
          <div class="social-links mt-3 text-center" style="height: 80px; font-size: x-large; margin-left: 42px; color: black;">
           <a href="https://about.twitter.com/en" class="twitter" style="color: black;"><i class="bx bxl-twitter"></i></a>
           <a href="https://www.facebook.com/" class="facebook"  style="color: black;"><i class="bx bxl-facebook"></i></a>
