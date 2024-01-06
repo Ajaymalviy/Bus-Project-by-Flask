@@ -612,8 +612,8 @@ def contact():
         try:
             cursor = db.cursor()
             insert_query = "INSERT INTO Queries (name, email, subject, message) VALUES (%s, %s, %s, %s)"
-            cursor.execute(insert_query, (name, email, subject, message))
-            flash('contact detail submitted successfully')
+            cursor.execute(insert_query, (name, email, subject, message))    
+            flash('Contact details submitted successfully !!', 'success')
             db.commit()
             cursor.close()
             return redirect(url_for('contact'))  # Return the success.html template

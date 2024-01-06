@@ -108,6 +108,27 @@
             margin: 10px 0;
             font-size: 16px; /* Adjusted font size for better fit */
         }
+       
+    .flash-messages {
+        width: 60%;
+        margin: 20px auto;
+    }
+
+    .flash-message {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: #333;
+        background-color: #dff0d8; /* Green for success messages */
+    }
+
+    /* Style for error messages */
+    .flash-message.error {
+        background-color: #f2dede;
+        color: #a94442;
+    }
+</style>
 
 
   </style>
@@ -164,7 +185,17 @@
     
 
   <main id="main">
+   
         <section>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              <div class="flash-messages" style="margin-left: 10%;">
+                  {% for message in messages %}
+                      <div class="flash-message" style="margin-left: 40%;">{{ message }}</div>
+                  {% endfor %}
+              </div>
+          {% endif %}
+          {% endwith %}
             <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                     class="bi bi-arrow-up-short" ></i></a>
     
@@ -317,6 +348,8 @@
         </div>
 
       </div>
+    
+  
     </section><!-- End Contact Section -->
 
   
@@ -373,16 +406,7 @@
     }
 
   </script>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <div class="flash-messages">
-            {% for message in messages %}
-                <div class="flash-message" style="margin-left: 40%;">{{ message }}</div>
-            {% endfor %}
-        </div>
-    {% endif %}
-    {% endwith %}
-
+  
 
 
 </body>
