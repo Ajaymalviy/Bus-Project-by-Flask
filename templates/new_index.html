@@ -324,7 +324,7 @@
   
    
   <!-- ======= Footer ======= -->
-    <footer id="footer" style="display: flex; flex-direction: row; background-color: #eecdcd; width: 1330px; height: 460px; position: relative;">  
+    <footer id="footer" style="display: flex; flex-direction: row; background-color: #eecdcd; width: 1330px; height: 460px; position: relative;margin-left: 10px;">  
       <div class="col-lg-5 d-flex align-items-stretch" style="width: 340px;">
         <div class="info">  
           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 350px; height: 310px; margin-top: 20px;"></iframe>
@@ -341,13 +341,13 @@
         <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center;">
           <div class="row"> 
             <div class="form-group col-md-6">
-              <label for="name" style="color: black;"> Email</label>
-              <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @.com" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required style="width: 260px;" placeholder="Enter Your gmail Id">
+              <label for="email" style="color: black;"> Email</label>
+              <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @.com" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required style="width: 260px;" placeholder="Enter Your Gmail Id">
             </div>
           </div>
           <div class="form-group">
-            <label for="name" style="color: black;">Message</label>
-            <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" title="May contain letters and digits but not a single special character. The first character must be a letter." required pattern="^[a-zA-Z][a-zA-Z0-9]*$" placeholder="Enter Message"></textarea>
+            <label for="message" style="color: black;">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="10" maxlength="150" minlength="10" title="May contain letters and digits." required pattern="^[a-zA-Z][a-zA-Z0-9]*$" placeholder="Enter Message"></textarea>
         </div>
         
           <div class="my-3">
@@ -356,10 +356,10 @@
           <div class="text-center"><button type="submit">Send Message</button></div>
         </form>
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
+        {% if msg %}
             <div class="flash-messages">
-                {% for message in messages %}
-                    <div class="flash-message" style="margin-left: 40%;">{{ message }}</div>
+                {% for message in msg %}
+                    <div class="flash-message" style="margin-left: 40%;">{{ msg }}</div>
                 {% endfor %}
             </div>
         {% endif %}

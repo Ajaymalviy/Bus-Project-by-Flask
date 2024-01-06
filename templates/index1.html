@@ -230,13 +230,13 @@
                     <label for="name">Aadhar-Number</label>
                     <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12" pattern="\d+" title="Aadhar-Number must contain only numeric digits" required placeholder=" must have 12 digits">
                 </div>
-                
                 <div class="form-group">
-                    <label for="name">Address</label>
-                    <textarea class="form-control" name="address" id="Address" rows="2" maxlength="30"  pattern="[A-Za-z0-9\- ]*" title="Address must contain only letters and digits, no special characters" required placeholder="Enter Your Address"></textarea>
+                  <label for="name">Address</label>
+                  <textarea type="text" class="form-control" name="address" id="Address" rows="2" maxlength="30" pattern="[a-zA-Z0-9\s]*" title="Address must contain only letters, digits, and spaces" required placeholder="Enter Your Address"></textarea>
                 </div>
-                
-                  <div class="my-3">
+              
+                     
+                 <div class="my-3">
               
                     <label for="userType">User Type:</label>
                     <select id="userType" name="userType" required>
@@ -303,7 +303,7 @@
               </div>
               <div class="form-group">
                 <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" title="must contain only latter or digit not character" required pattern="^[A-Za-z0-9_-]*$"  placeholder="Contain only latter and digits not character"></textarea required >
+                <textarea class="form-control" name="message" rows="10" maxlength="150" minlength="10" title="must contain only latter or digit or character" pattern="[A-Za-z][A-Za-z0-9\- ]*"  placeholder="Contain only latter and digits or character"></textarea required >
             </div>
             
               <div class="my-3">

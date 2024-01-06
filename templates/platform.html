@@ -104,18 +104,44 @@
         color: #666;
         cursor: not-allowed;
     }
+
+
+
+    .flash-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.flash-messages span {
+    background-color: #f52250;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.flash-messages span.error {
+    background-color: #f44336;
+}
         </style>
 </head>
 <body>
    
     <h1 style="color: white;">Platform Details <a href="{{url_for('homee')}}"  style=" border-radius: 2px; background-color: #701a1a; color: rgb(247, 243, 243); margin-left: 28%;">Home</a> <a class= "add-bus-button"href="{{ url_for('add_platform') }}" style="margin-left: 25%; background-color: #701a1a;border-radius: 2px; color: rgb(247, 243, 243);" >ADD</a></h1>
     <table>
-        {% if msg %}
-
-        <p>
-            {{msg}}
-        </p>
-        {%endif%}
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+            <span class="{{ 'error' if 'error' in msg.lower() else '' }}">
+                {{ msg }}
+            </span>
+            {% endfor %}
+        </div>
+        {% if platform_data %}
         <thead>
             <tr>
                 <th>Bus-Stop  ID</th>
@@ -125,6 +151,7 @@
             </tr>
         </thead>
         <tbody>
+            
             {% for platform in platform_data %}
                 <tr>
                     <td>{{ platform.platform_id }}</td>
@@ -136,6 +163,7 @@
                     </td>
                 </tr>
             {% endfor %}
+            {% endif %}
         </tbody>
     </table>
     <script>
@@ -145,7 +173,7 @@
             }
         }
     </script>
-
+    {% if page %}
     <div class="pagination">
         <span >Page {{ page }} of {{ total_pages }}</span>
         
@@ -157,7 +185,7 @@
             <a href="{{ url_for('platform_details', page=page+1) }}" style="margin-left: 50%;">Next</a>
         {% endif %}
     </div>
-    
+    {%endif%}
     
 </body>
 </html>

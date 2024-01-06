@@ -96,6 +96,29 @@
                 background-color: #f14040;
                 color: #31d1bc;
                 }
+
+                .flash-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.flash-messages span {
+    background-color: #f52250;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.flash-messages span.error {
+    background-color: #f44336;
+}
+
         </style>
     </head>
 
@@ -109,6 +132,15 @@
             text-decoration: none;
             border-radius: 1px;">Home</a></h1>
     <table>
+       
+        <div class="flash-messages">
+            {% for msg in get_flashed_messages() %}
+            <span class="{{ 'error' if 'error' in msg.lower() else '' }}">
+                {{ msg }}
+            </span>
+            {% endfor %}
+        </div>
+        
         <thead>
             <tr>
                 <th>Bus ID</th>
@@ -121,6 +153,7 @@
             </tr>
         </thead>
         <tbody>
+            {% if bus_data %}
             {% for bus in bus_data %}
             <tr>
                 <td>{{ bus.bus_id }}</td>
@@ -137,6 +170,7 @@
                 </td>
             </tr>
             {% endfor %}
+            {%endif%}
         </tbody>
         
     </table>
@@ -152,9 +186,9 @@
             <a href="{{ url_for('bus_details', page=page+1) }}" style="margin-left: 59%;">Next</a>
         {% endif %}
     </div>
+   
+   
     
-    
-
     <script>
         function confirmDelete(event) {
             if (!confirm("Are you sure you want to delete this bus?")) {

@@ -238,6 +238,8 @@ def user():
 #-------------------------------bus_detail___________________________________________________________
 @app.route('/bus_details', methods=['GET', 'POST'])
 def bus_details():
+    msg =None
+    bus_data = None
     # Get the current page from the query parameters, default to 1
     page = int(request.args.get('page', 1))
 
@@ -249,9 +251,11 @@ def bus_details():
 
     # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
-    cursor.execute(f"SELECT * FROM bus_detail LIMIT {per_page} OFFSET {offset}")
-    bus_data = cursor.fetchall()
-    
+    if page > 0 :
+        cursor.execute(f"SELECT * FROM bus_detail LIMIT {per_page} OFFSET {offset}")
+        bus_data = cursor.fetchall()
+    else :
+        msg = flash("Enter a valid page number ")
 
     # Count the total number of items
     cursor.execute("SELECT COUNT(*) FROM bus_detail")
@@ -268,19 +272,20 @@ def bus_details():
     # print(total_pages)
 
     # Modify the bus_data to be in title case
-    for bus in bus_data:
-        if bus['departure_time']:
-            departure_datetime = datetime(1, 1, 1) + bus['departure_time']
-            bus['departure_time'] = departure_datetime.strftime('%H:%M')  # Format as HH:MM
-        if bus['arrival_time']:
-            arrival_datetime = datetime(1, 1, 1) + bus['arrival_time']
-            bus['arrival_time'] = arrival_datetime.strftime('%H:%M')  # Format as HH:MM
+    if bus_data :
+        for bus in bus_data:
+            if bus['departure_time']:
+                departure_datetime = datetime(1, 1, 1) + bus['departure_time']
+                bus['departure_time'] = departure_datetime.strftime('%H:%M')  # Format as HH:MM
+            if bus['arrival_time']:
+                arrival_datetime = datetime(1, 1, 1) + bus['arrival_time']
+                bus['arrival_time'] = arrival_datetime.strftime('%H:%M')  # Format as HH:MM
 
-        for key, value in bus.items():
-            if isinstance(value, str):
-                bus[key] = value.title()
+            for key, value in bus.items():
+                if isinstance(value, str):
+                    bus[key] = value.title()
 
-    return render_template('bus_detail.html', bus_data=bus_data, page=page, per_page=per_page, total_pages=total_pages)
+    return render_template('bus_detail.html', bus_data=bus_data, page=page, per_page=per_page, total_pages=total_pages , msg=msg)
 
 
 
@@ -300,8 +305,8 @@ def add_bus_form():
         departure_time = request.form['departure_time']
         arrival_time = request.form['arrival_time']
         cursor=db.cursor(dictionary=True)
-        if arrival_time < departure_time:
-            flash('Arrival time must be before Departure time', 'error')
+        if arrival_time > departure_time:
+            flash('Departure time must be before Arrival time', 'error')
         else:
             query = 'INSERT INTO bus_detail ( bus_number, bus_model, seating_capacity, route, departure_time, arrival_time) VALUES ( %s, %s, %s, %s, %s, %s)'
             cursor.execute(query,(bus_number,bus_model,seating_capacity,route,departure_time,arrival_time)) 
@@ -321,8 +326,8 @@ def update_bus(bus_id):
         route = request.form['route']
         departure_time = request.form['departure_time']
         arrival_time = request.form['arrival_time']
-        if arrival_time < departure_time:
-            flash('Arrival time must be before Departure time', 'error')
+        if arrival_time >= departure_time:
+            flash(' Departure  time must be before than Arrival time', 'error')
         else:
             query = 'UPDATE bus_detail SET route=%s, departure_time=%s, arrival_time=%s WHERE bus_id = %s'
             cursor.execute(query, (route, departure_time, arrival_time, bus_id))
@@ -368,6 +373,8 @@ def delete_bus(bus_id):
 
 @app.route('/platform_details', methods=['GET', 'POST'])
 def platform_details():
+    platform_data=None
+    msg=None
     # Get the current page from the query parameters, default to 1
     page = int(request.args.get('page', 1))
 
@@ -379,9 +386,12 @@ def platform_details():
 
     # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
-    query = f"SELECT * FROM platform LIMIT {per_page} OFFSET {offset}"
-    cursor.execute(query)
-    platform_data = cursor.fetchall()
+    if page>0:
+        query = f"SELECT * FROM platform LIMIT {per_page} OFFSET {offset}"
+        cursor.execute(query)
+        platform_data = cursor.fetchall()
+    else :
+        msg = flash("Enter a valid page number ")    
 
     # Count the total number of items
     cursor.execute("SELECT COUNT(*) FROM platform")
@@ -391,13 +401,14 @@ def platform_details():
     total_pages = (total_items + per_page - 1) // per_page
 
     cursor.close()
-    for platform in platform_data:
-        for key, value in platform.items():
-            if isinstance(value, str):
-                platform[key] = value.title()
+    if platform_data:
+        for platform in platform_data:
+            for key, value in platform.items():
+                if isinstance(value, str):
+                    platform[key] = value.title()
 
 
-    return render_template('platform.html', platform_data=platform_data,page=page, per_page=per_page, total_pages=total_pages)
+    return render_template('platform.html', platform_data=platform_data,page=page, per_page=per_page, total_pages=total_pages ,msg=msg)
 
 #--------------------------------------------------for adding platform------------------------
 
@@ -586,7 +597,7 @@ def services():
         cursor.close() 
         return render_template('success1.html')  # Return the success.html template
 
-    return render_template('index1.html')  # Render the form for data submission
+    return redirect('home')  # Render the form for data submission
 
 #----------------------THIS IS FOR CONTACT DETAIL-----------------------
 @app.route('/contact', methods=['GET', 'POST'])
@@ -627,12 +638,13 @@ def query():
         # Commit the changes and close the cursor
         db.commit()
         cursor.close()
-        return redirect(url_for('thank_you'))
+        return redirect('thank_you')
 
     return redirect(url_for('home'))
 @app.route('/thank_you')
 def thank_you():
-    return 'Thank you for leaving the message we will try our best to go through your comment'
+    return 'Thank you for leaving the message we will try our best to go through your comment.'
+
 
 
 if __name__ == "__main__":
