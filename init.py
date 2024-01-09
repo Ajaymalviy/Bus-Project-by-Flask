@@ -431,23 +431,35 @@ def add_platform():
     return render_template('add_platform_form.html')   
 
 #--------------------for editing this platform----------------------------------------
-@app.route('/update_paltform/<int:platform_id>', methods=['GET', 'POST'])
+
+@app.route('/update_platform/<int:platform_id>', methods=['GET', 'POST'])
 @login_required
 def update_platform(platform_id):
     cursor = db.cursor(dictionary=True)
+    
     if request.method == 'POST':
-        platform_name=request.form['platform_name']
-        query = 'UPDATE platform SET location=%s WHERE platform_id = %s'
-        cursor.execute(query, (platform_name, platform_id))
+        # print(request.form)
+        platform_field = request.form['platform_field']
+        new_value = request.form['new_value']
+
+        if platform_field == 'platform_number':
+            query = 'UPDATE platform SET platform_number = %s WHERE platform_id = %s'
+        elif platform_field == 'location':
+            query = 'UPDATE platform SET location = %s WHERE platform_id = %s'
+        else:
+            return "Invalid field selected"
+
+        cursor.execute(query, (new_value, platform_id))
         db.commit()
-        # flash('platform name updated successfully', 'success')
+
         return redirect(url_for('platform_details'))
-        # return redirect(url_for('platform_details'))
 
     query1 = 'SELECT * FROM platform WHERE platform_id = %s'
     cursor.execute(query1, (platform_id,))
-    platform_data= cursor.fetchone()
-    return render_template('editplatform_form.html', platform_data=platform_data)
+    platform_data = cursor.fetchone()
+    
+    return render_template('editplatform.html', platform_data=platform_data)
+
 
 
 @app.route('/delete_platform/<int:platform_id>', methods=['GET','POST'])
