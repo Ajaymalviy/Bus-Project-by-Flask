@@ -338,17 +338,17 @@
         
       </div>
       <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 60px;  height: 380px;">
-        <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center;">
+        <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center;"  onsubmit="return validateForm()">
           <div class="row"> 
             <div class="form-group col-md-6">
               <label for="email" style="color: black;"> Email</label>
-              <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @.com" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" required
+              <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @gmail.com" pattern=".*@gmail\.com$" required
               required style="width: 260px;" placeholder="Enter Your Gmail Id">
             </div>
           </div>
           <div class="form-group">
             <label for="message" style="color: black;">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="10" maxlength="150" minlength="10" title="May contain letters and digits." required pattern="^[a-zA-Z][a-zA-Z0-9]*$" placeholder="Enter Message"></textarea>
+            <textarea class="form-control" id="message" name="message" rows="10" maxlength="150" minlength="10" title="May contain letters and digits." required pattern="^[a-zA-Z][a-zA-Z0-9]*[^@#$^&*()]+$"  placeholder="Enter Message"></textarea>
         </div>
         
           <div class="my-3">
@@ -367,7 +367,28 @@
         {% endwith %}
       </div>
 
-
+      <script>
+        function validateForm() {
+          var emailRegex =  /.*@gmail\.com$/;
+          var messageRegex = /^[a-zA-Z][a-zA-Z0-9]*[^@#$^&*()]+$/;
+    
+          var emailInput = document.getElementById("email");
+          var messageInput = document.getElementById("message");
+          var errorMessage = document.getElementById("error-message");
+    
+          if (!emailRegex.test(emailInput.value)) {
+            errorMessage.innerHTML = "Please enter a valid Gmail ID.";
+            return false;
+          } else if (!messageRegex.test(messageInput.value)) {
+            errorMessage.innerHTML = "Please enter a valid message.";
+            return false;
+          } else {
+            errorMessage.innerHTML = "";
+            return true;
+          }
+        }
+      </script>
+    
       <div style="margin-left: 80px; color: black; width: 130px; margin-top: 18px; height: 320px;">
         <div>
           <a href="#hero" class="bus-info" style="font-size: large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>

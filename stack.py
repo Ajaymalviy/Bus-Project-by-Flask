@@ -68,3 +68,39 @@ print( '\nminimum element',stack.find_min_element())
 # print('pop : ', stack.pop())    
 # print('size : ', stack.size())   
 
+
+
+class MinStack:
+
+    def __init__(self):
+        # Stack to store elements
+        self.stack = []
+        # Stack to store minimum values
+        self.min_stack = []
+
+    def push(self, val: int) -> None:
+        # Push the element onto the main stack
+        self.stack.append(val)
+        
+        # Update the minimum stack
+        if not self.min_stack or val <= self.min_stack[-1]:
+            self.min_stack.append(val)
+
+    def pop(self) -> None:
+        if self.stack:
+            # Pop the element from the main stack
+            popped_element = self.stack.pop()
+            
+            # If the popped element is the current minimum, pop from the minimum stack
+            if popped_element == self.min_stack[-1]:
+                self.min_stack.pop()
+
+    def top(self) -> int:
+        if self.stack:
+            # Return the top element of the main stack
+            return self.stack[-1]
+
+    def getMin(self) -> int:
+        if self.min_stack:
+            # Return the current minimum from the minimum stack
+            return self.min_stack[-1]

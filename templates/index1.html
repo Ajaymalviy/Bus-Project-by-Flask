@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Express-Index</title>
+  <title>Express-Buss</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -236,49 +236,86 @@
     </html>
     
     <!-- ======= Services Section ======= -->
-
     <section id="services" class="services">
       <div class="container">
 
-        <div class="section-title">
-          
-          <h2>Services</h2>
+          <div class="section-title">
+              <h2>Services</h2>
+          </div>
 
-        <div class="section-title">
-                <h4>Please Fill The Form For Verification</h4>
-                <form action="/services" method="post" role="form" >
+          <div class="section-title">
+              <h4>Please Fill The Form For Verification</h4>
+              <form action="/services" method="post" role="form" onsubmit="return validateForm()">
                   <div class="row">
-                    <div class="form-group col-md-6">
-                      <label for="name">  Your Name</label>
-                      <input type="text" name="name" class="form-control" id="name" minlength="3"  maxlength="22" required pattern="^[^\d.]+$" required placeholder="Enter Your Name">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="name">Your Email</label>
-                      <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required placeholder="Email must contain @.com">
-                    </div>
+                      <div class="form-group col-md-6">
+                          <label for="name">Your Name</label>
+                          <input type="text" name="name" class="form-control" id="name" minlength="3" maxlength="22" required pattern="^[^\d.]+$"
+                              placeholder="Enter Your Name">
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="email">Your Email</label>
+                          <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required
+                              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Email must contain @.com">
+                      </div>
                   </div>
                   <div class="form-group">
-                    <label for="name">Aadhar-Number</label>
-                    <input type="text" class="form-control" name="aadhar-number" id="Aadhar-Number" maxlength="12" minlength="12" pattern="\d+" title="Aadhar-Number must contain only numeric digits" required placeholder=" must have 12 digits">
-                </div>
-                <div class="form-group">
-                  <label for="name">Address</label>
-                  <textarea type="text" class="form-control" name="address" id="Address" rows="2" maxlength="30" pattern="[a-zA-Z0-9\s]*" title="Address must contain only letters, digits, and spaces" required placeholder="Enter Your Address"></textarea>
-                </div>
-              
-                     
-                 <div class="my-3">
-              
-                    <label for="userType">User Type:</label>
-                    <select id="userType" name="userType" required>
-                        <option value="student">Student</option>
-                        <option value="other">Other</option>
-                    </select>
+                      <label for="aadhar-number">Aadhar-Number</label>
+                      <input type="text" class="form-control" name="aadhar-number" id="aadhar-number" maxlength="12" minlength="12" pattern="\d+"
+                          title="Aadhar-Number must contain only numeric digits" placeholder="Must have 12 digits">
                   </div>
-                  <div class="text-center"><button type="submit">submit</button></div>
-                </form>
-        </div>
-    </section><!-- End Services Section -->
+                  <div class="form-group">
+                      <label for="address">Address</label>
+                      <textarea type="text" class="form-control" name="address" id="address" rows="2" maxlength="30" pattern="[a-zA-Z0-9\s]*"
+                          title="Address must contain only letters, digits, and spaces" required placeholder="Enter Your Address"></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="userType">User Type:</label>
+                      <select id="userType" name="userType" required>
+                          <option value="student">Student</option>
+                          <option value="other">Other</option>
+                      </select>
+                  </div>
+                  <button type="submit">Submit</button>
+              </form>
+          </div>
+      </div>
+
+      <script>
+          function validateForm() {
+              var nameRegex = /^[^\d.]+$/;
+              var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+              var aadharNumberRegex = /^\d{12}$/;
+              var addressRegex = /^[a-zA-Z0-9\s]*$/;
+
+              var nameInput = document.getElementById('name');
+              var emailInput = document.getElementById('email');
+              var aadharNumberInput = document.getElementById('aadhar-number');
+              var addressInput = document.getElementById('address');
+
+              if (!nameRegex.test(nameInput.value)) {
+                  alert("Invalid Name. It must contain only letters.");
+                  return false;
+              }
+
+              if (!emailRegex.test(emailInput.value)) {
+                  alert("Invalid Email format. it should end with @gmail.com");
+                  return false;
+              }
+
+              if (!aadharNumberRegex.test(aadharNumberInput.value)) {
+                  alert("Invalid Aadhar-Number. It must contain 12 numeric digits.");
+                  return false;
+              }
+
+              if (!addressRegex.test(addressInput.value)) {
+                  alert("Invalid Address. It must contain only letters, digits, and spaces.");
+                  return false;
+              }
+
+              return true;
+          }
+      </script>
+  </section><!-- End Services Section -->
 
    
     <!-- ======= Contact Section ======= -->

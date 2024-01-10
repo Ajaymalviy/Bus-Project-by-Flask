@@ -18,7 +18,7 @@
         }
 
         h1 {
-            margin-top: 20px;
+            margin-top: 12px;
             color: #333; /* Change the color of the heading text */
         }
 
@@ -80,10 +80,29 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        .home-button {
+            display: block;
+            margin-top: 1px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #28a745; /* Green color for the button */
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #218838; /* Darker green color on hover */
+        }
     </style>
 </head>
 
 <body>
+
+     <!-- Home button added here -->
+     <a href="{{url_for('home')}}" class="home-button">Home</a>
+
     <h1>Welcome To The Express-Bus</h1>
     <p>Please choose route for see the details of the Bus</p>
     <div class="find-form">
@@ -94,6 +113,8 @@
             <button type="submit">Search</button>
         </form>
     </div>
+
+
 
     <script>
         const routeInput = document.getElementById('route');
