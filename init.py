@@ -1,12 +1,12 @@
 from functools import wraps
 from flask import Flask, abort, render_template, request, redirect, url_for, session, flash 
-from flask_login import login_required, logout_user
+from flask_login import LoginManager, login_required, logout_user
 # from flask_paginate import Pagination, get_page_args
 import mysql.connector
 import bcrypt
-from flask_login import LoginManager
 from datetime import datetime ,timedelta
 import time
+from utile import requires_role
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
 #this is our flask application instance for class Flask or we can say that is our object of class .
 
@@ -57,18 +57,18 @@ CREATE TABLE bus_pass (
 #--------------------------------------authorization on tables------------------------------------
 
 # # the login_required function
-# def login_required(view):
-#     @wraps(view)
-#     def wrapped_view(*args, **kwargs):
-#         if session.get('username'):
-#             # User is authenticated, execute the original view function
-#             return view(*args, **kwargs)
-#         else:
-#             # User is not authenticated, redirect to the login page
-#             flash("You are not logged in..! Login to perform action")
-#             return redirect(url_for('login'))
+def login_required(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        if session.get('username'):
+            # User is authenticated, execute the original view function
+            return view(*args, **kwargs)
+        else:
+            # User is not authenticated, redirect to the login page
+            flash("You are not logged in..! Login to perform action")
+            return redirect(url_for('login'))
 
-#     return wrapped_view
+    return wrapped_view
 
 
 
@@ -85,8 +85,6 @@ def logout():
 
 # cursor.execute(create_table_query_bus_pass)
 # db.commit()
- 
-# Assume you have a function to retrieve a user from your database
 
 # #-----------------------------this is our pages for auth----------------------require----------------
 
@@ -122,72 +120,14 @@ def username():
 
 #---------------------authorisation for particular page by different users----------------------------
     
-    # ...
-def get_user_by_username(username):
-    cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT id, is_active FROM users WHERE name = %s", (username,))
-
-    user_data = cursor.fetchone()
-    cursor.close()
-
-    if user_data:
-        user = User(user_id=user_data['id'], roles=['Admin', 'User'], is_active=user_data['is_active'])
-        return user
-
-    return None
-
-# Dummy user class with roles
-class User:
-    def __init__(self, user_id, roles=None, is_active=None):
-        self.user_id = user_id
-        self.roles = roles if roles is not None else []
-        self.is_active = is_active
+   
 
 
-# Dummy user data
-admin_user = User('admin', ['Admin'])
-user_user = User('user', ['User'])
-guest_user = User('guest', ['Guest'])
-
-# ...
-
-def requires_role(required_role):
-    def decorator(view_func):
-        @wraps(view_func)
-        def wrapper(*args, **kwargs):
-            if 'username' in session:
-                user = get_user_by_username(session['username'])
-                if user and required_role in user.roles:
-    # User has the required role, execute the original view function
-                    return view_func(*args, **kwargs)
-                else:
-                     abort(401)  # Forbidden
-
-            else:
-                abort(401)  # Unauthorized
-        return wrapper
-    return decorator
-
-
-# ...
-
-# Routes using the @requires_role decorator for different roles
-@app.route('/admin')
-@requires_role('Admin')
-def admin_page():
-    return render_template('admin.html')
-
-@app.route('/user')
-@requires_role('User')
-def user_page():
-    return render_template('login_page.html')
-
-@app.route('/guest')
-@requires_role('Guest')
-def guest_page():
-    return render_template('guest.html')
 
 #
+@app.route('/usertype')
+def usertype():
+    return render_template('user_type.html')    
 
 #----------------this is our main page of login which work under authentication.----------------------------
 
@@ -219,6 +159,76 @@ def login():
             return "Username not found. Please register."
 
     return render_template('login_page.html')
+
+
+#--------------------------------------------admin authentication and authorisation-----------------------s
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+@app.route('/admin_register', methods=['GET', 'POST'])
+def admin_register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        mobile_number = request.form['mobile_number']
+        email = request.form['email']
+
+        # Check if both username and password already exist
+        cursor.execute("SELECT username, password FROM admin_registration WHERE username=%s", (username,))
+        admin_data = cursor.fetchone()
+
+        if admin_data:
+            stored_password = admin_data[1].encode('utf-8')
+            if bcrypt.checkpw(password.encode('utf-8'), stored_password):
+                return "Username and password already exist. You can log in now."
+
+        # Commit any pending changes from previous queries
+        db.commit()
+
+        # Hash the password
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+        # Insert the new admin into the database
+        insert_query = "INSERT INTO admin_registration (username, password, mobile_number, email) VALUES (%s, %s, %s, %s)"
+        cursor.execute(insert_query, (username, hashed_password, mobile_number, email))
+
+        # Commit the transaction after the INSERT query
+        db.commit()
+        return render_template('admin.html')  # Adjust the template accordingly
+
+    return render_template('admin_registration.html')
+
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        cursor = db.cursor()
+
+        # Fetch admin data based on the provided username
+        cursor.execute("SELECT username, password FROM admin_registration WHERE username=%s", (username,))
+        admin_data = cursor.fetchone()
+       # print(admin_data)
+        cursor.fetchall()
+        cursor.close()
+
+        if admin_data:
+            stored_password = admin_data[1]
+            if bcrypt.checkpw(password.encode('utf-8'), stored_password.encode('utf-8')):
+                # Passwords match, you can log in as admin
+                # Add admin login logic here
+                session['role'] = 'Admin'
+                flash('You are now logged in as admin!', 'success')
+                return redirect('home')
+            else:
+                return "Incorrect password. Please try again."
+        else:
+            return "Admin username not found. Please register as admin."
+
+    return render_template('admin.html')
+
 
 #-----------------for logout-----------------------------------------------------------------------------------
 @app.route('/register', methods=['GET', 'POST'])
@@ -285,6 +295,7 @@ def user():
 
 #-------------------------------bus_detail___________________________________________________________
 @app.route('/bus_details', methods=['GET', 'POST'])
+@requires_role(['Admin'])
 def bus_details():
     msg =None
     bus_data = None
@@ -340,7 +351,7 @@ def bus_details():
 #----------------------------------for adding bus-------------------------------------------------------------------   
 
 @app.route('/add_bus',methods=['GET','POST'])
-@requires_role('Admin')
+@login_required
 def add_bus_form():
     if request.method == 'POST':
         # bus_id = request.form['bus_id']
@@ -367,7 +378,7 @@ def add_bus_form():
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
  
 @app.route('/update_bus/<int:bus_id>', methods=['GET', 'POST'])
-@requires_role('Admin')
+@login_required
 def update_bus(bus_id):
     cursor = db.cursor(dictionary=True)
     if request.method == 'POST':
@@ -396,7 +407,7 @@ def success_page():
 
 
 @app.route('/delete_bus/<int:bus_id>', methods=['GET','POST'])
-@requires_role('Admin')
+@login_required
 def delete_bus(bus_id):
     try:
         # Delete the bus record from the database
@@ -420,7 +431,7 @@ def delete_bus(bus_id):
 
 
 @app.route('/platform_details', methods=['GET', 'POST'])
-@requires_role('Admin')
+@login_required
 def platform_details():
     platform_data=None
     msg=None
@@ -463,7 +474,7 @@ def platform_details():
 
 
 @app.route('/add_platform', methods=['GET', 'POST'])
-@requires_role('Admin')
+@login_required
 def add_platform():
     if request.method == 'POST':
          # platform_id = request.form['platform _id']

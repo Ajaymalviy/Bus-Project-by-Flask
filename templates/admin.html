@@ -78,6 +78,10 @@
             background-color: #3042a8;
         }
 
+        #homebutton {
+            background-color: #4285f4;
+        }
+
         .button:hover {
             background-color: #1429a0; /* Adjusted the hover color */
         }
@@ -85,14 +89,19 @@
         #registerbutton:hover {
             background-color: #3042a8;
         }
+
+        #homebutton:hover {
+            background-color: #2979ff;
+        }
     </style>
 </head>
 <body>
+    <a href="{{url_for('home')}}" class="button" id="homebutton" style="margin-bottom: 35%; ">Home</a>
     <div class="login-form">
-        <h1>Wellcome admin</h1>
-        <form id="loginForm" action="/login" method="POST">
+        <h1>Welcome admin</h1>
+        <form id="loginForm" action="/admin_login" method="POST">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" minlength="4" nmaxlength="18" title="Please remove space" required pattern="^[^\s]+$" placeholder="Enter Your Name"><br><br>
+            <input type="text" id="username" name="username" minlength="4" maxlength="18" title="Please remove space" required pattern="^[^\s]+$" placeholder="Enter Your Name"><br><br>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" maxlength="8" title="Must have length eight" required placeholder="Enter Your Password"><br><br>
@@ -100,7 +109,7 @@
             <div class="button-container">
                 <button type="submit" class="button" id="logbutton">Login</button>
                 <div class="registration-button">
-                    <a href="{{url_for('register')}}" class="button" id="registerbutton">Register</a>
+                    <a href="{{url_for('admin_register')}}" class="button" id="registerbutton">Register</a>
                 </div>
             </div>
         </form>

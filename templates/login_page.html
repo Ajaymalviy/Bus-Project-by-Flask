@@ -70,6 +70,10 @@
             transition: background-color 0.3s ease;
         }
 
+        #homebutton {
+            background-color: #4285f4;
+        }
+
         #logbutton {
             background-color: #052257;
         }
@@ -85,14 +89,19 @@
         #registerbutton:hover {
             background-color: #3042a8;
         }
+
+        #homebutton:hover {
+            background-color: #2979ff;
+        }
     </style>
 </head>
 <body>
+    <a href="{{url_for('home')}}" class="button" id="homebutton" style="margin-bottom: 33%;">Home</a>
     <div class="login-form">
-        <h1>Wellcome User</h1>
+        <h1>Welcome User</h1>
         <form id="loginForm" action="/login" method="POST">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" minlength="4" nmaxlength="18" title="Please remove space" required pattern="^[^\s]+$" placeholder="Enter Your Name"><br><br>
+            <input type="text" id="username" name="username" minlength="4" maxlength="18" title="Please remove space" required pattern="^[^\s]+$" placeholder="Enter Your Name"><br><br>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" maxlength="8" title="Must have length eight" required placeholder="Enter Your Password"><br><br>

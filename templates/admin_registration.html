@@ -73,8 +73,8 @@
 </head>
 <body>
     <div class="registration-form">
-        <h1>User-Registration</h1>
-        <form id="registrationForm" action="/register" method="POST">
+        <h1> Admin-Registration</h1>
+        <form id="registrationForm" action="/admin_register" method="POST">
             <label for="newUsername">New Username:</label>
             <input type="text" id="newUsername" name="username" minlength="4" maxlength="18" required pattern="^[^\s]+$" title="Remove spaces" placeholder="Enter your username">
 
@@ -87,17 +87,10 @@
             <label for="mobileNumber">Mobile Number:</label>
             <input type="text" id="mobileNumber" name="mobile_number" maxlength="10" title="Start with  6, 7, 8, or 9" required pattern="^[6789]\d{9}$" placeholder="Enter your mobile number">
 
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" maxlength="20" minlength="3" title="Fill at least three words" pattern="^[A-Za-z]+$" placeholder="Enter your city">
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" minlength="4" maxlength="30" title="Minimum length 4 and must contain @" required pattern="^[a-zA-Z0_%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email">
 
-            <label for="userType">User Type:</label>
-            <select id="userType" name="user_type" required>
-                <option value="student">Student</option>
-                <option value="other">Other</option>
-            </select>
 
             <button type="submit" value="register" style="margin-top: 15px;">Register</button>
         </form>
