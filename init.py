@@ -351,7 +351,7 @@ def bus_details():
 #----------------------------------for adding bus-------------------------------------------------------------------   
 
 @app.route('/add_bus',methods=['GET','POST'])
-@login_required
+
 def add_bus_form():
     if request.method == 'POST':
         # bus_id = request.form['bus_id']
@@ -378,7 +378,7 @@ def add_bus_form():
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
  
 @app.route('/update_bus/<int:bus_id>', methods=['GET', 'POST'])
-@login_required
+
 def update_bus(bus_id):
     cursor = db.cursor(dictionary=True)
     if request.method == 'POST':
@@ -407,7 +407,7 @@ def success_page():
 
 
 @app.route('/delete_bus/<int:bus_id>', methods=['GET','POST'])
-@login_required
+
 def delete_bus(bus_id):
     try:
         # Delete the bus record from the database
@@ -431,7 +431,7 @@ def delete_bus(bus_id):
 
 
 @app.route('/platform_details', methods=['GET', 'POST'])
-@login_required
+
 def platform_details():
     platform_data=None
     msg=None
@@ -474,7 +474,7 @@ def platform_details():
 
 
 @app.route('/add_platform', methods=['GET', 'POST'])
-@login_required
+
 def add_platform():
     if request.method == 'POST':
          # platform_id = request.form['platform _id']
@@ -493,7 +493,7 @@ def add_platform():
 #--------------------for editing this platform----------------------------------------
 
 @app.route('/update_platform/<int:platform_id>', methods=['GET', 'POST'])
-@login_required
+
 def update_platform(platform_id):
     cursor = db.cursor(dictionary=True)
     
@@ -523,7 +523,7 @@ def update_platform(platform_id):
 
 
 @app.route('/delete_platform/<int:platform_id>', methods=['GET','POST'])
-@login_required
+
 def delete_platform(platform_id):
     try:
         # Delete the bus record from the database
@@ -620,7 +620,7 @@ def route_details():
 #-----------------------------this is for open bus detail of particular bus------------------------------------
 
 @app.route("/search") #our first directry which is open
-@login_required
+
 def index():
     return render_template("particular_bus.html")#it will though us to the html page which is open at first
 
@@ -652,7 +652,7 @@ def getting_data():
 #--------------------for bus-pass from services------------------------------------------
 
 @app.route('/services', methods=['GET', 'POST'])
-@login_required
+
 def services():
     if request.method == 'POST':
         # Process the form data and insert it into the database
@@ -673,7 +673,7 @@ def services():
 
 #----------------------THIS IS FOR CONTACT DETAIL-----------------------
 @app.route('/contact', methods=['GET', 'POST'])
-@login_required
+
 def contact():
     if request.method == 'POST':
         # Get data from the form using correct keys
