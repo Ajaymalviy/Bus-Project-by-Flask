@@ -140,7 +140,7 @@ def login():
         cursor = db.cursor()
 
         # Fetch user data based on the provided username
-        cursor.execute("SELECT name, password FROM users WHERE name=%s", (username,))
+        cursor.execute("SELECT name, password FROM users WHERE BINARY name=%s", (username,))
         user_data = cursor.fetchone()
         cursor.fetchall()
         cursor.close()
@@ -711,7 +711,12 @@ def query():
         # Commit the changes and close the cursor
         db.commit()
         cursor.close()
-        return redirect('thank_you')
+
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return 'Thank you for leaving the message we will try our best to go through your comment.'
+        else:
+            return redirect('thank_you')
+        
 
     return redirect(url_for('home'))
 @app.route('/thank_you')
