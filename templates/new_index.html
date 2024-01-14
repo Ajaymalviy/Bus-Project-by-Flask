@@ -357,7 +357,20 @@
           <div class="text-center"><button type="submit"  onclick="validateForms()" >Send Message</button></div>
         </form>
 
-        
+        <script>
+  
+          var xhr = new XMLHttpRequest();
+  
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == 4 && xhr.status == 200) {
+                  document.getElementById('result').innerHTML = xhr.responseText;
+              }
+          };
+          xhr.open('GET', 'https://api.example.com/data', true);
+  
+          xhr.send();
+      </script>
+  
         {% with messages = get_flashed_messages() %}
         {% if msg %}
             <div class="flash-messages">
