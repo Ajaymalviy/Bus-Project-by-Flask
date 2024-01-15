@@ -354,22 +354,9 @@
           <div class="my-3" style="color: black;">
             <div class="error-message"></div>
           </div>
-          <div class="text-center"><button type="submit"  onclick="validateForms()" >Send Message</button></div>
+          <div class="text-center"><button type="submit"  onclick="loadData()" >Send Message</button></div>
         </form>
-
-        <script>
-  
-          var xhr = new XMLHttpRequest();
-  
-          xhr.onreadystatechange = function() {
-              if (xhr.readyState == 4 && xhr.status == 200) {
-                  document.getElementById('result').innerHTML = xhr.responseText;
-              }
-          };
-          xhr.open('GET', 'https://api.example.com/data', true);
-  
-          xhr.send();
-      </script>
+       
   
         {% with messages = get_flashed_messages() %}
         {% if msg %}
@@ -405,7 +392,7 @@
         }
       </script>
 
-      <script>
+      <!-- <script>
         $(document).ready(function() {
             $("#contact-form").submit(function(e) {
                 e.preventDefault();  // Prevent the default form submission
@@ -425,7 +412,7 @@
             });
         });
       </script>
-          
+           -->
       <div style="margin-left: 80px; color: black; width: 130px; margin-top: 18px; height: 320px;">
         <div>
           <a href="#hero" class="bus-info" style="font-size: large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>
@@ -437,14 +424,31 @@
           <a href="#resume" class="bus-info" style="font-size: large; color: black; text-decoration: underline;">History</a>   
         </div>
         <div style=" margin-top: 25px;">
-          <a href="{{url_for('usertype')}}" class="bus-info" style="font-size: large; color: black; text-decoration: underline;">Login</a>   
+          <a href="{{url_for('usertype')}}" class="bus-info" id="login_page" style="font-size: large; color: black;  text-decoration: underline;">Login</a>   
         </div>
         <div style=" margin-top: 25px;">
-          <a href="{{url_for('register')}}" class="bus-info" style="font-size: large; color: black; width: 250px; text-decoration: underline;">Sign Up</a>   
+          <a href="{{url_for('register')}}" class="bus-info" id="register_page" style="font-size: large; color: black; width: 250px; text-decoration: underline;">Sign Up</a>   
         </div>
+        <br>
+        <div>
+          <p id="demo" style="font-size: larger;"> </p>
+          <button onclick="loadData()"> gift</button>
+        </div>
+     
       </div>
-
-
+      <script>
+        function loadData() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              console.log(this.responseText);
+              document.getElementById("demo").innerHTML = this.responseText;
+            }
+          };
+          xhttp.open('GET', '/thanks', true);
+          xhttp.send();
+        }
+      </script>
       <div class="profile" style="margin-right: 100px; margin-top:10px; width: 30px;">
         
          <div class="social-links mt-3 text-center" style="height: 80px; font-size: x-large; margin-left: 42px; color: black;">
@@ -503,7 +507,7 @@
   <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- -----------------------this for hide  login page with sidebar---------------------------- -->
-  <script>
+  <!-- <script>
     document.getElementById('login_page').addEventListener('click' , function login() {
       
       loadContent("{{url_for('login')}}");
@@ -539,7 +543,7 @@
       xhr.send();
     }
 
-  </script>
+  </script> -->
 
 <!-- -----------------------this for hide  registration page with sidebar---------------------------- -->
 {%endblock%}

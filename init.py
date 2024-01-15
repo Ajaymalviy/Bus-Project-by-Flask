@@ -712,16 +712,21 @@ def query():
         db.commit()
         cursor.close()  
 
-        # if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        #     return 'Thank you for leaving the message we will try our best to go through your comment.'
-        # else:
-        #     return redirect('thank_you')
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return 'Thank you for leaving the message we will try our best to go through your comment.'
+        else:
+                return redirect('thank_you')
         
 
     return redirect(url_for('home'))
-@app.route('/thank_you')
+@app.route('/thank_you' )
 def thank_you():
     return 'Thank you for leaving the message we will try our best to go through your comment.'
+
+
+@app.route('/thanks' )
+def thanks():
+    return 'Thank you for coming on my website .'
 
 
 
