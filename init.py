@@ -628,8 +628,12 @@ def index():
 def getting_data():
     result = []
 
+   
     if request.method == 'POST':
-        route = request.form['route']
+        route = request.form.get('route')
+        
+        if not route:
+            return render_template('search_route.html', result=result)
         try:
             connection = mysql.connector.connect(**db_config)
             cursor = connection.cursor()
