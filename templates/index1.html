@@ -246,7 +246,7 @@
 
           <div class="section-title">
               <h4>Please Fill The Form For Verification</h4>
-              <form action="/services" method="post" role="form" onsubmit="return validateForm()">
+              <form action="/services" method="post" id="myForm" role="form" onsubmit="return validateForm()">
                   <div class="row">
                       <div class="form-group col-md-6">
                           <label for="name">Your Name</label>
@@ -276,12 +276,36 @@
                           <option value="other">Other</option>
                       </select>
                   </div>
-                  <button type="submit">Submit</button>
+                  <button type="submit" >Submit</button>
               </form>
+
+           <p id="response" style="font-size: larger; margin-top: 2%;" ></p>
           </div>
       </div>
+         <script>
+          //  function submitForm() {s
+          //     // Prevent the default form submission
+          //     event.preventDefault();
 
-      <script>
+          //     var xhttp = new XMLHttpRequest();
+          //     xhttp.onreadystatechange = function () {
+          //         if (this.readyState == 4 && this.status == 200) {
+          //             console.log(this.responseText);
+          //             document.getElementById("response").innerHTML = this.responseText;
+          //         }
+          //     };
+
+          //     var formData = new FormData(document.getElementById("myForm"));
+
+          //     xhttp.open('POST', '/services', true);
+          //     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              
+          //     // Send form data
+          //     xhttp.send(new URLSearchParams(formData));
+
+          //     return false; // Prevents the form from being submitted in the traditional way
+          // }
+     
           function validateForm() {
               var nameRegex = /^[^\d.]+$/;
               var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -315,6 +339,9 @@
 
               return true;
           }
+
+ 
+        
       </script>
   </section><!-- End Services Section -->
 
@@ -434,49 +461,10 @@
   <script src="{{ url_for('static', filename='vendor/typed.js/typed.umd.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/waypoints/noframework.waypoints.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
-
-  <!-- Template Main JS File -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<!-- -----------------------this for hide  login page with sidebar---------------------------- -->
-  <script>
-    document.getElementById('login_page').addEventListener('click' , function login() {
-      
-      loadContent("{{url_for('login')}}");
-    })
 
-    function loadContent(page) {
-      const contentContainer = document.getElementById('content-container')
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET" , page,true);
-      xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status ===200){
-          contentContainer.innerHTML = xhr.responseText;
-        }
-      }
-      xhr.send();
-    }
-
-    document.getElementById('register_page').addEventListener('click' , function register() {
-      
-      loadContent("{{url_for('registerbutton')}}");
-    })
-    function loadContent(page) {
-      const contentContainer = document.getElementById('content-mask')
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET" , page,true);
-      xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status ===200){
-          contentContainer.innerHTML = xhr.responseText;
-        }
-      }
-      xhr.send();
-    }
-
-  </script>
   
 
 

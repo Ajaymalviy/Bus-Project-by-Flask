@@ -675,6 +675,9 @@ def services():
 
     return redirect('home')  # Render the form for data submission
 
+
+                
+
 #----------------------THIS IS FOR CONTACT DETAIL-----------------------
 @app.route('/contact', methods=['GET', 'POST'])
 
@@ -723,7 +726,7 @@ def query():
         
 
     return redirect(url_for('home'))
-@app.route('/thank_you' )
+@app.route('/thank_you' ,methods=['GET', 'POST'])
 def thank_you():
     return 'Thank you for leaving the message we will try our best to go through your comment.'
 

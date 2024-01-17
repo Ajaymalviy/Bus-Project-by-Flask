@@ -506,44 +506,7 @@
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<!-- -----------------------this for hide  login page with sidebar---------------------------- -->
-  <!-- <script>
-    document.getElementById('login_page').addEventListener('click' , function login() {
-      
-      loadContent("{{url_for('login')}}");
-    })
-
-    function loadContent(page) {
-      const contentContainer = document.getElementById('content-container')
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET" , page,true);
-      xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status ===200){
-          contentContainer.innerHTML = xhr.responseText;
-        }
-      }
-      xhr.send();
-    }
-
-    document.getElementById('register_page').addEventListener('click' , function register() {
-      
-      loadContent("{{url_for('registerbutton')}}");
-    })
-    function loadContent(page) {
-      const contentContainer = document.getElementById('content-mask')
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET" , page,true);
-      xhr.onreadystatechange = function () {
-        
-        if(xhr.readyState == 4 && xhr.status ===200){
-          contentContainer.innerHTML = xhr.responseText;
-        }
-      }
-      xhr.send();
-    }
-
-  </script> -->
+ 
 
 <!-- -----------------------this for hide  registration page with sidebar---------------------------- -->
 {%endblock%}
