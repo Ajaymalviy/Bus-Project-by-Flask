@@ -12,19 +12,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Align content at the top */
             height: 100vh;
             margin: 0;
         }
 
-        h1 {
-            margin-top: 12px;
-            color: #333; /* Change the color of the heading text */
+        .container-1 {
+            flex: 1; /* Take one-third of the available height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        p {
-            margin-bottom: 20px;
-            color: #555; /* Change the color of the paragraph text */
+        .container-2 {
+            flex: 2; /* Take two-thirds of the available height */
+            background-color:  rgb(228, 216, 207); /* Adjust background color as needed */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .find-form {
@@ -36,6 +41,7 @@
             text-align: center;
             width: 300px; /* Adjusted width for better readability */
             max-width: 80%; /* Set a maximum width to ensure it's responsive */
+            margin-bottom: 30px;
         }
 
         label {
@@ -100,20 +106,41 @@
 
 <body>
     <a href="{{url_for('home')}}" class="home-button" style="margin-top:0%; width: 4%;">Home</a>
-    <div class="find-form" style="margin-bottom: 30%; width: 60%;">
-        <form action="/buses" method="POST">
-            <label for="route">Route:</label>
-            <input type="text" id="route" name="route" required placeholder="Choose Route" autocomplete="off">
-            <div class="autocomplete-items" id="autocomplete-items" style="background-color: white;"></div>
-            <button type="submit" style="width: 95px;">Search</button>
-            
-            
-        </form>
+    <div class="container-1" style="width: 60%;">
+        <div class="find-form" style="width: 60%;">
+            <form action="#" method="POST" onsubmit="loadData(); return false;">
+                <label for="route">Route:</label>
+                <input type="text" id="route" name="route" required placeholder="Choose Route" autocomplete="off">
+                <div class="autocomplete-items" id="autocomplete-items" style="background-color: white;"></div>
+                <button type="submit" style="width: 95px;">Search</button>
+            </form>
+        </div>
     </div>
-
-
+    <div class="container-2" id="container-2" style="width: 90%;">
+    
+    </div>
+    
 
     <script>
+        function loadData() {
+            var routeInput = document.getElementById('route');
+            var routeValue = routeInput.value;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    document.getElementById("container-2").innerHTML = this.responseText;
+                }
+            };
+
+            xhttp.open('POST', '/search', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('route=' + routeValue);
+        }
+
+    
+    
         const routeInput = document.getElementById('route');
         const autocompleteContainer = document.getElementById('autocomplete-items');
 

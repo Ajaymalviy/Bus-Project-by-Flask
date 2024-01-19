@@ -445,12 +445,11 @@
               document.getElementById("demo").innerHTML = this.responseText;
             }
           };
-          xhttp.open('GET' , 'filename.txt', true);  
+          xhttp.open('GET' , '/thanks', true);  
                         //'GET' is the method, then the path or URL of the file, and
                         //finally, the async mode which is always set to true in our case.                      
 
-          xhttp .send();
-
+      
           xhttp.send();
         }
       </script>

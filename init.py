@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Flask, abort, render_template, request, redirect, url_for, session, flash 
+from flask import Flask, abort, render_template, render_template_string, request, redirect, url_for, session, flash 
 from flask_login import LoginManager, login_required, logout_user
 # from flask_paginate import Pagination, get_page_args
 import mysql.connector
@@ -623,22 +623,22 @@ def route_details():
 
 def index():
     return render_template("particular_bus.html")#it will though us to the html page which is open at first
-
-@app.route("/buses", methods=['GET', 'POST'])
+# Change the return statement in getting_data route
+@app.route("/search", methods=['GET', 'POST'])
 def getting_data():
     result = []
 
-   
     if request.method == 'POST':
         route = request.form.get('route')
         
-        if not route:
-            return render_template('search_route.html', result=result)
+        if not route: 
+            return render_template_string('<p>No route selected</p>')
+
         try:
             connection = mysql.connector.connect(**db_config)
             cursor = connection.cursor()
 
-            cursor.execute(f'SELECT  bus_id,bus_number,seating_capacity, departure_time, arrival_time FROM bus_detail WHERE route= "{route}";')
+            cursor.execute(f'SELECT bus_id, bus_number, seating_capacity, departure_time, arrival_time FROM bus_detail WHERE route= "{route}";')
             result = cursor.fetchall()
 
         except mysql.connector.Error as e:
@@ -647,11 +647,14 @@ def getting_data():
 
         finally:
             cursor.close()
-            connection.close()
+            connection.close()        
 
+        # Render the partial_buses.html template and return its content as a response
+        partial_buses_content = render_template('partial_buses.html', result=result)
+        return partial_buses_content.replace('<body>', '').replace('</body>', '')
 
-        
-    return render_template('search_route.html', result=result)
+    # If the method is GET or any other, you may want to handle it accordingly
+    return render_template_string('<p>Invalid request</p>')
 
 #--------------------for bus-pass from services------------------------------------------
 
