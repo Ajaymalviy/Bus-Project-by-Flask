@@ -99,18 +99,15 @@
 </head>
 
 <body>
-
-     <!-- Home button added here -->
-     <a href="{{url_for('home')}}" class="home-button">Home</a>
-
-    <h1>Welcome To The Express-Bus</h1>
-    <p>Please choose route for see the details of the Bus</p>
-    <div class="find-form">
+    <a href="{{url_for('home')}}" class="home-button" style="margin-top:0%; width: 4%;">Home</a>
+    <div class="find-form" style="margin-bottom: 30%; width: 60%;">
         <form action="/buses" method="POST">
             <label for="route">Route:</label>
             <input type="text" id="route" name="route" required placeholder="Choose Route" autocomplete="off">
             <div class="autocomplete-items" id="autocomplete-items" style="background-color: white;"></div>
-            <button type="submit">Search</button>
+            <button type="submit" style="width: 95px;">Search</button>
+            
+            
         </form>
     </div>
 
