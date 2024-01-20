@@ -623,16 +623,18 @@ def route_details():
 
 def index():
     return render_template("particular_bus.html")#it will though us to the html page which is open at first
-# Change the return statement in getting_data route
+# Change the return statement in getting_data route@app.route("/search", methods=['GET', 'POST'])
+
 @app.route("/search", methods=['GET', 'POST'])
 def getting_data():
     result = []
 
     if request.method == 'POST':
         route = request.form.get('route')
-        
-        if not route: 
-            return render_template_string('<p>No route selected</p>')
+
+        if not route:
+            # Handle the case where no route is provided
+            return render_template_string('<p>Invalid route</p>')
 
         try:
             connection = mysql.connector.connect(**db_config)
@@ -647,13 +649,18 @@ def getting_data():
 
         finally:
             cursor.close()
-            connection.close()        
+            connection.close()
 
-        # Render the partial_buses.html template and return its content as a response
-        partial_buses_content = render_template('partial_buses.html', result=result)
-        return partial_buses_content.replace('<body>', '').replace('</body>', '')
+        # Check if any buses were found for the specified route
+        if result:
+            # Render the partial_buses.html template if buses were found
+            partial_buses_content = render_template('partial_buses.html', result=result)
+            return partial_buses_content.replace('<body>', '').replace('</body>', '')
+        else:
+            # Display a message if no buses match the route
+            return render_template_string('<p>No buses found for the selected route</p>')
 
-    # If the method is GET or any other, you may want to handle it accordingly
+    # Handle other request methods as needed
     return render_template_string('<p>Invalid request</p>')
 
 #--------------------for bus-pass from services------------------------------------------
@@ -675,6 +682,10 @@ def services():
         db.commit()
         cursor.close() 
         return render_template('success1.html')  # Return the success.html template
+    
+    if request.method == 'GET' and request.args.get('refresh'):
+        return redirect(url_for('services'))  # Re-render the services page
+
 
     return redirect('home')  # Render the form for data submission
 

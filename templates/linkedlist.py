@@ -79,7 +79,7 @@ class  Linkedlist   :
         count=0
         itr=self.head
         while itr:
-            if count== 'index-1':
+            if count== index-1:
                 node=Node(data,itr.next)
                 itr.next=node
                 break
@@ -117,6 +117,8 @@ if __name__  == '__main__':
     ll.insert_at_beginning(14)
     ll.insert_at_beginning(24)
     ll.insert_at_beginning(34)
+    ll.insert_at_end(12)
+    ll.insert_at_end(12)
     ll.insert_at_end(12)
     ll.insert_at_end(12)
     print("length of linked_list",ll.getlength())
