@@ -338,7 +338,7 @@
         
       </div>
       <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 60px;  height: 380px;">
-        <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center;"   onsubmit="return validateForms()">
+        <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center;"   onsubmit="loadDatas()"   onsubmit="return validateForms()">
           <div class="row"> 
             <div class="form-group col-md-6">
               <label for="email" style="color: black;"> Email</label>
@@ -354,9 +354,10 @@
           <div class="my-3" style="color: black;">
             <div class="error-message"></div>
           </div>
-          <div class="text-center"><button type="submit"  onclick="loadData()" >Send Message</button></div>
+          <div class="text-center"><button type="submit"  >Send Message</button></div>
+          <div class="messg" id="messg" style="color: black;"> <p></p></div>
         </form>
-       
+      
   
         {% with messages = get_flashed_messages() %}
         {% if msg %}
@@ -390,29 +391,29 @@
             return true;
           }
         }
-      </script>
 
-      <!-- <script>
-        $(document).ready(function() {
-            $("#contact-form").submit(function(e) {
-                e.preventDefault();  // Prevent the default form submission
+        function loadDatas() {
+            const emailInput = document.getElementById("email");
+            const emailValue = encodeURIComponent(emailInput.value); // Encode email value
+            const messageInput = document.getElementById("message");
+            const messageValue = encodeURIComponent(messageInput.value); // Encode message value
 
-                $.ajax({
-                    type: "POST",
-                    url: "/query",
-                    data: $(this).serialize(),  // Serialize the form data
-                    success: function(response) {
-                        // Update the result div with the response from the server
-                        $("#result").html(response);
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-            });
-        });
-      </script>
-           -->
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+              if (this.readyState === 4 && this.status === 200) {
+                console.log(this.responseText);
+                document.getElementById("messg").innerHTML = this.responseText;
+              }
+            };
+
+            xhttp.open("POST", "/query", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("emailValue=" + emailValue + "&messageValue=" + messageValue); // Correct send syntax
+          }
+
+      </script>  
+      
+
       <div style="margin-left: 80px; color: black; width: 130px; margin-top: 18px; height: 320px;">
         <div>
           <a href="#hero" class="bus-info" style="font-size: large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>
