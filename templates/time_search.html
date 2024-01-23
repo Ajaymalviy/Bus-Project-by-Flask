@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        #container1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: auto;
+        }
+        #container2 {
+            flex: 1;
+            background-color: #f2f2f2;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .form-container {
+            width: 300px;
+            margin: 50px auto;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="time"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .home-button {
+            display: block;
+            margin-top: 1px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #28a745; /* Green color for the button */
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #218838; /* Darker green color on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <a href="{{url_for('homee')}}" class="home-button" style="margin-top:0%; margin-left: 46%; width: 4%;">Home</a>
+    <div id="container1">
+        <div class="form-container">
+            <h2>Search Buses by Time</h2>
+            <form  id="time-search-form" action="/time_buses" method="post"  onsubmit=" return loadingData(event);">
+                <div class="input-group">
+                    <label for="start_time">Start Time:</label>
+                    <input type="time" id="start_time" name="start_time" required>
+                </div>
+                <div class="input-group">
+                    <label for="end_time">End Time:</label>
+                    <input type="time" id="end_time" name="end_time">
+                </div>
+                <button type="submit">Search Buses</button>
+            </form>
+           
+            
+            {% if messages %}
+                <div class="flash-messages" style="margin-left: 10%;">
+                    
+                        <div class="flash-message" style="margin-left: 40%;">{{ messages }}</div>
+                    
+                </div>
+            {% endif %}
+            
+        </div>
+
+    <script>
+        function loadingData(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var formData = new FormData(document.getElementById('time-search-form')); // Get form data
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("container2").innerHTML = this.responseText;
+            }
+        };
+
+        xhttp.open('POST', '/time_buses', true);
+        xhttp.send(formData); // Send form data including both start_time and end_time
+    }
+
+    </script>
+    </div>
+    <div id="container2">
+        <p>Time must be insert at between gap of a hour
+
+        </p>
+    </div>
+</body>
+</html>

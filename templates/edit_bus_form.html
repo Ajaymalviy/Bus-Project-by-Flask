@@ -8,7 +8,7 @@
         /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
-            position:fixed;
+            position:absolute;
         }
 
         .container {
@@ -43,12 +43,25 @@
             border-radius: 5px;
             cursor: pointer;
         }
+   
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #5a2b2b;
+            color: white;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+    <a href="{{url_for('homee')}}" class="home-button" style="margin-left: 40%;">Home</a>
+  
     {% extends "header.html" %}
     {% block content %}
- 
+     
     <div class="container" style="margin-left: 390px; margin-top: 8%;">
         <h1>Update Bus Details</h1>
         <form action="{{ url_for('update_bus', bus_id=bus.bus_id) }}" method="post" style="width: 90%;">

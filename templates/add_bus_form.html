@@ -43,12 +43,23 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #5a2b2b;
+            color: white;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     {% extends "header.html" %}
     {% block content %}
-    
+    <a href="{{url_for('homee')}}" class="home-button">Home</a>
     <div class="container" style="margin-left: 35% ; width:50% ; margin-top: 30px;">
         <h1>Add Bus</h1>
         <form action="/add_bus" method="post" style="width: 100%;">

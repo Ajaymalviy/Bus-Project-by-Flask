@@ -363,16 +363,25 @@ def add_bus_form():
         route = request.form['route']
         departure_time = request.form['departure_time']
         arrival_time = request.form['arrival_time']
-        cursor=db.cursor(dictionary=True)
-        if arrival_time > departure_time:
-            flash('Departure time must be before Arrival time', 'error')
-        else:
-            query = 'INSERT INTO bus_detail ( bus_number, bus_model, seating_capacity, route, departure_time, arrival_time) VALUES ( %s, %s, %s, %s, %s, %s)'
-            cursor.execute(query,(bus_number,bus_model,seating_capacity,route,departure_time,arrival_time)) 
-            db.commit()
-            # flash('bus-detail added successfully', 'success')
-            # return redirect(url_for('bus_details'))
-            return redirect(url_for('bus_details'))
+        cursor = db.cursor(dictionary=True)
+        query = "SELECT * FROM bus_detail WHERE bus_number=%s"
+        cursor.execute(query, (bus_number,))
+        existing_bus = cursor.fetchall()
+
+        if existing_bus:
+            error_message = f"Bus number '{bus_number}' already exists with model '{existing_bus['bus_model']}' and route '{existing_bus['route']}'. change number."
+            flash(error_message, 'error') 
+            return render_template('add_bus_form.html')  
+        else:         
+            if arrival_time <= departure_time:
+                flash('Departure time must be before  than Arrival time', 'error')
+            else:
+                query = 'INSERT INTO bus_detail ( bus_number, bus_model, seating_capacity, route, departure_time, arrival_time) VALUES ( %s, %s, %s, %s, %s, %s)'
+                cursor.execute(query,(bus_number,bus_model,seating_capacity,route,departure_time,arrival_time)) 
+                db.commit()
+                # flash('bus-detail added successfully', 'success')
+                # return redirect(url_for('bus_details'))
+                return redirect(url_for('bus_details'))
     return render_template('add_bus_form.html')    
 
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
@@ -491,25 +500,19 @@ def add_platform():
     return render_template('add_platform_form.html')   
 
 #--------------------for editing this platform----------------------------------------
+from flask import render_template, request, redirect, url_for
 
 @app.route('/update_platform/<int:platform_id>', methods=['GET', 'POST'])
-
 def update_platform(platform_id):
     cursor = db.cursor(dictionary=True)
-    
+
     if request.method == 'POST':
-        # print(request.form)
-        platform_field = request.form['platform_field']
-        new_value = request.form['new_value']
+        platform_number = request.form['platform_number']
+        location = request.form['location']
 
-        if platform_field == 'platform_number':
-            query = 'UPDATE platform SET platform_number = %s WHERE platform_id = %s'
-        elif platform_field == 'location':
-            query = 'UPDATE platform SET location = %s WHERE platform_id = %s'
-        else:
-            return "Invalid field selected"
-
-        cursor.execute(query, (new_value, platform_id))
+        # Assuming both fields can be updated simultaneously
+        query = 'UPDATE platform SET platform_number = %s, location = %s WHERE platform_id = %s'
+        cursor.execute(query, (platform_number, location, platform_id))
         db.commit()
 
         return redirect(url_for('platform_details'))
@@ -517,10 +520,12 @@ def update_platform(platform_id):
     query1 = 'SELECT * FROM platform WHERE platform_id = %s'
     cursor.execute(query1, (platform_id,))
     platform_data = cursor.fetchone()
-    
+
     return render_template('editplatform.html', platform_data=platform_data)
 
 
+
+#-------------------------------------delete platform---------------------------
 
 @app.route('/delete_platform/<int:platform_id>', methods=['GET','POST'])
 
@@ -591,7 +596,7 @@ def homee():
 def route_details():
     if request.method == 'POST':
         selected_route = request.form['selected_route']
-
+ 
         # Fetch details for the selected route from the database
         cursor = db.cursor(dictionary=True)
         cursor.execute(f'SELECT  bus_id,bus_number,bus_model,seating_capacity, departure_time, arrival_time FROM bus_detail WHERE route= "{selected_route}";')
@@ -651,7 +656,6 @@ def getting_data():
             cursor.close()
             connection.close()
 
-        # Check if any buses were found for the specified route
         if result:
             # Render the partial_buses.html template if buses were found
             partial_buses_content = render_template('partial_buses.html', result=result)
@@ -662,6 +666,51 @@ def getting_data():
 
     # Handle other request methods as needed
     return render_template_string('<p>Invalid request</p>')
+
+#----------------------------serch using time------------------------------------------
+
+
+
+
+
+
+from flask import Flask, render_template, request, flash
+from datetime import datetime, timedelta, time
+
+@app.route('/time_buses', methods=['GET', 'POST'])
+def bus_search():
+    messages =None
+    if request.method == 'POST':
+        start_time = request.form['start_time']
+        end_time = request.form['end_time'] if request.form['end_time'] else None
+
+        try:
+            start_time_obj = datetime.strptime(start_time, '%H:%M').time()
+            end_time_obj = datetime.strptime(end_time, '%H:%M').time() if end_time else None
+        except ValueError:
+            messages="Invalid time format. Please enter time in HH:MM format."
+            return render_template('time_search.html',messages=messages)
+
+        # Construct query based on input times
+        query = "SELECT * FROM bus_detail"
+        if not end_time_obj:
+            query += f" WHERE departure_time BETWEEN '{start_time}' AND '{(datetime.min + timedelta(hours=1)).time()}'"
+        else:
+            query += f" WHERE departure_time BETWEEN '{start_time}' AND '{end_time}'"
+
+        cursor.execute(query)
+        result = cursor.fetchall()
+    
+
+        if not result:
+            return render_template_string('<p>No buses found within the specified time range.</p>')
+        else:
+            return render_template('time_slot.html', result=result)
+
+    return render_template('time_search.html' ,messages=messages)
+
+#-----------------------------------time_slot---------------------------------------------
+
 
 #--------------------for bus-pass from services------------------------------------------
 

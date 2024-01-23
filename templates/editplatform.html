@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +28,9 @@
             font-weight: bold;
         }
 
-        input[type="text"], input[type="number"], input[type="time"] {
+        input[type="text"],
+        input[type="number"],
+        input[type="time"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -44,65 +47,32 @@
         }
     </style>
 </head>
+
 <body>
     {% extends "header.html" %}
     {% block content %}
-  
-    <div class="container" style="margin-left: 30% ; margin-top: 90px; width: 800px; height: 300px;">
+
+    <div class="container" style="margin-left: 30%; margin-top: 90px; width: 800px; height: 300px;">
         <h1>Update Platform Details</h1>
         {% if platform_data %}
-        <form action="{{ url_for('update_platform', platform_id=platform_data.platform_id) }}" method="post" onsubmit="return validateForm()">
+        <form action="{{ url_for('update_platform', platform_id=platform_data.platform_id) }}" method="post" >
             <div class="form-group">
-                <label for="platform_field">Choose Field to Update:</label>
-                <select id="platform_field" name="platform_field" onchange="updateValidation()" required>
-                    <option value="platform_number">Platform Number</option>
-                    <option value="location">Location</option>
-                </select>
+                <label for="platform_number">New Platform Number:</label>
+                <input type="text" id="platform_number" title="It must be number only" require pattern="\d+" maxlength ="4" minlength="1"   placeholder="it must contain 4-numbers only" name="platform_number" required>
             </div>
             <div class="form-group">
-                <label for="new_value">New Value:</label>
-                <input type="text" id="new_value" name="new_value" required>
+                <label for="location">New Location:</label>
+                <input type="text" id="location" name="location" maxlength="30" minlength="3" required pattern="[A-Za-z][A-Za-z0-9\- ]*"   Placeholder="it must contain letters only" title="Must start with a letter and can contain letters, numbers, hyphens, and spaces">
             </div>
             <div class="form-group">
                 <input type="submit" value="Update">
             </div>
         </form>
-        
-        <script>
-            function updateValidation() {
-                var platformField = document.getElementById('platform_field').value;
-                var newValueInput = document.getElementById('new_value');
-        
-                // Reset validation attributes
-                newValueInput.removeAttribute('pattern');
-                newValueInput.removeAttribute('title');
-        
-                // Apply validation based on selected platform field
-                if (platformField === 'platform_number') {
-                    // Validate for less than 100
-                    newValueInput.setAttribute('type', 'number');
-                    newValueInput.setAttribute('max', '99');
-                    newValueInput.setAttribute('min', '1');
-                } else if (platformField === 'location') {
-                    // Validate using regex pattern
-                    newValueInput.setAttribute('type', 'text');
-                    newValueInput.setAttribute('pattern', '[A-Za-z][A-Za-z0-9\\- ]*');
-                    newValueInput.setAttribute('title', 'Must start with a letter and can contain letters, numbers, hyphens, and spaces');
-                }
-            }
-        
-            function validateForm() {
-                // Perform additional form validation if needed
-                // Return true to submit the form, or false to prevent submission
-                return true;
-            }
-        
-            // Initial validation setup
-            updateValidation();
-        </script>
-       {%endif%}
+
+        {% endif %}
     </div>
-  
+
     {% endblock %}
 </body>
+
 </html>

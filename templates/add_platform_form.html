@@ -46,11 +46,23 @@
             justify-content: center;
 
         }
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #5a2b2b;
+            color: white;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     {% extends "header.html" %}
     {% block content %}
+
+    <a href="{{url_for('homee')}}" class="home-button">Home</a>
     <div class="container" style="margin-left: 30% ; margin-top: 90px; width: 800px; height: 400px;">
         <h1 style="justify-content: center;">Add Bus-Stop</h1>
         <form action="/add_platform" method="post" >
