@@ -38,14 +38,7 @@
         tbody tr:hover {
             background-color: #b7cfc7;
         }
-
-        button {
-            padding: 3%;
-            margin: 4%;
-            background-color: rgb(167, 109, 52);
-            border-radius: 5px;
-        }
-
+      
         .add-bus-button {
             float: right;
             margin-right: 20px;
@@ -118,6 +111,20 @@
 .flash-messages span.error {
     background-color: #f44336;
 }
+li {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgb(228, 178, 163);
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+
+        li:hover {
+            background-color: #ddd;
+        }
 
         </style>
     </head>
@@ -159,7 +166,12 @@
                 <td>{{ bus.bus_id }}</td>
                 <td>{{ bus.bus_number }}</td>
                 <td>{{ bus.seating_capacity }}</td>
-                <td>{{ bus.route }}</td>
+                <td>
+                <form action="{{ url_for('route_details') }}" method="post">
+                    <input type="hidden" name="selected_route" value="{{ bus.route }}">
+                    <button type="submit" id="main" style=" border: none;background-color: none;  ">{{ bus.route }}</button>
+                </form>
+               </td>
                 <td>{{ bus.departure_time }}</td>
                 <td>{{ bus.arrival_time }}</td>
                 <td>

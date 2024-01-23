@@ -394,7 +394,7 @@ def update_bus(bus_id):
         route = request.form['route']
         departure_time = request.form['departure_time']
         arrival_time = request.form['arrival_time']
-        if arrival_time >= departure_time:
+        if arrival_time <= departure_time:
             flash(' Departure  time must be before than Arrival time', 'error')
         else:
             query = 'UPDATE bus_detail SET route=%s, departure_time=%s, arrival_time=%s WHERE bus_id = %s'
@@ -700,7 +700,7 @@ def bus_search():
 
         cursor.execute(query)
         result = cursor.fetchall()
-    
+        
 
         if not result:
             return render_template_string('<p>No buses found within the specified time range.</p>')

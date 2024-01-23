@@ -55,6 +55,10 @@
         li:hover {
             background-color: #ddd;
         }
+        .love:hover{
+          
+            background-color: #ddd;  
+        }
 
         .buttons {
             display: flex;
@@ -142,7 +146,7 @@
             <li class="clickable">
                 <form action="{{ url_for('route_details') }}" method="post">
                     <input type="hidden" name="selected_route" value="{{ ticket.route }}">
-                    <button type="submit">{{ ticket.route }}</button>
+                    <button type="submit" class="love" style="border: none; background-color: rgb(228, 178, 163)">{{ ticket.route }}</button>
                 </form>
             </li>
         {% endfor %}
