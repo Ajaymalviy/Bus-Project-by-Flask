@@ -554,6 +554,7 @@ def delete_platform(platform_id):
 
 @app.route('/ticket_routes', methods=['GET', 'POST'])
 def ticket_routes():
+    msg =None
     # Get the current page from the query parameters, default to 1
     page = int(request.args.get('page', 1))
 
@@ -566,24 +567,29 @@ def ticket_routes():
     # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
     query = f"SELECT route FROM bus_detail LIMIT {per_page} OFFSET {offset}"
-    cursor.execute(query)
-    ticket_data = cursor.fetchall()
+    if page > 0:
 
+        cursor.execute(query)
+        ticket_data = cursor.fetchall()
+    
     # Count the total number of items
-    cursor.execute("SELECT COUNT(*) FROM bus_detail")
-    total_items = cursor.fetchone()['COUNT(*)']
+        cursor.execute("SELECT COUNT(*) FROM bus_detail")
+        total_items = cursor.fetchone()['COUNT(*)']
 
-    # Calculate the total number of pages
-    total_pages = (total_items + per_page - 1) // per_page
+        # Calculate the total number of pages
+        total_pages = (total_items + per_page - 1) // per_page
 
-    cursor.close()
-    for ticket in ticket_data:
-        for key,value in ticket.items():
-            if isinstance(value,str):
-                ticket[key]=value.title()
+        cursor.close()
+        for ticket in ticket_data:
+            for key,value in ticket.items():
+                if isinstance(value,str):
+                    ticket[key]=value.title()
 
+    else :
+        msg = flash("Enter a valid page number ")
+    
 
-    return render_template('ticket.html', ticket_data=ticket_data, page=page, per_page=per_page, total_pages=total_pages)
+    return render_template('ticket.html', ticket_data=ticket_data, page=page, per_page=per_page,msg=msg, total_pages=total_pages)
 
 
 
