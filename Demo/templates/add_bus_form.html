@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bus</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="number"], input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #5a2b2b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    {% extends "index.html" %}
+    {% block content %}
+    <div class="container">
+        <h1>Add Bus</h1>
+        <form action="/add_bus" method="post">
+            
+            <div class="form-group">
+                <label for="bus_number">Bus Number:</label>
+                <input type="text" id="bus_number" name="bus_number" required>
+            </div>
+            <div class="form-group">
+                <label for="bus_model">Bus Model:</label>
+                <input type="text" id="bus_model" name="bus_model" required>
+            </div>
+            <div class="form-group">
+                <label for="seating_capacity">Seating Capacity:</label>
+                <input type="number" id="seating_capacity" name="seating_capacity" required>
+            </div>
+            <div class="form-group">
+                <label for="route">Route:</label>
+                <input type="text" id="route" name="route" required>
+            </div>
+            <div class="form-group">
+                <label for="departure_time">Departure Time:</label>
+                <input type="time" id="departure_time" name="departure_time" required>
+            </div>
+            <div class="form-group">
+                <label for="arrival_time">Arrival Time:</label>
+                <input type="time" id="arrival_time" name="arrival_time" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add">
+            </div>
+        </form>
+    </div>
+    {% endblock %}  
+</body>
+</html>

@@ -97,6 +97,9 @@
     .navbar {
       background-color: #faf5f5;
       overflow: hidden;
+      position: fixed;
+      top: 0;
+      z-index: 2;
     }
 
     .navbar a {
@@ -283,7 +286,7 @@
           </p>
         </div>
 
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="1">
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="0">
           <div class="swiper-wrapper">
 
             <div class="swiper-slide">
@@ -315,7 +318,7 @@
             </div><!-- End testimonial item -->
 
           </div>
-          <div class="swiper-pagination">
+        
           
       </div>
     </section><!-- End Testimonials Section -->
@@ -324,7 +327,7 @@
   
    
   <!-- ======= Footer ======= -->
-    <footer id="footer" style="display: flex; flex-direction: row; background-color: #eecdcd; width: 1330px; height: 460px; position: relative;margin-left: 10px;">  
+    <footer id="footer" style="display: flex; flex-direction: row; background-color: #eecdcd; width: 99%; height: 460px; position: relative;margin-left: 10px;">  
       <div class="col-lg-5 d-flex align-items-stretch" style="width: 340px;">
         <div class="info">  
           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 350px; height: 310px; margin-top: 20px;"></iframe>
@@ -337,103 +340,77 @@
         </div>
         
       </div>
-      <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 60px;  height: 380px;">
-        <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center;"   onsubmit="loadDatas()"   onsubmit="return validateForms()">
+      <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 180px;  height: 380px;">
+        <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center; font-size: large;" onsubmit="return validateForms()">
           <div class="row"> 
-            <div class="form-group col-md-6">
-              <label for="email" style="color: black;"> Email</label>
-              <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @gmail.com" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"required
-              required style="width: 260px;" placeholder="Enter Your Gmail Id">
-            </div>
+              <div class="form-group col-md-6">
+                  <label for="email" style="color: black;"> Email</label>
+                  <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @gmail.com" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" required style="width: 260px;" placeholder="Enter Your Gmail Id">
+              </div>
           </div>
           <div class="form-group">
-            <label for="message" style="color: black;">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="10" maxlength="150" minlength="10" title="Must start with a letter and can contain letters, digits, hyphen, and space." pattern="[A-Za-z][A-Za-z0-9\- ]*" placeholder="Enter Message"></textarea>
-        </div>
-        
-          <div class="my-3" style="color: black;">
-            <div class="error-message"></div>
+              <label for="message" style="color: black;">Message</label>
+              <textarea class="form-control" id="message" name="message" rows="10" maxlength="150" minlength="10" title="Must start with a letter and can contain letters, digits, hyphen, and space." pattern="[A-Za-z][A-Za-z0-9\- ]*" placeholder="Enter Message"></textarea>
           </div>
-          <div class="text-center"><button type="submit"  >Send Message</button></div>
-          <div class="messg" id="messg" style="color: black;"> <p></p></div>
-        </form>
-      
-  
-        {% with messages = get_flashed_messages() %}
-        {% if msg %}
-            <div class="flash-messages">
-                {% for message in msg %}
-                    <div class="flash-message" style="margin-left: 40%; color: black;">{{ msg }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        {% endwith %}
-      </div>
-     
+          
+          <div class="my-3" style="color: black;">
+              <div class="error-message"></div>
+          </div>
+          <div class="text-center"><button type="submit">Send Message</button></div>
+          <div class="messg" id="messg" style="color: black;"><p></p></div>
+      </form>
       
       <script>
-        function validateForms() {
-          var emailRegex = /.*@gmail\.com$/;
-          var messageRegex = /^[A-Za-z][A-Za-z0-9\-_ ]*$/;
-      
-          var emailInput = document.getElementById("email");
-          var messageInput = document.getElementById("message");
-          var errorMessage = document.querySelector(".error-message");
-      
-          if (!emailRegex.test(emailInput.value)) {
-            errorMessage.textContent = "Please enter a valid Gmail ID. it must end with @gmail.com";
-            return false;
-          } else if (!messageRegex.test(messageInput.value)) {
-            errorMessage.textContent = "Please enter a valid message. Must start with a letter and can contain letters, digits, hyphen, and space.";
-            return false;
-          } else {
-            errorMessage.textContent = "";
-            return true;
-          }
-        }
-
-        function loadDatas() {
-            const emailInput = document.getElementById("email");
-            const emailValue = encodeURIComponent(emailInput.value); // Encode email value
-            const messageInput = document.getElementById("message");
-            const messageValue = encodeURIComponent(messageInput.value); // Encode message value
-
-            const xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-              if (this.readyState === 4 && this.status === 200) {
-                console.log(this.responseText);
-                document.getElementById("messg").innerHTML = this.responseText;
+          function validateForms() {
+              var emailRegex = /.*@gmail\.com$/;
+              var messageRegex = /^[A-Za-z][A-Za-z0-9\-_ ]*$/;
+          
+              var emailInput = document.getElementById("email");
+              var messageInput = document.getElementById("message");
+              var errorMessage = document.querySelector(".error-message");
+          
+              if (!emailRegex.test(emailInput.value)) {
+                  errorMessage.textContent = "Please enter a valid Gmail ID. it must end with @gmail.com";
+                  return false;
+              } else if (!messageRegex.test(messageInput.value)) {
+                  errorMessage.textContent = "Please enter a valid message. Must start with a letter and can contain letters, digits, hyphen, and space.";
+                  return false;
+              } else {
+                  errorMessage.textContent = "";
+                  return true;
               }
-            };
-
-            xhttp.open("POST", "/query", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("emailValue=" + emailValue + "&messageValue=" + messageValue); // Correct send syntax
           }
-
-      </script>  
+      
+          document.querySelector('form').addEventListener('submit', function(event) {
+              if (validateForms()) {
+                  alert("Thank you for filling out the form!");
+              } else {
+                  event.preventDefault();
+              }
+          });
+      </script>
       
 
-      <div style="margin-left: 80px; color: black; width: 130px; margin-top: 18px; height: 320px;">
+      <div style="margin-left: 200px;  color: black; width: 130px; margin-top: 18px; height: 320px;">
         <div>
-          <a href="#hero" class="bus-info" style="font-size: large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>
+          <a href="#hero" class="bus-info" style="font-size: x-large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>
         </div>
         <div style="margin-top: 25px;">
-          <a href="#about" class="bus-info" style="font-size: large; color: black; text-decoration: underline; margin-top: 40px;">About</a>
+          <a href="#about" class="bus-info" style="font-size: x-large; color: black; text-decoration: underline; margin-top: 40px;">About</a>
         </div>
         <div style=" margin-top: 25px;">
-          <a href="#resume" class="bus-info" style="font-size: large; color: black; text-decoration: underline;">History</a>   
+          <a href="#resume" class="bus-info" style="font-size: x-large; color: black; text-decoration: underline;">History</a>   
         </div>
         <div style=" margin-top: 25px;">
-          <a href="{{url_for('usertype')}}" class="bus-info" id="login_page" style="font-size: large; color: black;  text-decoration: underline;">Login</a>   
+          <a href="{{url_for('usertype')}}" class="bus-info" id="login_page" style="font-size: x-large; color: black;  text-decoration: underline;">Login</a>   
         </div>
         <div style=" margin-top: 25px;">
-          <a href="{{url_for('register')}}" class="bus-info" id="register_page" style="font-size: large; color: black; width: 250px; text-decoration: underline;">Sign Up</a>   
+          <a href="{{url_for('register')}}" class="bus-info" id="register_page" style="font-size: x-large; color: black; width: 250px; text-decoration: underline;">Sign Up</a>   
         </div>
         <br>
         <div>
-          <p id="demo" style="font-size: larger;"> </p>
-          <button onclick="loadData()"> gift</button>
+          <p id="demo" style="font-size: x-large;"> </p>
+          <button style="font-size:large;" onclick="loadData()"> gift</button>
         </div>
      
       </div>
@@ -454,9 +431,9 @@
           xhttp.send();
         }
       </script>
-      <div class="profile" style="margin-right: 100px; margin-top:10px; width: 30px;">
+      <div class="profile" style="margin-right: 0px; margin-left: 50px;  margin-top:10px; width: 30px; z-index: 2;">
         
-         <div class="social-links mt-3 text-center" style="height: 80px; font-size: x-large; margin-left: 42px; color: black;">
+         <div class="social-links mt-3 text-center" style="height: 80px; font-size:xx-large; margin-left: 42px; color: black;">
           <a href="https://about.twitter.com/en" class="twitter" style="color: black;"><i class="bx bxl-twitter"></i></a>
           <a href="https://www.facebook.com/" class="facebook"  style="color: black;"><i class="bx bxl-facebook"></i></a>
           <a href="https://www.instagram.com/" class="instagram"  style="color: black;"><i class="bx bxl-instagram"></i></a>  
@@ -465,18 +442,18 @@
       </div>
 
       <div class="row" data-aos="fade-in" style="margin-top: 5px;">  
-        <div class="col-lg-5 d-flex align-items-stretch" style=" margin-top: 5px; margin-left: 10px; background-color:  #eecdcd; z-index: 11;">
-        <div class="info" style="color: black; margin-left: 30px;">
+        <div class="col-lg-5 d-flex align-items-stretch" style=" margin-top: 5px; margin-left: 180px; background-color: #eecdcd;  font-size: x-large; z-index: 1;">
+        <div class="info" style="color: black; margin-left: 20px;">
           <div class="address">
             <i class="bi bi-geo-alt"></i>
             <h4>Location:</h4>
-            <p>A108 Sapna Sangeeta ,Indore,IN 535022</p>
+            <a href="https://www.google.com/maps/place/Sapna+Sangeeta+Rd,+Indore,+Madhya+Pradesh/@22.6996933,75.8647049,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fce2c1f7a605:0xf052d6f6d94333f3!8m2!3d22.6996933!4d75.8672798!16s%2Fg%2F1ydp9ynd4?entry=ttu" style="color: black;"><p>A108 Sapna Sangeeta ,Indore,IN 535022</p></a>
           </div>
 
           <div class="email">
             <i class="bi bi-envelope"></i>
             <h4>Email:</h4>
-            <p>expressbus@example.com</p>
+            <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new" style="color: black;"><p>expressbus@example.com</p></a>
           </div>
 
           <div class="phone">

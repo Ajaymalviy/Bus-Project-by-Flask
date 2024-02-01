@@ -22,27 +22,33 @@
             background: linear-gradient(to right, #e99f9f, #e48c83);
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: relative;
             z-index: 1;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
         }
 
-        .navbar a {
+
+        .navbar .bus-info {
             float: left;
             display: block;
-            color: #ffffff;
+            color: #0c0909;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
             transition: background-color 0.3s;
         }
 
-        .navbar a:hover {
-            background-color: #0e3c52;
+        .navbar .bus-info:hover {
+            background-color: #df5620;
             border-radius: 10px;
         }
 
         h2 {
-            color: #36aecc;
+            color: #ccb636;
             border: 2px solid #ffffff;
             border-radius: 5px;
             padding: 10px;
@@ -56,8 +62,8 @@
 <body>
 
     <div class="navbar" style="background-color: #faf8f8; height: 77px;">
-      
-        <h2 style=" color: rgb(35, 100, 126); border-radius: 5px solid white; text-decoration: double; font-style: normal; margin-left: 32px;">Express-BUS</h2>
+         
+        <h2  style=" cursor: pointer; color: rgb(172, 136, 21); border-radius: 5px solid white; text-decoration: double; font-style: normal; margin-left: 32px; height: 65px;"><a href="#hero" style="margin-bottom: 5px;">Express-BUS</a></h2>
         <a href="#hero" class="bus-info" style="font-size: large;">Home</a>
         <a href="#about" class="bus-info" style="font-size: large;">About</a>
         <a href="#resume" class="bus-info" style="font-size: large;">History</a>

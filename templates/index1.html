@@ -129,11 +129,7 @@
         color: #a94442;
     }
 </style>
-
-
-  </style>
-  
-  
+    
 </head>
 
 <body>
@@ -187,24 +183,23 @@
 
   <main id="main">
     <a href="{{url_for('bus_search')}}" style="text-decoration: none;">
-      <button style="background-color: #2c9e98; /* Green */
+      <button style="background-color: #d3dbdb; /* Green */
                       border: none;
                       color: rgb(2, 2, 2);
-                      padding: 10px 20px;
+                      padding: 8px 10px;
                       text-align: center;
                       text-decoration: none;
                       display: inline-block;
                       font-size: 16px;
                       margin-left: 80%;
                       cursor: pointer;
-                      width: 14%;
+                      width: 10%;
                       border-radius: 7px ;">
           At-Time
       </button>
   </a>
   
 
-    <section id="notheader"> 
         <section>
           {% with messages = get_flashed_messages() %}
           {% if messages %}
@@ -380,13 +375,13 @@
                 <div class="address">
                   <i class="bi bi-geo-alt"></i>
                   <h4>Location:</h4>
-                  <p>A108 Sapna Sangeeta ,Indore,IN 452022</p>
+                 <a href="https://www.google.com/maps/place/Sapna+Sangeeta+Rd,+Indore,+Madhya+Pradesh/@22.6996933,75.8647049,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fce2c1f7a605:0xf052d6f6d94333f3!8m2!3d22.6996933!4d75.8672798!16s%2Fg%2F1ydp9ynd4?entry=ttu"  style="color: black;"> <p>A108 Sapna Sangeeta ,Indore,IN 452022</p></a>
                 </div>
 
                 <div class="email">
                   <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>expressbus@example.com</p>
+                  <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new" style="color: black;"><h4>Email:</h4>
+                  <p>expressbus@example.com</p></a>
                 </div>
 
                 <div class="phone">

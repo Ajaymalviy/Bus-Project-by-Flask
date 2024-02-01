@@ -295,7 +295,6 @@ def user():
 
 #-------------------------------bus_detail___________________________________________________________
 @app.route('/bus_details', methods=['GET', 'POST'])
-@requires_role(['Admin'])
 def bus_details():
     msg =None
     bus_data = None
@@ -351,7 +350,7 @@ def bus_details():
 #----------------------------------for adding bus-------------------------------------------------------------------   
 
 @app.route('/add_bus',methods=['GET','POST'])
-
+@requires_role(['Admin'])
 def add_bus_form():
     if request.method == 'POST':
         # bus_id = request.form['bus_id']
@@ -387,7 +386,7 @@ def add_bus_form():
 #-------------------------------------------------for editing bus ---------------------------------------------------------------------------------
  
 @app.route('/update_bus/<int:bus_id>', methods=['GET', 'POST'])
-
+@requires_role(['Admin'])
 def update_bus(bus_id):
     cursor = db.cursor(dictionary=True)
     if request.method == 'POST':
@@ -416,7 +415,7 @@ def success_page():
 
 
 @app.route('/delete_bus/<int:bus_id>', methods=['GET','POST'])
-
+@requires_role(['Admin'])
 def delete_bus(bus_id):
     try:
         # Delete the bus record from the database
@@ -788,11 +787,6 @@ def query():
         db.commit()
         cursor.close()  
 
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return 'Thank you for leaving the message we will try our best to go through your comment.'
-        else:
-            return render_template_string('<p>Thank you for leaving the message we will try our best to go through your comment.</p>')
-        
 
     return redirect(url_for('home'))
 @app.route('/thank_you' ,methods=['GET', 'POST'])
@@ -802,7 +796,7 @@ def thank_you():
 
 @app.route('/thanks' )
 def thanks():
-    return 'Thank you for coming on my website .'
+    return 'Thank you .'
 
 
 

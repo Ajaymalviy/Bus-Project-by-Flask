@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Details</title>
+    <style>
+      
+        h1 {
+            
+            color: rgb(214, 207, 207);
+            padding: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 69%;
+            margin-left: 27%;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(12, 12, 12, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #333;
+            color: rgb(231, 239, 240);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: bisque;
+        }
+
+        tbody tr:hover {
+            background-color: #56b998;
+        }
+        button{
+            padding: 3%;
+            margin: 4%;
+            background-color: rgb(167, 109, 52);
+            border-radius: 5px;
+            
+        }
+
+        .add-bus-button {
+            float: right;
+            margin-right: 20px;
+            
+            padding: 2px 7px;
+            background-color: #31d1bc;
+            color: white;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+
+    </style>
+</head>
+<body style="background-color: #f2f2f2;">
+    {% extends "index.html" %}
+    {% block content %}
+    <h1 style="background-color:#5a2b2b; margin-left: 22%; border-radius: 5px; color: white;">Bus Details  <a class="add-bus-button" href="{{url_for('add_bus_form')}}" style="background-color: rgb(109,31,23,1); margin-right: 14%;">Add Bus</a></h1>
+    <!-- ... (your existing table and data) ... -->
+    <table>
+        <thead>
+            <tr>
+                <th>Bus ID</th>
+                <!-- <th>Driver ID</th>
+                <th>Conductor ID</th> -->
+                <th>Bus Number</th>
+                <th>Bus Model</th>
+                <th>Seating Capacity</th>
+                <th>Route</th>
+                <th>Departure Time</th>
+                <th>Arrival Time</th>
+                <th>Action</th>
+                <!-- Add more table headers for other attributes if needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for bus in bus_data %}
+                <tr>
+                    <td>{{ bus.bus_id }}</td>
+                    <!-- <td>{{ bus.driver_id }}</td>
+                    <td>{{ bus.conductor_id }}</td> -->
+                    <td>{{ bus.bus_number }}</td>
+                    <td>{{ bus.bus_model }}</td>
+                    <td>{{ bus.seating_capacity }}</td>
+                    <td>{{ bus.route }}</td> 
+                    <td>{{ bus.departure_time }}</td>
+                    <td>{{ bus.arrival_time }}</td>
+                    <td>
+                        <a href="{{ url_for('delete_bus', bus_id=bus.bus_id) }}" onclick="confirmDelete(event)" style="background-color:rgba(195,199,138,1); color: rgb(0, 0, 0); border-radius: 1px;">Delete </a>
+                        <a href="{{ url_for('update_bus', bus_id=bus.bus_id) }}" style="background-color:rgba(195,199,138,1); color: rgb(0, 0, 0); border-radius: 1px;">Edit</a>
+                    
+                    </td>
+                    
+                    <!-- Add more table cells for other attributes if needed -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="{{ url_for('bus_details', page=page-1) }}" style="color: black;">Previous</a>
+        {% endif %}
+        
+        {% if bus_data|length == per_page %}
+            <a href="{{ url_for('bus_details', page=page+1) }}" style=" color: black;">Next</a>
+        {% endif %}
+    </div>
+    {% endblock %}  
+    <script>
+        function confirmDelete(event) {
+            if (!confirm("Are you sure you want to delete this bus?")) {
+                event.preventDefault();
+            }
+        }
+        </script>
+     
+  
+</body>
+</html>

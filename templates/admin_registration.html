@@ -69,6 +69,24 @@
         button[type="submit"]:hover {
             background-color: #1c7d6a;
         }
+
+        .password-toggle-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        /* Hide the original password input when toggled */
+        .password-toggle-icon:focus ~ input[type="password"] {
+            display: none;
+        }
+
+        /* Show the text input when toggled */
+        .password-toggle-icon:focus ~ input[type="text"] {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +97,9 @@
             <input type="text" id="newUsername" name="username" minlength="4" maxlength="18" required pattern="^[^\s]+$" title="Remove spaces" placeholder="Enter your username">
 
             <label for="newPassword">New Password:</label>
-            <input type="password" id="newPassword" name="password" minlength="8" maxlength="8" title="Must contain at least 4 characters" required placeholder="Enter your password">
+            <div class="password-field">
+                <input type="password" id="newPassword" name="password" minlength="8" maxlength="8" title="Must contain at least 8 characters" required placeholder="Enter your password">
+                <input type="text" id="newPasswordText" name="passwordText" style="display: none;" disabled> <i class="fa fa-eye password-toggle-icon" aria-hidden="true"></i> </div>
 
             <label for="confirmPassword">Confirm Password:</label>
             <input type="password" id="confirmPassword" name="confirm_password" minlength="8" maxlength="8" title="Must match the entered password" required placeholder="Confirm your password" oninput="validatePassword()">
@@ -96,7 +116,7 @@
         </form>
     </div>
     <script>
-         function validatePassword() {
+        function validatePassword() {
             var newPassword = document.getElementById("newPassword");
             var confirmPassword = document.getElementById("confirmPassword");
 
@@ -106,6 +126,16 @@
                 confirmPassword.setCustomValidity("");
             }
         }
+
+        const passwordToggleIcons = document.querySelectorAll('.password-toggle-icon');
+        passwordToggleIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                const inputType = icon.parentElement.querySelector('input[type="password"]').type;
+                icon.parentElement.querySelectorAll('input[type="password"], input[type="text"]').forEach(input => {
+                    input.type = inputType === 'password' ? 'text' : 'password';
+                });
+            });
+        });
     </script>
 </body>
 </html>

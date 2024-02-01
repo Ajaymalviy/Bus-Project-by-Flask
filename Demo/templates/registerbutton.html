@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            background-color: rgb(180, 201, 194);
+           
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-left: 60%;
+            overflow: hidden; /* Prevent scrolling */
+           
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .registration-form {
+            background-color: bisque;
+            padding: 40px;
+            border-radius: 10px;
+            width: 50%;
+            height: 70%;
+            margin-left: 40%;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0px;
+            font-size: medium;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        select {
+            width: 60%;
+            padding: 8px;
+            margin-bottom: 13px;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+
+        input[type="text"]:required,
+        input[type="password"]:required,
+        input[type="email"]:required,
+        select:required {
+            border-color: rgb(10, 3, 3);
+        }
+
+        input[type="text"][name="mobile_number"] {
+            width: 60%;
+            padding: 5px;
+            height: 40%;
+            margin-bottom: 5px;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+
+        input[type="text"][name="mobile_number"]:required {
+            border-color: rgb(24, 13, 13);
+        }
+
+        input[type="text"][name="mobile_number"]:valid {
+            border-color: green;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid black;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+{% extends "index.html" %}
+{% block content %}
+<div class="registration-form">
+    <h1>Registration</h1>
+    <form id="registrationForm" action="/register" method="POST">
+        <label for="newUsername">New Username:</label>
+        <input type="text" id="newUsername" name="username" required pattern="^[^\d.]+$" placeholder="Enter your username"><br>
+
+        <label for="newPassword">New Password :</label>
+        <input type="password" id="newPassword" name="password"  placeholder="Enter your password"><br>
+
+        <label for="mobileNumber">Mobile Number :</label>
+        <input type="text" id="mobileNumber" name="mobile_number" required pattern="^[789]\d{9}$" placeholder="Enter your mobile number"><br>
+
+        <label for="city">City :</label>
+        <input type="text" id="city" name="city" required pattern="^[A-Za-z]+$" placeholder="Enter your city"><br>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your email"><br>
+
+        <label for="userType">User Type:</label>
+        <select id="userType" name="user_type" required>
+            <option value="student">Student</option>
+            <option value="other">Other</option>
+        </select><br>
+
+        <button type="submit" value="register">Register</button>
+    </form>
+</div>
+{% endblock %}
+
+</body>
+</html>
