@@ -80,6 +80,7 @@
 
             <label for="newPassword">New Password:</label>
             <input type="password" id="newPassword" name="password" minlength="8" maxlength="8" title="Must contain at least 4 characters" required placeholder="Enter your password">
+            <input type="checkbox" onclick="myFunction()" style="width:10% ; margin-left: 70%;">Show Password
 
             <label for="confirmPassword">Confirm Password:</label>
             <input type="password" id="confirmPassword" name="confirm_password" minlength="8" maxlength="8" title="Must match the entered password" required placeholder="Confirm your password" oninput="validatePassword()">
@@ -113,6 +114,19 @@
                 confirmPassword.setCustomValidity("");
             }
         }
+
+
+  
+          function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+          }
+
     </script>
+   
 </body>
 </html>

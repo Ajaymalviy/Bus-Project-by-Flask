@@ -113,6 +113,7 @@
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" maxlength="8" minlength="8" title="Must have length eight" required placeholder="Enter Your Password"><br><br>
+            <input type="checkbox" onclick="myFunction()" style="width:10%">Show Password
 
             <div class="button-container">
                 <button type="submit" class="button" id="logbutton">Login</button>
@@ -122,5 +123,19 @@
             </div>
         </form>
     </div>
+
+
+
+    <script>
+        function myFunction() {
+          var x = document.getElementById("password");
+          if (x.type === "password") {
+            x.type = "text";
+          } else {
+            x.type = "password";
+          }
+        }
+
+  </script>
 </body>
 </html>

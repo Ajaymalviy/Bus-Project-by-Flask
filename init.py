@@ -1,14 +1,32 @@
 from functools import wraps
-from flask import Flask, abort, render_template, render_template_string, request, redirect, url_for, session, flash 
+import mailbox
+import random
+from flask import Flask, abort, jsonify, render_template, render_template_string, request, redirect, url_for, session, flash 
 from flask_login import LoginManager, login_required, logout_user
 # from flask_paginate import Pagination, get_page_args
 import mysql.connector
 import bcrypt
 from datetime import datetime ,timedelta
+from flask_mail import Mail, Message
 import time
 from utile import requires_role
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
 #this is our flask application instance for class Flask or we can say that is our object of class .
+
+app = Flask(__name__)
+# app.config.update(
+#     DEBUG=True,
+#     # Configure email settings
+#     MAIL_SERVER='smtp.gmail.com',
+#     MAIL_PORT=587,
+#     MAIL_USE_TLS=True,
+#     MAIL_USERNAME='ajeymalviya143@gmail.com',
+#     MAIL_PASSWORD='ajaymalviya@2003'
+# )
+# mail = Mail(app)
+
+# otp_cache = {}  # Store OTPs temporarily, you might want to use a more persistent storage for production
+
 
 
 app.secret_key = 'secrets.token_hex(16)'  # Replace with a secret key for sessions as our need ,we can fix any secrete key
@@ -100,6 +118,31 @@ def home():
 # @app.route('/signin')
 # def signin():
 #     return render_template('login_page.html')
+
+
+# @app.route('/send_otp', methods=['POST'])
+# def send_otp():
+#     email = request.form['email']
+#     otp = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+#     otp_cache[email] = otp  # Store OTP in cache
+#     msg = Message('Your OTP', sender='ajaymalviya143@gmail.com', recipients=[email])
+#     msg.body = f'Your OTP is: {otp}'
+#     try:
+#         mail.send(msg)
+#         return jsonify({'status': 'success'})
+#     except Exception as e:
+#         print(e)
+#         return jsonify({'status': 'error', 'message': 'Failed to send OTP'})
+
+# @app.route('/validate_otp', methods=['POST'])
+# def validate_otp():
+#     email = request.form['email']
+#     otp_entered = request.form['otp']
+#     if email in otp_cache and otp_cache[email] == otp_entered:
+#         del otp_cache[email]  # Remove OTP from cache after validation
+#         return jsonify({'status': 'success'})
+#     else:
+#         return jsonify({'status': 'error', 'message': 'Invalid OTP'})
 
 
 
