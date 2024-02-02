@@ -100,6 +100,12 @@
       position: fixed;
       top: 0;
       z-index: 2;
+      transform: translateY(0);
+      
+    }
+
+    .hide{
+      display: none;
     }
 
     .navbar a {
@@ -327,37 +333,39 @@
   
    
   <!-- ======= Footer ======= -->
-    <footer id="footer" style="display: flex; flex-direction: row; background-color: #eecdcd; width: 99%; height: 460px; position: relative;margin-left: 10px;">  
+    <footer id="footer" style="display: flex; flex-direction: row;   background: linear-gradient(to right, #182d49, #49108B);
+    width: 99%; height: 460px; position: relative;margin-left: 10px;">  
       <div class="col-lg-5 d-flex align-items-stretch" style="width: 340px;">
-        <div class="info">  
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 350px; height: 310px; margin-top: 20px;"></iframe>
-          <div class="copyright" style="color: black; height: 19px; margin-top: 45px; margin-right: 140px;font-size: medium;">
-            &copy; Created by <strong><span>Ajay Malviya</span></strong>
-          </div>
-          <div class="credits" style="color: black; height: 19px; margin-top: 4px; margin-right: 4px; font-size: medium;">
-            Designed using <a href="#">BootstrapMade</a>
-          </div>
+        
+        <div class="info">
+          <div style="margin-left: 1%; margin-top: 2px;"><h4>Maps :</h4>
+          </div>  
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d50155.731365968786!2d75.8552579!3d22.6852882!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fce2c1f7a605%3A0xf052d6f6d94333f3!2sSapna%20Sangeeta%20Rd%2C%20Snehnagar%2C%20Indore%2C%20Madhya%20Pradesh!5e1!3m2!1sen!2sin!4v1703154218437!5m2!1sen!2sin" frameborder="0" style="border:0; width: 370px; height: 350px; margin-top: 5px;"></iframe>
+          
         </div>
         
       </div>
-      <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 180px;  height: 380px;">
+      <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" style="width: 220px; margin-left: 100px; margin-top: 5%; height: 380px;">
+        
         <form action='/query' method="post" role="form" style="height: 320px; justify-content: center; align-items: center; font-size: large;" onsubmit="return validateForms()">
+          <div>
+            <h4>FeedbacK :</h4>  </div>
           <div class="row"> 
               <div class="form-group col-md-6">
-                  <label for="email" style="color: black;"> Email</label>
+                  <label for="email" style="color: rgb(255, 255, 255);"> Email</label>
                   <input type="email" class="form-control" name="email" id="email" maxlength="30" title="must contain @gmail.com" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" required style="width: 260px;" placeholder="Enter Your Gmail Id">
               </div>
           </div>
           <div class="form-group">
-              <label for="message" style="color: black;">Message</label>
+              <label for="message" style="color: rgb(235, 230, 230);">Message</label>
               <textarea class="form-control" id="message" name="message" rows="10" maxlength="150" minlength="10" title="Must start with a letter and can contain letters, digits, hyphen, and space." pattern="[A-Za-z][A-Za-z0-9\- ]*" placeholder="Enter Message"></textarea>
           </div>
           
-          <div class="my-3" style="color: black;">
+          <div class="my-3" style="color: rgb(223, 223, 223);">
               <div class="error-message"></div>
           </div>
           <div class="text-center"><button type="submit">Send Message</button></div>
-          <div class="messg" id="messg" style="color: black;"><p></p></div>
+          <div class="messg" id="messg" style="color: rgb(253, 253, 253);"><p></p></div>
       </form>
       
       <script>
@@ -389,89 +397,122 @@
               }
           });
       </script>
+        <div style="margin-top: 8%;">
+          <div style="margin-left: 19%;"><h4>LinKs:</h4>
+          </div>
+          
+        <div style="display: flex; flex-direction: row; margin-left: 120px; color: rgb(247, 242, 242); height: 30px;">
+          <div style="margin-right: 20px;">
+            <a href="#about" class="bus-info" style="font-size: x-large; color: rgb(71, 198, 236); text-decoration: underline;">About</a>
+          </div>
+          <div style="margin-right: 20px;">
+            <a href="#resume" class="bus-info" style="font-size: x-large; color: rgb(71, 198, 236); text-decoration: underline;">History</a>
+          </div>
       
-
-      <div style="margin-left: 200px;  color: black; width: 130px; margin-top: 18px; height: 320px;">
+          <div style="margin-right: 20px;">
+            <a href="{{url_for('usertype')}}" class="bus-info" id="login_page" style="font-size: x-large;color: rgb(71, 198, 236); text-decoration: underline;">Login</a>
+          </div>
+          <div>
+            <a href="{{url_for('register')}}" class="bus-info" id="register_page" style="font-size: x-large; color: rgb(71, 198, 236);; text-decoration: underline;">SignUp</a>
+          </div>
+         </div>
+         <div>
+          <div style="font-size:xx-large; color: black; margin-left: 30%; margin-top: 5%;">
+            <a href="https://about.twitter.com/en" class="twitter" style="color: rgb(71, 198, 236);; margin-right: 20px;"><i class="bx bxl-twitter"></i></a>
+            <a href="https://www.facebook.com/" class="facebook" style="color: rgb(71, 198, 236);; margin-right: 24px;"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.instagram.com/" class="instagram" style="color: rgb(71, 198, 236);; margin-right: 24px;"><i class="bx bxl-instagram"></i></a>
+            <a href="https://www.linkedin.com/feed/" class="linkedin" style="color: rgb(71, 198, 236);; margin-right: 34px;"><i class="bx bxl-linkedin"></i></a>
+        </div>
         <div>
-          <a href="#hero" class="bus-info" style="font-size: x-large; color: black; margin-top: 10px;text-decoration: underline;">Home</a>
+          <p style="color: black; margin-left: 28%; margin-top: 1%;">-------------------------------------------------------------------------</p>
         </div>
-        <div style="margin-top: 25px;">
-          <a href="#about" class="bus-info" style="font-size: x-large; color: black; text-decoration: underline; margin-top: 40px;">About</a>
-        </div>
-        <div style=" margin-top: 25px;">
-          <a href="#resume" class="bus-info" style="font-size: x-large; color: black; text-decoration: underline;">History</a>   
-        </div>
-        <div style=" margin-top: 25px;">
-          <a href="{{url_for('usertype')}}" class="bus-info" id="login_page" style="font-size: x-large; color: black;  text-decoration: underline;">Login</a>   
-        </div>
-        <div style=" margin-top: 25px;">
-          <a href="{{url_for('register')}}" class="bus-info" id="register_page" style="font-size: x-large; color: black; width: 250px; text-decoration: underline;">Sign Up</a>   
-        </div>
-        <br>
         <div>
-          <p id="demo" style="font-size: x-large;"> </p>
-          <button style="font-size:large;" onclick="loadData()"> gift</button>
+          <h4 style="margin-left: 19%;">Policy:</h4>
         </div>
-     
+        <div style="display: flex; flex-direction: row; margin-left: 120px; color: rgb(247, 242, 242); height: 30px;">
+          <div style="margin-right: 20px;">
+            <a href="#" class="bus-info" style="font-size: x-large; color: rgb(71, 198, 236); text-decoration: underline;"> security</a>
+          </div>
+          <div style="margin-right: 20px;">
+            <a href="#" class="bus-info" style="font-size: x-large; color: rgb(71, 198, 236);margin-left: 29%; text-decoration: underline;">Privacy</a>
+          </div>
       </div>
-      <script>
-        function loadData() {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-              console.log(this.responseText);
-              document.getElementById("demo").innerHTML = this.responseText;
-            }
-          };
-          xhttp.open('GET' , '/thanks', true);  
-                        //'GET' is the method, then the path or URL of the file, and
-                        //finally, the async mode which is always set to true in our case.                      
-
-      
-          xhttp.send();
-        }
-      </script>
-      <div class="profile" style="margin-right: 0px; margin-left: 50px;  margin-top:10px; width: 30px; z-index: 2;">
         
-         <div class="social-links mt-3 text-center" style="height: 80px; font-size:xx-large; margin-left: 42px; color: black;">
-          <a href="https://about.twitter.com/en" class="twitter" style="color: black;"><i class="bx bxl-twitter"></i></a>
-          <a href="https://www.facebook.com/" class="facebook"  style="color: black;"><i class="bx bxl-facebook"></i></a>
-          <a href="https://www.instagram.com/" class="instagram"  style="color: black;"><i class="bx bxl-instagram"></i></a>  
-          <a href="https://www.linkedin.com/feed/" class="linkedin"  style="color: black;"><i class="bx bxl-linkedin"></i></a>
-        </div>
       </div>
+            <div>
+              <p style="margin-left: 28%; color: black; margin-top: 1%;">-----------------------------------------------------------------------</p>
+            </div>
+            <div style="margin-left: 19%;"><h4>With:</h4>
+            </div>
+            
+            <div class="copyright" style="color: rgb(245, 244, 244); height: 19px; margin-top: 20px; margin-right: 14px;font-size: medium;">
+              &copy; Created by <strong><span>Ajay Malviya</span></strong>
+            </div>
+            <div class="credits" style="color: rgb(253, 249, 249); height: 19px; margin-top: 4px; margin-right: 4px; font-size: medium;">
+              Designed using <a href="#">BootstrapMade</a>
+            </div>
+            <div>
+              <p style="color: black; margin-left: 28%; margin-top: 3%;">-------------------------------------------------------------------------</p>
+            </div>
+        </div>
 
-      <div class="row" data-aos="fade-in" style="margin-top: 5px;">  
-        <div class="col-lg-5 d-flex align-items-stretch" style=" margin-top: 5px; margin-left: 180px; background-color: #eecdcd;  font-size: x-large; z-index: 1;">
-        <div class="info" style="color: black; margin-left: 20px;">
-          <div class="address">
-            <i class="bi bi-geo-alt"></i>
-            <h4>Location:</h4>
-            <a href="https://www.google.com/maps/place/Sapna+Sangeeta+Rd,+Indore,+Madhya+Pradesh/@22.6996933,75.8647049,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fce2c1f7a605:0xf052d6f6d94333f3!8m2!3d22.6996933!4d75.8672798!16s%2Fg%2F1ydp9ynd4?entry=ttu" style="color: black;"><p>A108 Sapna Sangeeta ,Indore,IN 535022</p></a>
-          </div>
+        <div class="row" data-aos="fade-in" style="margin-top: 5px;">  
+          <div class="col-lg-5 d-flex align-items-stretch" style=" margin-top: 1px; margin-left: 110px; background-color:none;  font-size: x-large; z-index: 1;">
+          <div class="info" style="color: rgb(221, 221, 221); margin-left: 20px;">
+            <div class="address">
+              <i class="bi bi-geo-alt"></i>
+              <h4>Location:</h4>
+              <a href="https://www.google.com/maps/place/Sapna+Sangeeta+Rd,+Indore,+Madhya+Pradesh/@22.6996933,75.8647049,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fce2c1f7a605:0xf052d6f6d94333f3!8m2!3d22.6996933!4d75.8672798!16s%2Fg%2F1ydp9ynd4?entry=ttu" style="color: rgb(71, 198, 236);"><p>A108 Sapna Sangeeta ,Indore,IN 535022</p></a>
+            </div>
+      
+            <div class="email">
+              <i class="bi bi-envelope"></i>
+              <h4>Email:</h4>
+              <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new" style="color: rgb(71, 198, 236);"><p>expressbus@example.com</p></a>
+            </div>
+      
+            <div class="phone">
+              <i class="bi bi-phone"></i>
+              <h4>Call:</h4>
+              <p>+91 9098293312</p>
+            </div>
+      
 
-          <div class="email">
-            <i class="bi bi-envelope"></i>
-            <h4>Email:</h4>
-            <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=new" style="color: black;"><p>expressbus@example.com</p></a>
-          </div>
 
-          <div class="phone">
-            <i class="bi bi-phone"></i>
-            <h4>Call:</h4>
-            <p>+91 9098293312</p>
-          </div>
 
-       
+
+
+
     </footer><!-- End  Footer -->
     <div>
       <marquee behavior="fade-left" direction="right" style="background-color: black; color: white;">Thankyou for visiting my website </marquee>
       <p style="background-color: black; margin-bottom: 0%;"></p>
     </div>
-    
-        
-    
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+      <script>
+        const nav = document.querySelector('#navigation');
+
+function showNav(){
+    navbar.classList.remove('hide');
+}
+
+function hidewNav(){
+    nav.classList.add('hide');
+}
+var currPos = window.scrollY;
+document.addEventListener('scroll', () => {
+  if (window.scrollY < currPos) {
+  //scroll up
+    hidewNav();
+  } else {
+  //scroll down
+    showNav();
+  }
+  currPos = window.scrollY;
+});
+      </script>
+  
 
   <!-- Vendor JS Files -->
   <script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js') }}"></script>
