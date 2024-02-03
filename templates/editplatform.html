@@ -45,24 +45,34 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            padding: 10px;
+            background-color: #5a2b2b;
+            color: white;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
 <body>
     {% extends "header.html" %}
     {% block content %}
-
+    <a href="{{url_for('homee')}}" class="home-button">Home</a>
     <div class="container" style="margin-left: 30%; margin-top: 90px; width: 800px; height: 300px;">
         <h1>Update Platform Details</h1>
         {% if platform_data %}
         <form action="{{ url_for('update_platform', platform_id=platform_data.platform_id) }}" method="post" >
             <div class="form-group">
-                <label for="platform_number">New Platform Number:</label>
-                <input type="text" id="platform_number" title="It must be number only" require pattern="\d+" maxlength ="4" minlength="1"   placeholder="it must contain 4-numbers only" name="platform_number" required>
+                <label for="platform_number">New Bus-Stop Number:</label>
+                <input type="text" id="platform_number" title="Starts with Letters Only"  required pattern="[A-Za-z][A-Za-z0-9\- ]*" maxlength ="14" minlength="3"   placeholder="Enter Bus-Stop Number (e.g., GPOBUS68)" name="platform_number" required>
             </div>
             <div class="form-group">
                 <label for="location">New Location:</label>
-                <input type="text" id="location" name="location" maxlength="30" minlength="3" required pattern="[A-Za-z][A-Za-z0-9\- ]*"   Placeholder="it must contain letters only" title="Must start with a letter and can contain letters, numbers, hyphens, and spaces">
+                <input type="text" id="location" name="location" maxlength="30" minlength="3" required pattern="[A-Za-z][A-Za-z0-9\- ]*"   Placeholder="Enter Bus-Stop Location (e.g., GT-road,MR-9,rajwada)" title="Must start with a letter and can contain letters, numbers, hyphens, and spaces">
             </div>
             <div class="form-group">
                 <input type="submit" value="Update">
