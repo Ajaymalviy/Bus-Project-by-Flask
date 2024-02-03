@@ -35,7 +35,7 @@ db_config = {
     "host": "localhost",
     "user": "root",
     "password": "password",
-    "database": "myproject",
+    "database": "busproject",
 }#here we connect our database for transfer data with UI or for performing operation on data 
 
 db = mysql.connector.connect(**db_config)
@@ -608,7 +608,7 @@ def ticket_routes():
 
     # Execute the SELECT query with LIMIT and OFFSET clauses
     cursor = db.cursor(dictionary=True)
-    query = f"SELECT route FROM bus_detail LIMIT {per_page} OFFSET {offset}"
+    query = f"SELECT distinct route FROM bus_detail LIMIT {per_page} OFFSET {offset}"
     if page > 0:
 
         cursor.execute(query)
@@ -638,6 +638,40 @@ def ticket_routes():
 @app.route('/home')
 def homee():
     return render_template ('index1.html')
+
+
+
+@app.route('/location_details', methods=['POST'])
+def location_details():
+    if request.method == 'POST':
+        selected_route = request.form['selected_route']
+ 
+        # Fetch details for the selected route from the database
+        cursor = db.cursor(dictionary=True)
+        temp = f"SELECT bd.bus_id, bd.bus_number, bd.bus_model, bd.seating_capacity, bd.departure_time, bd.arrival_time FROM bus_detail bd JOIN ticket t ON bd.bus_id = t.bus_id WHERE t.platform_id IN (SELECT platform_id FROM platform WHERE location = '{selected_route}');"
+        print(temp)
+        cursor.execute(temp)
+        route_details = cursor.fetchall()
+
+        # Close the cursor after fetching results
+        cursor.close()
+        for bus in route_details:
+            if bus['departure_time']:
+                departure_datetime = datetime(1, 1, 1) + bus['departure_time']
+                bus['departure_time'] = departure_datetime.strftime('%H:%M')  # Format as HH:MM
+            if bus['arrival_time']:
+                arrival_datetime = datetime(1, 1, 1) + bus['arrival_time']
+                bus['arrival_time'] = arrival_datetime.strftime('%H:%M')  # Format as HH:MM
+
+        for key, value in bus.items():
+            if isinstance(value, str):
+                bus[key] = value.title()
+
+        # Pass the route details to the template and render it
+        return render_template('location_details.html', route_details=route_details)
+
+    # Handle the case where the route_details page is directly accessed without a POST request
+    return render_template('error_page.html', error_message='Invalid Access')
 
 
 @app.route('/route_details', methods=['POST'])
