@@ -267,18 +267,18 @@
                                 placeholder="Enter Your Name">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="email">Your Email</label>
+                            <label for="name">Your Email</label>
                             <input type="email" class="form-control" name="email" id="email" maxlength="30" minlength="4" required title="Email must contain @gmail.com"
                                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Email must contain @gmail.com">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="aadhar-number">Aadhar-Number</label>
+                        <label for="name">Aadhar-Number</label>
                         <input type="text" class="form-control" name="aadhar-number" id="aadhar-number" maxlength="12" minlength="12" pattern="\d+"
                             title="Aadhar-Number must contain only numeric digits" placeholder="Must have 12 digits">
                     </div>
                     <div class="form-group">
-                        <label for="address">Address</label>
+                        <label for="name">Address</label>
                         <textarea type="text" class="form-control" name="address" id="address" rows="2" maxlength="30" pattern="[a-zA-Z0-9\s]*"
                             title="Address must contain only letters, digits, and spaces" required placeholder="Enter Your Address"></textarea>
                     </div>
@@ -289,7 +289,7 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <button type="submit" >Submit</button>
+                    <button type="submit"onsubmit=validateForm() >Submit</button>
                 </form>
 
             <p id="response" style="font-size: larger; margin-top: 2%;" ></p>
@@ -325,35 +325,39 @@
                 var aadharNumberRegex = /^\d{12}$/;
                 var addressRegex = /^[a-zA-Z0-9\s]*$/;
 
-                var nameInput = document.getElementById('name');
-                var emailInput = document.getElementById('email');
-                var aadharNumberInput = document.getElementById('aadhar-number');
-                var addressInput = document.getElementById('address');
+                var nameInput = document.querySelector('#services input[name="name"]');
+                var emailInput = document.querySelector('#services input[name="email"]');
+                var aadharNumberInput = document.querySelector('#services input[name="aadhar-number"]');
+                var addressInput = document.querySelector('#services textarea[name="address"]');
+
+
+
+                function showAlert(message) {
+                  alert(message);
+                }
 
                 if (!nameRegex.test(nameInput.value)) {
-                    alert("Invalid Name. It must contain only letters.");
-                    return false;
+                  alert("Invalid Name. It must contain only letters.");
+                  return false;
+                }
+    
+                else if (!emailRegex.test(emailInput.value)) {
+                  alert("Invalid Email format. it should end with @gmail.com");
+                  return false;
                 }
 
-                if (!emailRegex.test(emailInput.value)) {
-                    alert("Invalid Email format. it should end with @gmail.com");
-                    return false;
+                else if (!aadharNumberRegex.test(aadharNumberInput.value)) {
+                alert("Invalid Aadhar-Number. It must contain 12 numeric digits.");
+                return false;
                 }
 
-                if (!aadharNumberRegex.test(aadharNumberInput.value)) {
-                    alert("Invalid Aadhar-Number. It must contain 12 numeric digits.");
-                    return false;
-                }
-
-                if (!addressRegex.test(addressInput.value)) {
-                    alert("Invalid Address. It must contain only letters, digits, and spaces.");
-                    return false;
+                else if (!addressRegex.test(addressInput.value)) {
+                  alert("Invalid Address. It must contain only letters, digits, and spaces.");
+                  return false;
                 }
 
                 return true;
             }
-
-  
           
         </script>
       </section><!-- End Services Section -->
@@ -444,16 +448,16 @@
             }
       
             if (!nameRegex.test(nameInput.value)) {
-              showAlert('Invalid name. Must contain only letters.');
+              alert('Invalid name. Must contain only letters.');
               return false;
             } else if (!emailRegex.test(emailInput.value)) {
-              showAlert('Invalid email. Must end with @gmail.com.');
+              alert('Invalid email. Must end with @gmail.com.');
               return false;
             } else if (!subjectRegex.test(subjectInput.value)) {
-              showAlert('Invalid subject. Must start with a letter and can contain letters, digits, hyphen, and underscore.');
+              alert('Invalid subject. Must start with a letter and can contain letters, digits, hyphen, and underscore.');
               return false;
             } else if (!messageRegex.test(messageInput.value)) {
-              showAlert('Invalid message. Must start with a letter and can contain letters, digits, hyphen, and space.');
+              alert('Invalid message. Must start with a letter and can contain letters, digits, hyphen, and space.');
               return false;
             }
       
