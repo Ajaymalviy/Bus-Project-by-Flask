@@ -253,7 +253,7 @@ def admin_login():
         # Fetch admin data based on the provided username
         cursor.execute("SELECT username, password FROM admin_registration WHERE username=%s", (username,))
         admin_data = cursor.fetchone()
-       # print(admin_data)
+        # print(admin_data)
         cursor.fetchall()
         cursor.close()
 
@@ -331,9 +331,6 @@ def user():
             return "Database error"
     else:
         return redirect(url_for('login'))  # Redirect to login page if not logged in
-
-
-    
 
 
 #-------------------------------bus_detail___________________________________________________________
@@ -570,7 +567,7 @@ def update_platform(platform_id):
 #-------------------------------------delete platform---------------------------
 
 @app.route('/delete_platform/<int:platform_id>', methods=['GET','POST'])
-
+@requires_role(['Admin'])
 def delete_platform(platform_id):
     try:
         # Delete the bus record from the database
