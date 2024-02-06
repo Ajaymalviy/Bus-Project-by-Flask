@@ -378,10 +378,10 @@
               var errorMessage = document.querySelector(".error-message");
           
               if (!emailRegex.test(emailInput.value)) {
-                  errorMessage.textContent = "Please enter a valid Gmail ID. it must end with @gmail.com";
+                  errorMessage.textContent = "it must end with @gmail.com";
                   return false;
               } else if (!messageRegex.test(messageInput.value)) {
-                  errorMessage.textContent = "Please enter a valid message. Must start with a letter and can contain letters, digits, hyphen, and space.";
+                  errorMessage.textContent = "Remove special character.";
                   return false;
               } else {
                   errorMessage.textContent = "";

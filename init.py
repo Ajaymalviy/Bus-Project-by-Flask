@@ -1,5 +1,6 @@
 from functools import wraps
 import mailbox
+import mailcap
 import random
 from flask import Flask, abort, jsonify, render_template, render_template_string, request, redirect, url_for, session, flash 
 from flask_login import LoginManager, login_required, logout_user
@@ -115,34 +116,6 @@ def home():
 # on this root directry one fuction is wrote and this tell us to render/ change direction on given page which is index.html
 
 
-# @app.route('/signin')
-# def signin():
-#     return render_template('login_page.html')
-
-
-# @app.route('/send_otp', methods=['POST'])
-# def send_otp():
-#     email = request.form['email']
-#     otp = ''.join([str(random.randint(0, 9)) for _ in range(6)])
-#     otp_cache[email] = otp  # Store OTP in cache
-#     msg = Message('Your OTP', sender='ajaymalviya143@gmail.com', recipients=[email])
-#     msg.body = f'Your OTP is: {otp}'
-#     try:
-#         mail.send(msg)
-#         return jsonify({'status': 'success'})
-#     except Exception as e:
-#         print(e)
-#         return jsonify({'status': 'error', 'message': 'Failed to send OTP'})
-
-# @app.route('/validate_otp', methods=['POST'])
-# def validate_otp():
-#     email = request.form['email']
-#     otp_entered = request.form['otp']
-#     if email in otp_cache and otp_cache[email] == otp_entered:
-#         del otp_cache[email]  # Remove OTP from cache after validation
-#         return jsonify({'status': 'success'})
-#     else:
-#         return jsonify({'status': 'error', 'message': 'Invalid OTP'})
 
 
 
@@ -810,10 +783,7 @@ def services():
         db.commit()
         cursor.close() 
         return render_template('success1.html')  # Return the success.html template
-    
-    if request.method == 'GET' and request.args.get('refresh'):
-        return redirect(url_for('services'))  # Re-render the services page
-
+  
 
     return redirect('home')  # Render the form for data submission
 
@@ -859,8 +829,7 @@ def query():
 
         # Commit the changes and close the cursor
         db.commit()
-        cursor.close()  
-
+        cursor.close() 
 
     return redirect(url_for('home'))
 @app.route('/thank_you' ,methods=['GET', 'POST'])
