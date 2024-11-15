@@ -8,10 +8,8 @@ MarkupSafe==2.1.3
 mysql-connector==2.2.9
 mysql-connector-python==8.2.0
 protobuf==4.21.12
-<<<<<<< HEAD
 Werkzeug==3.0.1
 Flask-Login==0.6.3
-=======
 Werkzeug==3.0.0
 Flask-Login==0.6.3
 >>>>>>> 4cba3f9 (this is init file)
