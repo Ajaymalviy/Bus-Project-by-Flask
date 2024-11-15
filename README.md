@@ -85,8 +85,22 @@ Before proceeding with the installation and execution of the application, ensure
 Before running the application, it's essential to initialize the database and configure the connection. Follow these steps:
 
 1. Import the database schema by running the SQL script (`QUERIES.SQL`) provided in the repository. This script will set up the required tables and initial data.
+##### (a) Using MySQL Interpreter
 
-2. Update the MySQL database configuration in the `inti.py` file. Open `int.py` and provide your MySQL database connection details as follows:
+a). **Login to MySQL Interpreter**
+
+    ```bash
+    mysql -u root -p
+    ```
+b). **Import the SQL script**
+
+    ```sql
+    source /path/to/QUERIES.SQL; 
+
+
+#### After importing the database, update the database configuration as mentioned in the next step.    
+
+3. Update the MySQL database configuration in the `inti.py` file. Open `int.py` and provide your MySQL database connection details as follows:
 
    ```python
    db_config = {
@@ -98,6 +112,11 @@ Before running the application, it's essential to initialize the database and co
    ```
 
    Save the changes.
+
+## Running the Generator file  
+```bash
+python3 generator.py
+```
 
 ## Running the Application
 
