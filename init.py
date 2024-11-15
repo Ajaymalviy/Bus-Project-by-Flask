@@ -8,7 +8,7 @@ from flask_login import LoginManager, login_required, logout_user
 import mysql.connector
 import bcrypt
 from datetime import datetime ,timedelta
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 import time
 from utile import requires_role
 app = Flask(__name__,template_folder='templates',static_url_path='/static',static_folder="static")
@@ -35,8 +35,8 @@ app.secret_key = 'secrets.token_hex(16)'  # Replace with a secret key for sessio
 db_config = {
     "host": "localhost",
     "user": "root",
-    "password": "password",
-    "database": "busproject",
+    "password": "root@123",
+    "database": "myproject",
 }#here we connect our database for transfer data with UI or for performing operation on data 
 
 db = mysql.connector.connect(**db_config)
