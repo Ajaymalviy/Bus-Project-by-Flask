@@ -87,15 +87,17 @@ Before running the application, it's essential to initialize the database and co
 1. Import the database schema by running the SQL script (`QUERIES.SQL`) provided in the repository. This script will set up the required tables and initial data.
 ##### (a) Using MySQL Interpreter
 
-a). **Login to MySQL Interpreter**
+1. **Login to MySQL Interpreter**
 
     ```bash
     mysql -u root -p
     ```
-b). **Import the SQL script**
+    
+4. **Import the SQL script**
 
     ```sql
-    source /path/to/QUERIES.SQL; 
+    source /path/to/QUERIES.SQL;
+    ```
 
 
 #### After importing the database, update the database configuration as mentioned in the next step.    
@@ -114,17 +116,17 @@ b). **Import the SQL script**
    Save the changes.
 
 ## Running the Generator file  
-```bash
-python3 generator.py
-```
+   ```bash
+   python3 generator.py
+   ```
 
 ## Running the Application
 
 To launch the application, execute the following command:
 
-```bash
-flask --app init.py run
-```
+   ```bash
+   flask --app init.py run
+   ```
 
 This command will start the Flask development server, and you can access the BMS Application in your web browser at http://localhost:5000.
 
